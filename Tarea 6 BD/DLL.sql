@@ -7,10 +7,8 @@
 */
 CREATE TABLE medico
   (
-     idmedico    NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1
-     MAXVALUE 99999999 INCREMENT BY 1 START WITH 1 CACHE 20
-     NOORDER NOCYCLE NOT NULL ENABLE,
-     nombre     	VARCHAR2(50)   NOT NULL,
+     idmedico       NUMBER,
+     nombre     	  VARCHAR2(50)   NOT NULL,
      apaterno       VARCHAR2(50)   NOT NULL,
      amaterno       VARCHAR2(50)   NOT NULL,
      calle          VARCHAR2(50)   NOT NULL,
@@ -28,10 +26,8 @@ CREATE TABLE medico
 */
 CREATE TABLE paciente
   (
-  	 idpaciente     NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1
-     MAXVALUE 99999999 INCREMENT BY 1 START WITH 1 CACHE 20
-     NOORDER NOCYCLE NOT NULL ENABLE,
-     nombre     	VARCHAR2(50) NOT NULL,
+  	 idpaciente     NUMBER,
+     nombre     	  VARCHAR2(50) NOT NULL,
      apaterno       VARCHAR2(50) NOT NULL,
      amaterno       VARCHAR2(50) NOT NULL,
      calle          VARCHAR2(50) NOT NULL,
@@ -61,8 +57,8 @@ CREATE TABLE supervisar
      idmedico_supervisor      NUMBER NOT NULL,
      idmedico_supervisado     NUMBER NOT NULL,
      CONSTRAINT supervisar_idmedico_supervisor_FK FOREIGN KEY (idmedico_supervisor) REFERENCES medico (idmedico) ON DELETE CASCADE,
-     CONSTRAINT supervisar_idmedico_supervisado_FK FOREIGN KEY (idmedico_supervisado) REFERENCES medico (idmedico) ON DELETE CASCADE,
-     CONSTRAINT supervisar_PK PRIMARY KEY (idmedico_supervisor)
+     CONSTRAINT supervisar_idmedico_supervisado_FK FOREIGN KEY (idmedico_supervisado) REFERENCES medico (idmedico) ON DELETE CASCADE--,
+     --CONSTRAINT supervisar_PK PRIMARY KEY (idmedico_supervisor, idmedico_supervisado)
   );
 
 /*
@@ -87,13 +83,13 @@ CREATE TABLE medico_ingresar_paciente
   (
   	idmedico        NUMBER,
   	idpaciente      NUMBER,
-  	habitacion      VARCHAR2(50) NOT NULL,
-  	cama            VARCHAR2(50) NOT NULL,
-  	num_ingreso     VARCHAR2(50) NOT NULL,
+  	num_ingreso     CHAR(15) NOT NULL UNIQUE,
+  	habitacion      CHAR(5) NOT NULL,
+  	cama            CHAR(5) NOT NULL,
   	fecha_ingreso   DATE DEFAULT sysdate NOT NULL,
   	CONSTRAINT medico_ingresar_paciente_idmedico_FK FOREIGN KEY (idmedico) REFERENCES medico (idmedico) ON DELETE CASCADE,
     CONSTRAINT medico_ingresar_paciente_idpaciente_FK FOREIGN KEY (idpaciente) REFERENCES paciente (idpaciente) ON DELETE CASCADE,
-    CONSTRAINT medico_ingresar_paciente_PK PRIMARY KEY (idmedico, idpaciente)
+    CONSTRAINT medico_ingresar_paciente_PK PRIMARY KEY (idmedico, idpaciente, num_ingreso)
   );
 
 /*
@@ -104,10 +100,10 @@ CREATE TABLE medico_consultar_paciente
   (
   	idmedico        NUMBER,
   	idpaciente      NUMBER,
-  	consultorio     VARCHAR2(50) NOT NULL,
-  	num_consulta    VARCHAR2(50) NOT NULL,
+  	num_consulta    CHAR(15) NOT NULL UNIQUE,
+  	consultorio     CHAR(5) NOT NULL,
   	fecha_consulta  DATE DEFAULT sysdate NOT NULL,
   	CONSTRAINT medico_consultar_paciente_idmedico_FK FOREIGN KEY (idmedico) REFERENCES medico (idmedico) ON DELETE CASCADE,
     CONSTRAINT medico_consultar_paciente_idpaciente_FK FOREIGN KEY (idpaciente) REFERENCES paciente (idpaciente) ON DELETE CASCADE,
-    CONSTRAINT medico_consultar_paciente_PK PRIMARY KEY (idmedico, idpaciente)
+    CONSTRAINT medico_consultar_paciente_PK PRIMARY KEY (idmedico, idpaciente, num_consulta)
   );  
