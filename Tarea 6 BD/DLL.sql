@@ -7,33 +7,36 @@
 */
 CREATE TABLE medico
   (
-     idmedico       NUMBER,
-     nombre     	  VARCHAR2(50)   NOT NULL,
+     idmedico       NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
+    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
+     nombre     	VARCHAR2(50)   NOT NULL,
      apaterno       VARCHAR2(50)   NOT NULL,
      amaterno       VARCHAR2(50)   NOT NULL,
      calle          VARCHAR2(50)   NOT NULL,
      numero         CHAR(5)        NOT NULL,
      ciudad         VARCHAR2(50)   NOT NULL,
      CP             CHAR(5)    	   NOT NULL,
-     --CONSTRAINT check_numero       CHECK (numero LIKE '%[0-9]%'),
-     --CONSTRAINT check_CP           CHECK (CP LIKE '%[0-9]%'),
+     CONSTRAINT check_numero_med   CHECK(regexp_like(numero, '^[0-9]{5}$')),
+     CONSTRAINT check_CP_med       CHECK(regexp_like(CP, '^[0-9]{5}$')),
      CONSTRAINT idmedico_PK        PRIMARY KEY (idMedico)
   );
-
 
 /*
 	Creacion de la tabla paciente, asignandole una llave que se autoincrementa
 */
 CREATE TABLE paciente
   (
-  	 idpaciente     NUMBER,
-     nombre     	  VARCHAR2(50) NOT NULL,
+  	 idpaciente     NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
+     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
+     nombre     	VARCHAR2(50) NOT NULL,
      apaterno       VARCHAR2(50) NOT NULL,
      amaterno       VARCHAR2(50) NOT NULL,
      calle          VARCHAR2(50) NOT NULL,
      numero         CHAR(5)      NOT NULL,
      ciudad         VARCHAR2(50) NOT NULL,
      CP             CHAR(5) NOT NULL,
+     CONSTRAINT check_numero_pac   CHECK(regexp_like(numero, '^[0-9]{5}$')),
+     CONSTRAINT check_CP_pac       CHECK(regexp_like(CP, '^[0-9]{5}$')),
      CONSTRAINT idpaciente_PK PRIMARY KEY (idpaciente)
   );
 
@@ -42,7 +45,8 @@ CREATE TABLE paciente
 */
 CREATE TABLE especialidad
   (
-  	idespecialidad        NUMBER,
+  	idespecialidad        NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
+    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
   	nombre_especialidad   VARCHAR2(50) NOT NULL,
   	CONSTRAINT idespecialidad_PK PRIMARY KEY (idespecialidad)
   );  
@@ -57,8 +61,8 @@ CREATE TABLE supervisar
      idmedico_supervisor      NUMBER NOT NULL,
      idmedico_supervisado     NUMBER NOT NULL,
      CONSTRAINT supervisar_idmedico_supervisor_FK FOREIGN KEY (idmedico_supervisor) REFERENCES medico (idmedico) ON DELETE CASCADE,
-     CONSTRAINT supervisar_idmedico_supervisado_FK FOREIGN KEY (idmedico_supervisado) REFERENCES medico (idmedico) ON DELETE CASCADE--,
-     --CONSTRAINT supervisar_PK PRIMARY KEY (idmedico_supervisor, idmedico_supervisado)
+     CONSTRAINT supervisar_idmedico_supervisado_FK FOREIGN KEY (idmedico_supervisado) REFERENCES medico (idmedico) ON DELETE CASCADE,
+     CONSTRAINT supervisar_PK PRIMARY KEY (idmedico_supervisor, idmedico_supervisado)
   );
 
 /*
@@ -87,6 +91,9 @@ CREATE TABLE medico_ingresar_paciente
   	habitacion      CHAR(5) NOT NULL,
   	cama            CHAR(5) NOT NULL,
   	fecha_ingreso   DATE DEFAULT sysdate NOT NULL,
+  	CONSTRAINT check_num_ingreso  CHECK(regexp_like(num_ingreso, '^[0-9]{15}$')),
+    CONSTRAINT check_habitacion   CHECK(regexp_like(habitacion, '^[0-9]{5}$')),
+    CONSTRAINT check_cama         CHECK(regexp_like(cama, '^[0-9]{5}$')),
   	CONSTRAINT medico_ingresar_paciente_idmedico_FK FOREIGN KEY (idmedico) REFERENCES medico (idmedico) ON DELETE CASCADE,
     CONSTRAINT medico_ingresar_paciente_idpaciente_FK FOREIGN KEY (idpaciente) REFERENCES paciente (idpaciente) ON DELETE CASCADE,
     CONSTRAINT medico_ingresar_paciente_PK PRIMARY KEY (idmedico, idpaciente, num_ingreso)
@@ -103,6 +110,8 @@ CREATE TABLE medico_consultar_paciente
   	num_consulta    CHAR(15) NOT NULL UNIQUE,
   	consultorio     CHAR(5) NOT NULL,
   	fecha_consulta  DATE DEFAULT sysdate NOT NULL,
+  	CONSTRAINT check_num_consulta CHECK(regexp_like(num_consulta, '^[0-9]{15}$')),
+    CONSTRAINT check_consultorio  CHECK(regexp_like(consultorio, '^[0-9]{5}$')),
   	CONSTRAINT medico_consultar_paciente_idmedico_FK FOREIGN KEY (idmedico) REFERENCES medico (idmedico) ON DELETE CASCADE,
     CONSTRAINT medico_consultar_paciente_idpaciente_FK FOREIGN KEY (idpaciente) REFERENCES paciente (idpaciente) ON DELETE CASCADE,
     CONSTRAINT medico_consultar_paciente_PK PRIMARY KEY (idmedico, idpaciente, num_consulta)
