@@ -16,8 +16,8 @@ CREATE TABLE medico
      numero         CHAR(5)        NOT NULL,
      ciudad         VARCHAR2(50)   NOT NULL,
      CP             CHAR(5)    	   NOT NULL,
-     CONSTRAINT check_numero_med   CHECK(regexp_like(numero, '^[0-9]{5}$')),
-     CONSTRAINT check_CP_med       CHECK(regexp_like(CP, '^[0-9]{5}$')),
+     CONSTRAINT check_numero_med   CHECK(regexp_like(numero, '^[0-9]')),
+     CONSTRAINT check_CP_med       CHECK(regexp_like(CP, '^[0-9]')),
      CONSTRAINT idmedico_PK        PRIMARY KEY (idMedico)
   );
 
@@ -35,8 +35,8 @@ CREATE TABLE paciente
      numero         CHAR(5)      NOT NULL,
      ciudad         VARCHAR2(50) NOT NULL,
      CP             CHAR(5) NOT NULL,
-     CONSTRAINT check_numero_pac   CHECK(regexp_like(numero, '^[0-9]{5}$')),
-     CONSTRAINT check_CP_pac       CHECK(regexp_like(CP, '^[0-9]{5}$')),
+     CONSTRAINT check_numero_pac   CHECK(regexp_like(numero, '^[0-9]')),
+     CONSTRAINT check_CP_pac       CHECK(regexp_like(CP, '^[0-9]')),
      CONSTRAINT idpaciente_PK PRIMARY KEY (idpaciente)
   );
 
@@ -91,9 +91,9 @@ CREATE TABLE medico_ingresar_paciente
   	habitacion      CHAR(5) NOT NULL,
   	cama            CHAR(5) NOT NULL,
   	fecha_ingreso   DATE DEFAULT sysdate NOT NULL,
-  	CONSTRAINT check_num_ingreso  CHECK(regexp_like(num_ingreso, '^[0-9]{15}$')),
-    CONSTRAINT check_habitacion   CHECK(regexp_like(habitacion, '^[0-9]{5}$')),
-    CONSTRAINT check_cama         CHECK(regexp_like(cama, '^[0-9]{5}$')),
+  	CONSTRAINT check_num_ingreso  CHECK(regexp_like(num_ingreso, '^[0-9]')),
+    CONSTRAINT check_habitacion   CHECK(regexp_like(habitacion, '^[0-9]')),
+    CONSTRAINT check_cama         CHECK(regexp_like(cama, '^[0-9]')),
   	CONSTRAINT medico_ingresar_paciente_idmedico_FK FOREIGN KEY (idmedico) REFERENCES medico (idmedico) ON DELETE CASCADE,
     CONSTRAINT medico_ingresar_paciente_idpaciente_FK FOREIGN KEY (idpaciente) REFERENCES paciente (idpaciente) ON DELETE CASCADE,
     CONSTRAINT medico_ingresar_paciente_PK PRIMARY KEY (idmedico, idpaciente, num_ingreso)
@@ -110,8 +110,8 @@ CREATE TABLE medico_consultar_paciente
   	num_consulta    CHAR(15) NOT NULL UNIQUE,
   	consultorio     CHAR(5) NOT NULL,
   	fecha_consulta  DATE DEFAULT sysdate NOT NULL,
-  	CONSTRAINT check_num_consulta CHECK(regexp_like(num_consulta, '^[0-9]{15}$')),
-    CONSTRAINT check_consultorio  CHECK(regexp_like(consultorio, '^[0-9]{5}$')),
+  	CONSTRAINT check_num_consulta CHECK(regexp_like(num_consulta, '^[0-9]')),
+    CONSTRAINT check_consultorio  CHECK(regexp_like(consultorio, '^[0-9]')),
   	CONSTRAINT medico_consultar_paciente_idmedico_FK FOREIGN KEY (idmedico) REFERENCES medico (idmedico) ON DELETE CASCADE,
     CONSTRAINT medico_consultar_paciente_idpaciente_FK FOREIGN KEY (idpaciente) REFERENCES paciente (idpaciente) ON DELETE CASCADE,
     CONSTRAINT medico_consultar_paciente_PK PRIMARY KEY (idmedico, idpaciente, num_consulta)
