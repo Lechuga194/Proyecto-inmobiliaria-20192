@@ -1,0 +1,301 @@
+IDPACIENTE,Nombre,APATERNO,AMATERNO,CALLE,NUMERO,CIUDAD,CP,FNACIMIENTO
+1,Cristi,Gotthard,Elbourn,Mayer,2809,Slovakia,24945,1956/03/23
+2,Jens,Tewelson,Demann,Mandrake,4753,Philippines,44506,1982/04/10
+3,Duff,Flecknoe,Burbank,Forest Dale,4137,China,16725,1989/05/19
+4,Georgia,Geffcock,Giffon,Sunnyside,8630,China,26959,1973/09/29
+5,Fonsie,Blakeley,Traylen,Charing Cross,5687,Indonesia,8301,1957/10/27
+6,Valentina,Newbegin,Baudouin,Mallory,723,Philippines,20249,1991/09/07
+7,Wynn,Oxby,Tomas,Dwight,7858,China,45654,1970/06/24
+8,Isabel,Whayman,Gumey,Roth,4632,Paraguay,33341,1965/05/06
+9,Hurley,Gauson,Marris,Debra,5060,United States,91475,1995/05/30
+10,Elwira,Hazzard,Renouf,Lawn,1658,Czech Republic,25668,1979/12/30
+11,Broddy,Samwaye,McVee,Stoughton,830,China,83585,1962/07/02
+12,Thibaud,Fortye,Bessent,Schurz,4932,Iran,47795,1958/07/09
+13,Nerte,Pierri,Shankle,Toban,7906,France,84214,1979/10/04
+14,Rolland,Hounsome,Trulock,Michigan,5930,Indonesia,27087,1993/06/06
+15,Natal,Shee,Paslow,Express,3823,China,54157,1961/12/25
+16,Tabbie,Bothe,Ouchterlony,Huxley,6354,Mexico,88661,1987/11/20
+17,Jemima,Hardy,O'Hannay,Northland,1383,Indonesia,49501,1959/11/08
+18,Gregor,Padginton,Dorking,Anzinger,6267,Indonesia,72199,1996/09/24
+19,Roby,Paddemore,Blest,Scofield,4162,Indonesia,55260,1962/06/06
+20,Inez,Huitt,Waud,Waywood,2812,Brazil,43969,1979/05/03
+21,Michele,Bull,Cossam,Arrowood,4154,Ukraine,85831,1971/06/26
+22,Rustie,Ready,Celle,Lakeland,5577,Sweden,39723,1958/12/26
+23,Porter,Le Cornu,Birkbeck,Express,3586,China,29502,1954/02/26
+24,Silvanus,Waterhous,Pasek,Waxwing,996,Russia,86047,1951/08/10
+25,Sutherlan,Ullrich,Littlefield,Northridge,8277,China,96409,1994/08/21
+26,Way,Warin,McMonnies,Delladonna,9567,Russia,51404,1967/02/26
+27,Meredith,O'Neary,Mattis,Gateway,6625,Indonesia,38923,1966/11/11
+28,Ferdy,Skeel,Pawlicki,Claremont,6549,Philippines,92814,1984/05/27
+29,Bertha,Goodie,Ledford,Raven,4740,Indonesia,65683,1990/11/11
+30,Flss,Evangelinos,Behnecke,Dennis,2379,Brazil,47886,1981/12/27
+31,Kory,Brewer,Douse,Carberry,2129,China,73367,1988/08/28
+32,Dennie,Smouten,Doerrling,Grayhawk,6050,China,82543,1998/05/08
+33,Erick,Slatford,Unwin,Karstens,5644,Nigeria,20379,1996/05/12
+34,Valentina,De-Ville,Snoxall,Menomonie,9685,Greece,91605,1963/08/28
+35,Lincoln,Buckler,Cutmere,Sunfield,4235,Indonesia,43773,1986/10/18
+36,Kerrill,Sarvar,McGinly,Schmedeman,1407,China,18434,1972/02/03
+37,Sheppard,Older,Gallahue,Butterfield,9675,Morocco,20725,1987/08/08
+38,Francois,Tytherton,Franciskiewicz,Melvin,1799,Mali,7107,1958/07/10
+39,Urban,Collabine,Langan,Hallows,2670,Netherlands,83149,1963/05/18
+40,Abie,Samber,Cardozo,Arrowood,8385,China,47945,1962/08/22
+41,Norbert,Linney,Pyvis,Moland,7626,Indonesia,35285,1974/09/22
+42,Benedicta,MacScherie,Agent,Lerdahl,2137,Sweden,90746,1986/10/11
+43,Milena,Macellar,Gibb,Rusk,4556,Poland,41676,1960/10/07
+44,Eolanda,Cust,Gyngyll,Schmedeman,6914,Russia,84170,1962/01/06
+45,Jada,Fardell,Phillipps,Parkside,2830,Benin,88946,1962/12/20
+46,Katharine,Acarson,Alesio,8th,5408,Sweden,48391,1958/10/31
+47,Hendrick,Jervoise,Kliner,Lakewood,1471,China,34820,1958/07/08
+48,Dionis,Beardshall,Haskell,Scott,6370,China,18762,1998/08/31
+49,Josie,Lowensohn,Peterffy,Bayside,8351,China,39495,1953/10/07
+50,Frances,Jovicevic,Buntain,Kinsman,3046,Nigeria,60370,1996/01/01
+51,Eimile,Pleavin,Tye,Cambridge,4219,Czech Republic,5564,1987/06/08
+52,Mikel,Orehead,Oldridge,Transport,9920,China,75710,1982/04/28
+53,Tamara,Marley,Dorrins,Novick,3298,South Africa,36001,1973/08/08
+54,Averil,Chivrall,Weddeburn,Birchwood,4605,France,86777,1958/03/07
+55,Jerrold,Skalls,Killingbeck,Parkside,8829,China,40663,1973/12/12
+56,Damaris,McNelly,Danter,Burning Wood,5876,Peru,13665,1993/07/17
+57,Leola,Eaton,Yearsley,Green Ridge,5318,China,58407,1965/10/08
+58,Elspeth,Blindt,Beevors,Old Shore,9648,Indonesia,10691,1970/05/20
+59,Vivianna,Portigall,Purle,Raven,6019,Portugal,24621,1997/12/06
+60,Ruby,Yapp,Pottery,Commercial,3278,China,12573,1952/06/17
+61,Hewie,Hogbourne,Navarijo,Mallard,7351,Vietnam,11387,1985/05/28
+62,Libby,Chaim,Hargrove,Roxbury,7496,Russia,68054,1981/06/25
+63,Jase,Dearlove,Reditt,Eliot,7547,Philippines,15519,1975/01/13
+64,Granville,Saiz,Collerd,Summer Ridge,3715,Russia,89724,1985/01/07
+65,Nanine,Eykelhof,Yurikov,Petterle,3123,China,31543,1970/05/22
+66,Leonidas,Whitloe,Clowley,Barby,1271,Philippines,68671,1996/05/29
+67,Corrie,McArdell,O'Kennavain,Packers,8976,Thailand,15,1988/10/21
+68,Brody,Sullens,Skacel,Union,2362,Luxembourg,50827,1959/01/21
+69,Gery,Umpleby,Lochrie,Veith,6549,China,65023,1977/12/12
+70,Syd,Ensor,MacSkeaghan,Talisman,6393,South Korea,13452,1992/05/19
+71,Tucky,Mackison,Isakovic,Melby,7434,Sweden,79265,1984/05/04
+72,Jackqueline,Neiland,Hiddersley,Hanson,7380,Russia,41693,1959/02/03
+73,Georgianna,Davenell,Tidridge,3rd,9126,United States,12865,1989/05/29
+74,Trever,Vittet,Davidou,Lerdahl,9857,Russia,56268,1997/01/03
+75,Kermy,MacKilroe,Kytter,Upham,8583,Brazil,26059,1992/09/30
+76,Dru,Moloney,Billett,Roxbury,1645,Philippines,6827,1963/11/19
+77,Marj,Burrel,Benterman,Jay,3458,Poland,89198,1990/09/14
+78,Gaylene,Dunkersley,Fryers,Meadow Valley,2095,China,26620,1962/04/19
+79,Aggi,Beddard,Stokes,Graceland,3657,Latvia,34804,1978/07/27
+80,Rachael,Duckinfield,Dunne,Bashford,148,Malawi,5257,1975/06/27
+81,Sarah,Goldsbrough,Amberson,Rieder,1403,Philippines,9885,1967/09/03
+82,Merissa,Cabbell,Couzens,Northfield,4461,Finland,1938,1956/12/22
+83,Gerta,Challice,Jerzycowski,Mockingbird,7758,Sweden,89909,1963/03/23
+84,Janeen,Standrin,Powney,Granby,9013,Argentina,78996,2000/04/30
+85,Nancey,Leggatt,Westberg,Parkside,9216,Russia,35162,1963/02/24
+86,Sharl,Libbey,Sandilands,Commercial,3763,Philippines,73552,1984/08/11
+87,Norton,Dalglish,Ogle,Nelson,8290,Philippines,65250,1990/03/14
+88,Dilan,Thiese,Strelitz,Morrow,7107,Portugal,9890,1986/12/23
+89,Noble,Marians,Endley,Waubesa,4615,Indonesia,55601,1992/02/01
+90,Bianka,Dunphy,Ecclestone,Red Cloud,128,Bosnia and Herzegovina,74003,1989/01/09
+91,Sanders,Wards,Izhakov,Center,9873,Philippines,25262,1964/05/15
+92,Onida,Traite,Wearne,Gulseth,4394,Poland,57718,1987/07/29
+93,Wyn,Gwatkin,Meffen,Milwaukee,5949,Philippines,38718,1987/06/09
+94,Carmen,Tremathack,Boagey,Oak,3296,China,2293,1967/12/05
+95,Janot,Launder,Gummery,Meadow Vale,3698,France,32500,1992/09/12
+96,Giorgi,Rosenthal,Baggiani,Delladonna,1238,China,21782,1960/12/14
+97,Haleigh,Fincke,Peoples,Hooker,4035,Poland,41006,1995/03/20
+98,Renae,Pawlik,Mathiot,Lyons,8636,Brazil,86139,1994/04/08
+99,Herman,Rossbrook,Aitkin,Claremont,2530,Peru,68295,1991/02/04
+100,Padget,Fernihough,Merdew,Sunnyside,2285,Myanmar,12084,1996/05/12
+101,Nicolina,Servis,Glanton,Debs,1608,Nigeria,25346,1983/03/27
+102,Elvira,Enderby,Astley,Myrtle,2833,Philippines,18239,1992/03/13
+103,Rori,Mayman,Pamment,Holy Cross,136,Tajikistan,73634,1992/01/11
+104,Anson,Moralee,Freund,Shopko,3553,Peru,834,1979/05/04
+105,Hagen,Punch,Applin,Larry,1843,Ukraine,68298,1955/05/22
+106,Wynne,Skirvane,Sperrett,Oakridge,7068,Canada,93690,1981/08/12
+107,Erny,Kimberly,McCooke,Independence,1780,Tunisia,91205,1968/07/29
+108,Dylan,Runsey,Hayer,Nobel,9696,China,46349,1954/09/07
+109,Gorden,Vernham,Ollie,Bluejay,1582,Tokelau,14879,1952/12/09
+110,Barn,Mosconi,Eccleshall,Sommers,3177,Serbia,33884,1954/07/21
+111,Nita,Sallis,Grimsdell,New Castle,4498,China,66725,1982/07/17
+112,Ulrica,Moscon,Summerell,5th,4760,Russia,63048,1984/04/26
+113,Ignatius,McWhin,Hagwood,5th,7377,Greece,39410,1980/02/19
+114,Monique,Alvaro,Fassman,Donald,634,Poland,58768,1986/08/31
+115,Vilhelmina,Lambkin,Almey,Dixon,431,Greece,9881,1999/03/26
+116,Samuel,Clemmitt,Boneham,Grasskamp,4772,China,11499,1966/09/23
+117,Quint,Bim,Hance,Hooker,7768,Portugal,75076,1966/04/07
+118,Krissie,Poncet,Parysowna,Susan,7124,Albania,74449,1986/07/13
+119,Bernardo,Macbane,MacClenan,Dahle,1252,Portugal,78876,1951/03/05
+120,Bobbie,Jirick,Boutellier,Susan,1458,Indonesia,23254,1993/02/02
+121,Kimberly,Wyer,Derwin,Erie,6259,China,37242,1966/09/19
+122,Cam,Pottinger,Spinello,Arapahoe,9725,Indonesia,88660,1983/05/09
+123,Hadley,Wycliffe,Smythin,Hazelcrest,915,Brazil,87914,1953/04/03
+124,Ramsey,Barter,Prangle,Caliangt,5485,France,1081,1986/08/06
+125,Dolli,Reboulet,Occleshaw,Gerald,9400,Cuba,55496,1965/12/11
+126,Archy,Garaghan,Osban,Bluejay,5325,China,13879,1983/11/14
+127,Bucky,Meadway,McCallum,7th,6723,Canada,33990,1967/09/18
+128,Heda,McIlvenny,Sabates,Monument,5326,Canada,65180,1981/05/27
+129,Robbert,Peinke,Grange,Heffernan,2458,Ukraine,8874,1955/09/10
+130,Lottie,Toby,Tripony,Cascade,7675,Indonesia,37509,1992/06/21
+131,Kora,Tellwright,Pentony,Everett,3662,France,631,1971/03/03
+132,Dorisa,Kulver,Chiddy,Milwaukee,5599,China,7910,1994/07/10
+133,Ashien,Ashingden,Comino,Sommers,4524,Russia,64660,1985/06/21
+134,Carroll,Flatte,Lavarack,Redwing,1429,Portugal,65044,1967/05/01
+135,Daniella,Quincey,D'Agostino,Fordem,8644,Lithuania,87572,1966/10/16
+136,Harmon,Stanning,Schustl,Hooker,2908,Sweden,87244,1991/10/07
+137,Paten,Josofovitz,Benbough,Cottonwood,1037,China,38711,1976/02/25
+138,Mabel,Thorburn,Scholtis,Donald,1970,Taiwan,61778,1964/02/01
+139,Sig,Kiltie,Jacquot,Ridge Oak,1323,Ethiopia,2834,1976/09/07
+140,Cecilius,Lambourn,Madgett,Memorial,1337,Philippines,45709,1993/08/29
+141,Coralie,Cryer,Bitchener,Division,6761,Pakistan,49530,1962/06/17
+142,Abbye,Flescher,Krabbe,Melby,7643,China,59139,1991/04/23
+143,Germain,Leroux,Maris,Del Sol,9686,Czech Republic,77022,1999/12/09
+144,Rhona,McClounan,Pleasance,Bluestem,4276,Colombia,29141,1958/07/09
+145,Forbes,Drewery,MacBarron,Meadow Ridge,1366,Finland,66465,1962/06/10
+146,Sara,Belfelt,Romaynes,Commercial,1075,Nepal,12430,1969/08/23
+147,Yoko,Brodway,Yakubowicz,Kim,9657,Macedonia,96740,1994/05/03
+148,Charmane,Fills,Moralee,Novick,3088,Ukraine,48565,1981/02/14
+149,Alejandrina,Venes,Studdard,Katie,3421,China,32129,1973/01/21
+150,Fitzgerald,Burthom,Sketchley,Buhler,2424,China,32522,1959/12/01
+151,Natividad,Deschelle,Rubartelli,Glendale,3896,Macedonia,85068,1977/05/03
+152,Honey,Thake,D'Aeth,Burning Wood,6803,Indonesia,13488,1965/04/29
+153,Dani,Wilford,Fairfoul,Hoepker,892,Poland,13209,1984/05/27
+154,Jilli,Newtown,Mc Ilwrick,Aberg,16,United States,89858,1968/11/06
+155,Trstram,Loosemore,Purchon,Bowman,6114,China,14524,1958/07/04
+156,Ginelle,Quinsee,Tolomei,Morningstar,8006,Tunisia,67897,1988/09/07
+157,Forster,Willingam,Cuckoo,Walton,4705,Georgia,20352,1953/12/24
+158,Raina,Kipping,Jeratt,Corben,4631,Greece,93291,1990/09/21
+159,Alice,Calderhead,Macrow,Florence,4949,Sweden,76783,1992/02/17
+160,Ruthann,O'Hannay,Mulvany,Continental,7125,Mauritania,3666,1999/01/07
+161,Arlin,Eaden,Reddin,Lakeland,8886,Russia,84005,1989/01/31
+162,Grethel,Gayler,Strasse,Boyd,9395,Indonesia,3970,1998/08/11
+163,Margaux,Sullivan,Villa,Milwaukee,5281,Sweden,67849,1993/06/12
+164,Vicki,Morrel,Scholler,Rowland,8975,Paraguay,89854,1978/09/14
+165,Hyacinthia,Puttnam,Fulcher,Monica,4577,Philippines,92392,1955/01/18
+166,Harmon,Iacovazzi,Arkin,Hayes,3893,Indonesia,89385,1987/02/17
+167,Aymer,Tappin,Quixley,Oriole,5893,Norway,11675,1951/04/04
+168,Chelsey,Ellerington,Pattlel,Susan,8874,Russia,87233,1979/09/14
+169,Ilka,Dicken,Dunderdale,Oak,6598,United States,78966,1994/05/26
+170,Janela,Vivers,Roarty,Melrose,2917,Indonesia,21712,1980/09/28
+171,Odey,Bodemeaid,Coenraets,Manufacturers,7435,Democratic Republic of the Congo,53995,1974/11/17
+172,Elston,Schroder,Conrard,Muir,6030,Myanmar,85404,1954/07/02
+173,Kendrick,Jacox,Freake,Welch,1783,Russia,49840,1983/10/31
+174,Trumann,Ramplee,Marcq,Sutherland,2553,Ukraine,22688,1978/08/02
+175,Quinn,Mathews,O'Hollegan,Harbort,5409,Peru,23804,1982/06/07
+176,Kippy,Goodhall,Milne,Fisk,2476,Portugal,21819,1959/03/22
+177,Innis,Daynter,Melliard,John Wall,1911,Sweden,12269,1980/02/10
+178,Curtice,Tresise,Ford,Grayhawk,9036,Belarus,34574,1971/11/17
+179,Chaim,Tapping,Dulinty,Warrior,768,China,30437,1968/12/07
+180,Wilbur,Nell,Given,Dorton,3466,Philippines,14634,1974/01/11
+181,Eugen,Earp,Sherringham,Becker,2332,Palestinian Territory,52713,1972/03/12
+182,Margarete,Breyt,Lude,Dwight,8374,Argentina,84147,1995/11/06
+183,Angelita,Cossons,Greenleaf,Holmberg,8711,China,65135,1961/09/24
+184,Rafael,Arnaudin,Wylie,Ronald Regan,9243,Nepal,86257,1955/06/15
+185,Revkah,Stener,Tough,Manley,1477,Indonesia,84177,1983/09/28
+186,Miguela,Lipman,Beglin,Grasskamp,8339,Greece,11290,1974/08/27
+187,Jedidiah,Sanches,Magnay,Aberg,498,China,97595,1951/07/23
+188,Julio,Gavaghan,Peart,Dryden,8017,Argentina,21874,1950/08/17
+189,Carlyn,Piscotti,Willmetts,Stuart,5755,Indonesia,71026,1962/01/08
+190,Sydelle,Bampforth,Guarin,Homewood,4500,Sweden,43165,1985/07/09
+191,Carol-jean,Tumber,Derricoat,Coleman,5822,Angola,3463,1967/05/25
+192,Sanford,Petrus,Burrage,Del Mar,2857,Iran,50353,1975/02/28
+193,Dolli,Twiggs,Dunckley,Center,5755,China,25005,1987/08/28
+194,Toddy,Nertney,Minger,Dixon,5445,Lebanon,69721,1996/03/30
+195,Prudy,MacIver,Pealing,Atwood,7041,Mali,69300,1994/10/16
+196,Alexis,Gillespie,McInally,Morning,1448,China,30945,1952/04/08
+197,Kristoforo,Loweth,Carson,Ridge Oak,8352,China,40250,1979/02/09
+198,Tito,Dunsmore,Skoughman,Thierer,8589,New Caledonia,1656,1960/10/02
+199,Care,Guwer,Ragsdall,Eagle Crest,8943,Zambia,59921,1992/10/23
+200,Tally,Lain,Markovic,Westerfield,3875,Niger,3912,1960/06/12
+201,Kissiah,Saxton,Coomber,Butternut,7976,Brazil,53952,2000/03/12
+202,Chrisse,Dohr,Patnelli,Prentice,2081,Egypt,58926,1988/03/25
+203,Vivian,Cakes,Porritt,Melody,2633,Colombia,17921,1953/03/07
+204,Lauritz,Jakucewicz,Nunnery,Dixon,8447,Serbia,71584,1960/06/24
+205,Elnora,Dizlie,Elloy,Orin,2397,Poland,19519,1995/06/28
+206,Tiebold,Rablan,Cortez,Bluestem,3428,Myanmar,88554,1968/05/15
+207,Rock,Grevatt,Stealey,Dovetail,8246,Argentina,28280,1952/11/13
+208,Ivor,MacDiarmid,Bog,Crest Line,6396,Philippines,74670,1991/06/24
+209,Alexio,Josefer,Charlo,Anthes,9012,Sweden,57792,1951/08/04
+210,Anetta,Focke,Learman,Birchwood,2865,France,87956,1974/09/22
+211,Pamella,Waeland,Saintpierre,Lakeland,2763,Serbia,61394,1992/07/06
+212,Porty,Dorot,Grassett,Buena Vista,1217,Mexico,30310,1961/03/07
+213,Karia,Iskov,Carrabot,Bluestem,5359,Indonesia,24759,1971/11/05
+214,Carlee,Rolph,Riglar,West,775,Jamaica,37815,1959/10/20
+215,Keary,Halkyard,Dufoure,Riverside,7861,China,35585,1982/05/22
+216,Neely,Pala,Wilmington,Eastwood,3459,Poland,58083,1999/10/08
+217,Joya,Brand,Tuff,Muir,780,China,75733,1956/09/06
+218,Boote,Cummine,Latus,Lotheville,799,France,60500,1960/09/03
+219,Koral,Roback,Stoodale,Oxford,2563,China,74310,1998/12/15
+220,Rusty,Hickisson,Dupoy,Goodland,3433,Philippines,80192,1956/04/07
+221,Davin,Spinello,Morrieson,Lotheville,4367,China,6578,1986/12/12
+222,Louie,Parken,Kleynermans,Crownhardt,4306,Canada,49978,1994/07/28
+223,Clywd,Fritschel,Hamlet,Lillian,7338,Indonesia,74499,1984/08/20
+224,Redford,Wagenen,Strongitharm,Katie,17,Philippines,57780,1980/02/10
+225,Tades,Duthie,Dionis,Anniversary,1957,Argentina,41529,1998/02/23
+226,Wang,Burnip,Petegre,Talmadge,8234,Poland,52582,1990/03/10
+227,Ania,Popplestone,Cottage,Hoffman,3,Japan,36248,1996/02/17
+228,Malynda,Prando,Barok,Farmco,5677,Russia,79428,1980/10/28
+229,Allene,Pantry,Hynes,Prairieview,3404,Philippines,96992,1983/10/03
+230,Claudelle,Lambert,Grishagin,Lindbergh,337,South Korea,34640,1951/08/09
+231,Alden,Gowthrop,Boutwell,Rowland,7870,China,62949,1977/09/19
+232,Marten,Cropp,Sowter,Donald,3296,Dominican Republic,21129,1991/01/10
+233,Andrus,Columbine,Dannell,Cordelia,634,Azerbaijan,19898,1957/09/05
+234,Gilles,Charsley,Wedgwood,Sundown,5207,Ireland,74959,1983/04/08
+235,Nerita,Dodridge,Klesl,Cottonwood,6475,Tunisia,29061,1962/09/09
+236,Zolly,Lewsy,Ellsworthe,Saint Paul,4900,Netherlands,19102,1988/06/07
+237,Beale,Kibbey,Brawson,Fairview,8143,Philippines,68527,1968/09/08
+238,Leslie,Mackett,Eastmead,Mosinee,4574,Argentina,82734,1977/09/15
+239,Rory,Shellum,Macvey,Di Loreto,614,Russia,91694,1990/03/11
+240,Derwin,Iddons,Smurthwaite,Clarendon,7960,Russia,99249,1983/01/03
+241,Renell,Gunnell,Coare,Dryden,8586,Russia,19811,1981/07/19
+242,Felicle,Richardot,Candie,Kensington,5950,Indonesia,31725,1965/03/08
+243,Isidor,Farish,Presidey,Oxford,1172,Colombia,35662,1984/02/11
+244,Daphene,Narup,Waple,Hoard,1277,China,13591,1955/09/21
+245,Guglielma,Koppelmann,Hirjak,Bashford,1113,China,28291,1989/02/12
+246,Gus,Davidwitz,Edrich,Talisman,1467,Colombia,46790,1999/04/02
+247,Chevalier,Longfoot,Kluss,Marcy,9049,Indonesia,59964,1972/08/21
+248,Kendricks,Pocknoll,Bawle,Dahle,8168,Indonesia,75182,1969/12/09
+249,Hussein,Grix,Sighard,Elka,7880,Ukraine,96651,1967/12/29
+250,Alexina,Nuttall,Kettlestringes,Goodland,3661,Mongolia,59475,1986/09/30
+251,Dannie,Espadas,Aimer,Hayes,7214,Bulgaria,37712,1963/05/25
+252,Abigale,Bugdale,Patrickson,Eliot,6360,Nigeria,81529,1998/12/09
+253,Isidora,Voce,Chetwynd,Dwight,7254,Russia,70660,1990/01/05
+254,Dulcinea,Starmont,Merrill,Maywood,6,Indonesia,15315,1951/04/26
+255,Drake,Wainwright,Kimmins,Fremont,7757,Sweden,47096,1956/07/19
+256,Susan,Etuck,Vandrill,Katie,3165,China,3804,1983/10/30
+257,Starlene,Alsopp,Milberry,Burrows,3208,Sri Lanka,7514,1975/12/24
+258,Eb,Matashkin,Osbaldeston,Memorial,9794,Russia,41145,1959/05/03
+259,Ileane,Duthy,Pizzey,Larry,8826,Russia,34507,1982/12/11
+260,Madelon,Beverley,Adshede,Kim,5262,Russia,87587,1975/02/20
+261,Kelly,Szachniewicz,Banbrigge,Chive,9919,Brazil,44032,1956/08/22
+262,Eva,Boldra,Large,Lyons,9908,Russia,8146,1953/06/20
+263,Alfred,Beauchop,Hallowes,Huxley,5288,Morocco,33672,1974/07/08
+264,Noe,Netley,Saint,Fulton,4071,Russia,4909,1992/02/28
+265,Valeria,Blasli,Vaughan-Hughes,Eliot,3602,Russia,78645,1989/01/11
+266,Osmund,Gumly,Muckian,Coleman,1784,Australia,241,1982/01/30
+267,Whitney,Crossgrove,Carnew,Arkansas,560,Indonesia,14101,1979/03/01
+268,Elizabet,Stapleford,Haitlie,7th,533,Nigeria,35642,1985/02/13
+269,Gus,Leibold,Nordass,Comanche,349,United States,74950,1971/09/29
+270,Corette,Fessions,Emsden,Moose,9463,Nigeria,95064,1986/12/30
+271,Kale,Boake,Petow,Golf Course,2410,France,28640,1964/12/22
+272,Zach,Tremayne,Comport,Cardinal,3719,France,69131,1963/05/01
+273,Pail,Fealy,Mouatt,Gateway,1172,Indonesia,95367,1986/11/11
+274,Cloe,Westberg,Penkman,Union,2145,Denmark,50733,1966/09/15
+275,Tommie,Iacopini,Esposito,Ridgeway,2468,China,18247,1977/09/02
+276,Corinna,Wisam,Drissell,Ilene,7449,Poland,51474,1972/07/19
+277,Gabriella,Feasley,Braffington,Derek,4180,Indonesia,45775,1972/03/23
+278,Caressa,Bonde,Cammomile,Waubesa,3988,Poland,84540,1958/09/06
+279,Jocelin,Beswell,Quarles,Hagan,6370,Peru,22870,1984/09/13
+280,Zolly,Tidder,Fipp,Pierstorff,4617,China,28103,1956/03/26
+281,Standford,Pudsey,Whall,Mcguire,6602,Canada,11045,1953/02/06
+282,Kat,Minchella,Sheardown,Debs,6071,Israel,68981,1995/08/02
+283,Asia,Abelwhite,Grzeszczak,Sullivan,8457,Philippines,17818,1996/08/23
+284,Phillip,Lamplugh,Yakubovich,Eagan,4858,China,91179,1983/05/13
+285,Joann,Dury,Baltzar,Atwood,694,Lithuania,57789,1994/06/03
+286,Misty,Cottrill,Tritton,Melvin,1257,South Africa,42202,1999/07/06
+287,Christoffer,Darragh,Saby,Annamark,1168,Malaysia,44301,1970/02/02
+288,Lynnell,Moncreif,Peat,Melrose,6891,Indonesia,94459,1993/05/07
+289,Wheeler,Lodeke,Diament,Algoma,4969,Japan,19431,1989/11/17
+290,Alexa,Ruf,Spiring,Harper,7733,China,54652,1961/01/29
+291,Dian,Nolte,Fitzhenry,Arizona,7230,Greece,43091,1999/05/03
+292,Georgette,Hinksen,Escudier,Old Shore,5027,Philippines,93413,1997/11/09
+293,Eldin,Hovard,Kerwen,Warbler,9295,China,84351,1980/04/07
+294,Charmion,Bank,Tomkins,Victoria,7367,China,66059,1985/04/07
+295,Ryan,Eudall,Bullock,Schurz,9807,South Africa,68694,1987/07/23
+296,Theresa,Cownden,Mulford,Autumn Leaf,2611,China,59228,1961/04/28
+297,Vivianne,Cruces,de Werk,Jana,804,China,95836,1986/09/06
+298,Cathi,Quinsee,Slimm,Parkside,4626,China,67768,1975/03/28
+299,Adria,Guwer,Skuse,Stoughton,6187,Bulgaria,33313,1984/02/16
+300,Herby,Firk,Benbrick,Cherokee,7269,Moldova,47373,1951/05/02

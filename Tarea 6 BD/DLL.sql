@@ -16,6 +16,7 @@ CREATE TABLE medico
      numero         CHAR(5)        NOT NULL,
      ciudad         VARCHAR2(50)   NOT NULL,
      CP             CHAR(5)    	   NOT NULL,
+     FNACIMIENTO    DATE DEFAULT SYSDATE NOT NULL,
      CONSTRAINT check_numero_med   CHECK(regexp_like(numero, '^[0-9]')),
      CONSTRAINT check_CP_med       CHECK(regexp_like(CP, '^[0-9]')),
      CONSTRAINT idmedico_PK        PRIMARY KEY (idMedico)
@@ -35,6 +36,7 @@ CREATE TABLE paciente
      numero         CHAR(5)      NOT NULL,
      ciudad         VARCHAR2(50) NOT NULL,
      CP             CHAR(5) NOT NULL,
+     FNACIMIENTO    DATE DEFAULT SYSDATE NOT NULL,
      CONSTRAINT check_numero_pac   CHECK(regexp_like(numero, '^[0-9]')),
      CONSTRAINT check_CP_pac       CHECK(regexp_like(CP, '^[0-9]')),
      CONSTRAINT idpaciente_PK PRIMARY KEY (idpaciente)
