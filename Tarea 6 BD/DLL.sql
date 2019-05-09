@@ -17,6 +17,7 @@ CREATE TABLE medico
      ciudad         VARCHAR2(50)   NOT NULL,
      CP             CHAR(5)    	   NOT NULL,
      FNACIMIENTO    DATE DEFAULT SYSDATE NOT NULL,
+     idsupervisor NUMBER DEFAULT 1,
      CONSTRAINT check_numero_med   CHECK(regexp_like(numero, '^[0-9]')),
      CONSTRAINT check_CP_med       CHECK(regexp_like(CP, '^[0-9]')),
      CONSTRAINT idmedico_PK        PRIMARY KEY (idMedico)
@@ -89,9 +90,9 @@ CREATE TABLE medico_ingresar_paciente
   (
   	idmedico        NUMBER,
   	idpaciente      NUMBER,
-  	num_ingreso     CHAR(15) NOT NULL UNIQUE,
-  	habitacion      CHAR(5) NOT NULL,
-  	cama            CHAR(5) NOT NULL,
+  	num_ingreso     CHAR(5) NOT NULL UNIQUE,
+  	habitacion      CHAR(2) NOT NULL,
+  	cama            CHAR(3) NOT NULL,
   	fecha_ingreso   DATE DEFAULT sysdate NOT NULL,
   	CONSTRAINT check_num_ingreso  CHECK(regexp_like(num_ingreso, '^[0-9]')),
     CONSTRAINT check_habitacion   CHECK(regexp_like(habitacion, '^[0-9]')),
@@ -109,8 +110,8 @@ CREATE TABLE medico_consultar_paciente
   (
   	idmedico        NUMBER,
   	idpaciente      NUMBER,
-  	num_consulta    CHAR(15) NOT NULL UNIQUE,
-  	consultorio     CHAR(5) NOT NULL,
+  	num_consulta    CHAR(5) NOT NULL UNIQUE,
+  	consultorio     CHAR(2) NOT NULL,
   	fecha_consulta  DATE DEFAULT sysdate NOT NULL,
   	CONSTRAINT check_num_consulta CHECK(regexp_like(num_consulta, '^[0-9]')),
     CONSTRAINT check_consultorio  CHECK(regexp_like(consultorio, '^[0-9]')),
