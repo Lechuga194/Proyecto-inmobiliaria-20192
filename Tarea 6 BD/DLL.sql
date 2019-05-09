@@ -92,11 +92,11 @@ CREATE TABLE medico_ingresar_paciente
   	idpaciente      NUMBER,
   	num_ingreso     CHAR(5) NOT NULL UNIQUE,
   	habitacion      CHAR(2) NOT NULL,
-  	cama            CHAR(3) NOT NULL,
+  	cama            CHAR(10) NOT NULL,
   	fecha_ingreso   DATE DEFAULT sysdate NOT NULL,
   	CONSTRAINT check_num_ingreso  CHECK(regexp_like(num_ingreso, '^[0-9]')),
     CONSTRAINT check_habitacion   CHECK(regexp_like(habitacion, '^[0-9]')),
-    CONSTRAINT check_cama         CHECK(regexp_like(cama, '^[0-9]')),
+    CONSTRAINT check_cama         CHECK(cama='cama' OR cama='camilla'),
   	CONSTRAINT medico_ingresar_paciente_idmedico_FK FOREIGN KEY (idmedico) REFERENCES medico (idmedico) ON DELETE CASCADE,
     CONSTRAINT medico_ingresar_paciente_idpaciente_FK FOREIGN KEY (idpaciente) REFERENCES paciente (idpaciente) ON DELETE CASCADE,
     CONSTRAINT medico_ingresar_paciente_PK PRIMARY KEY (idmedico, idpaciente, num_ingreso)
