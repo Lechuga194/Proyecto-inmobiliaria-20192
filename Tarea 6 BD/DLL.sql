@@ -58,7 +58,7 @@ CREATE TABLE especialidad
 	Crea la tabla supervisar, que es una relacion entre medico y medico
 	recibe dos llaves foraneas que mantienen integridad referencial por medio de "Cascade"
 	su llave primaria es el idmedico_supervisor (El supervisor de los otros medicos)
-*/ 
+
 CREATE TABLE supervisar
   (
      idmedico_supervisor      NUMBER NOT NULL,
@@ -67,6 +67,7 @@ CREATE TABLE supervisar
      CONSTRAINT supervisar_idmedico_supervisado_FK FOREIGN KEY (idmedico_supervisado) REFERENCES medico (idmedico) ON DELETE CASCADE,
      CONSTRAINT supervisar_PK PRIMARY KEY (idmedico_supervisor, idmedico_supervisado)
   );
+*/
 
 /*
 	Crea la tabla que indica si un medico tiene especialidad
