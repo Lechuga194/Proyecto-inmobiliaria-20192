@@ -36,6 +36,7 @@ CREATE TABLE paciente
      calle          VARCHAR2(50) NOT NULL,
      numero         CHAR(5)      NOT NULL,
      ciudad         VARCHAR2(50) NOT NULL,
+     estado         VARCHAR(10) NOT NULL,
      CP             CHAR(5) NOT NULL,
      FNACIMIENTO    DATE DEFAULT SYSDATE NOT NULL,
      CONSTRAINT check_numero_pac   CHECK(regexp_like(numero, '^[0-9]')),
@@ -111,7 +112,7 @@ CREATE TABLE medico_consultar_paciente
   (
   	idmedico        NUMBER,
   	idpaciente      NUMBER,
-  	num_consulta    CHAR(5) NOT NULL UNIQUE,
+  	num_consulta    NUMBER NOT NULL UNIQUE,
   	consultorio     CHAR(2) NOT NULL,
   	fecha_consulta  DATE DEFAULT sysdate NOT NULL,
   	CONSTRAINT check_num_consulta CHECK(regexp_like(num_consulta, '^[0-9]')),
