@@ -1,513 +1,539 @@
 /*
-DDL.SQL Practica 8 | Lechuga Martínez José Eduardo
+DDL.SQL Proyecto final | Lechuga Martínez José Eduardo | 314325749 | Joselechuga194@ciencias.unam.mx
 */
---Creacion de Encargado
-CREATE TABLE encargado
+CREATE TABLE colonia
   (
-    idencargado NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    nombrepila     VARCHAR2(50) NOT NULL,
-    apaterno       VARCHAR2(50) NOT NULL,
-    amaterno       VARCHAR2(50) NOT NULL,
-    fnacimiento    DATE NOT NULL,
-    fregistro      DATE DEFAULT sysdate NOT NULL,
-    colonia        VARCHAR2(50) NOT NULL,
-    numerovivienda NUMBER(3,0) NOT NULL,
-    estado         VARCHAR2(50) NOT NULL,
-    calle          VARCHAR2(50) NOT NULL,
-    CONSTRAINT idencargado_PK PRIMARY KEY (idencargado)
+    idColonia NUMBER,
+    nombre    CHAR(25) NOT NULL,
+    CONSTRAINT colonia_PK PRIMARY KEY (idColonia)
   );
-CREATE TABLE correos_encargado
+
+CREATE TABLE tiendas_Cercanas
   (
-    correo      VARCHAR2(50) CHECK(correo LIKE '%@%.%'),
-    idencargado NUMBER NOT NULL,
-    CONSTRAINT encargado_correo_PK PRIMARY KEY (correo),
-    CONSTRAINT encargado_correos_idencargado_FK FOREIGN KEY (idencargado) REFERENCES encargado (idencargado)
+    nombreTienda CHAR(50),
+    idColonia    NUMBER,
+    CONSTRAINT tiendas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
+  DELETE CASCADE, CONSTRAINT tiendas_Cercanas_PK PRIMARY KEY (nombreTienda)
   );
-CREATE TABLE telefonos_encargado
+
+CREATE TABLE recreativos_Cercanos
   (
-    telefono    VARCHAR(14),
-    idencargado NUMBER ,
-    CONSTRAINT encargado_telefono_PK PRIMARY KEY (telefono),
-    CONSTRAINT encargado_telefonos_idencargado_FK FOREIGN KEY (idencargado) REFERENCES encargado (idencargado)
+    nombreRecreativo CHAR(50),
+    idColonia        NUMBER,
+    CONSTRAINT recreativos_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
+  DELETE CASCADE,
+    CONSTRAINT recreativos_Cercanos_PK PRIMARY KEY (nombreRecreativo)
   );
---Creacion de Gerente
-CREATE TABLE gerente
+
+CREATE TABLE escuelas_Cercanas
   (
-    idgerente NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    nombrepila     VARCHAR2(50) NOT NULL,
-    apaterno       VARCHAR2(50) NOT NULL,
-    amaterno       VARCHAR2(50) NOT NULL,
-    fnacimiento    DATE NOT NULL,
-    fregistro      DATE DEFAULT sysdate NOT NULL,
-    colonia        VARCHAR2(50) NOT NULL,
-    numerovivienda NUMBER (3,0) NOT NULL,
-    estado         VARCHAR2(50) NOT NULL,
-    calle          VARCHAR2(50) NOT NULL,
-    CONSTRAINT idgerente_PK PRIMARY KEY (idgerente)
+    nombreEscuela CHAR(50),
+    idColonia     NUMBER,
+    CONSTRAINT Escuelas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
+  DELETE CASCADE, CONSTRAINT Escuelas_Cercanas_PK PRIMARY KEY (nombreEscuela)
   );
-CREATE TABLE correos_gerente
+
+CREATE TABLE hospitales_Cercanos
   (
-    correo    VARCHAR2(50) CHECK(correo LIKE '%@%.%'),
-    idgerente NUMBER,
-    CONSTRAINT gerente_correo_PK PRIMARY KEY (correo),
-    CONSTRAINT gerente_correos_idgerente_FK FOREIGN KEY (idgerente) REFERENCES gerente (idgerente)
+    nombreHospital CHAR(50),
+    idColonia      NUMBER,
+    CONSTRAINT hospitales_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
+  DELETE CASCADE,
+    CONSTRAINT hospitales_Cercanos_PK PRIMARY KEY (nombreHospital)
   );
-CREATE TABLE telefonos_gerente
+
+CREATE TABLE transportes_Cercanos
   (
-    telefono  VARCHAR(14),
-    idgerente NUMBER,
-    CONSTRAINT gerente_telefono_PK PRIMARY KEY (telefono),
-    CONSTRAINT gerente_telefonos_idgerente_FK FOREIGN KEY (idgerente) REFERENCES gerente (idgerente)
+    nombreTransporte CHAR(50),
+    idColonia        NUMBER,
+    CONSTRAINT transportes_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
+  DELETE CASCADE,
+    CONSTRAINT transportes_Cercanos_PK PRIMARY KEY (nombreTransporte)
   );
---Creacion de Empleado
-CREATE TABLE empleado
+
+CREATE TABLE direccion
   (
-    idempleado NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    nombrepila     VARCHAR2(50) NOT NULL,
-    apaterno       VARCHAR2(50) NOT NULL,
-    amaterno       VARCHAR2(50) NOT NULL,
-    fnacimiento    DATE NOT NULL,
-    fregistro      DATE DEFAULT sysdate NOT NULL,
-    colonia        VARCHAR2(50) NOT NULL,
-    numerovivienda NUMBER (3,0) NOT NULL,
-    estado         VARCHAR2(50) NOT NULL,
-    calle          VARCHAR2(50) NOT NULL,
-    CONSTRAINT idempleado_PK PRIMARY KEY (idempleado)
+    idDireccion NUMBER,
+    idColonia   NUMBER,
+    estado      CHAR(50) DEFAULT 'No especificado' NOT NULL,
+    municipio   CHAR(50) DEFAULT 'No especificado' NOT NULL,
+    CP          CHAR(5) DEFAULT '00000' NOT NULL,
+    calle       VARCHAR2(50) DEFAULT 'No especificado' NOT NULL,
+    nExterior   CHAR(3) DEFAULT '000' NOT NULL,
+    nInterior   CHAR(3) DEFAULT '000' NOT NULL,
+    CONSTRAINT revisaNumeros_direccion CHECK (regexp_like(CP, '^[0-9]')
+  AND (regexp_like(nExterior, '^[0-9]')
+  AND (regexp_like(nInterior, '^[0-9]')))),
+    CONSTRAINT idColonia_direccio_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
+  DELETE CASCADE, CONSTRAINT direccion_PK PRIMARY KEY (idDireccion)
   );
-CREATE TABLE correos_empleado
+
+CREATE TABLE caracteristica
   (
-    correo     VARCHAR2(50) CHECK(correo LIKE '%@%.%'),
-    idempleado NUMBER,
-    CONSTRAINT empleado_correo_PK PRIMARY KEY (correo),
-    CONSTRAINT empleado_correos_idempleado_FK FOREIGN KEY (idempleado) REFERENCES empleado (idempleado)
+    idCaracteristica NUMBER,
+    nombre           CHAR(50),
+    descripcion      VARCHAR2(150),
+    CONSTRAINT caracteristica_PK PRIMARY KEY (idCaracteristica)
   );
-CREATE TABLE telefonos_empleado
+
+CREATE TABLE amenidad
   (
-    telefono   VARCHAR(14),
-    idempleado NUMBER,
-    CONSTRAINT empleado_telefono_PK PRIMARY KEY (telefono),
-    CONSTRAINT empleado_telefonos_idempleado_FK FOREIGN KEY (idempleado) REFERENCES empleado (idempleado)
+    idAmenidad  NUMBER,
+    nombre      CHAR(50),
+    descripcion VARCHAR2(150),
+    CONSTRAINT amenidad_PK PRIMARY KEY (idAmenidad)
   );
---Creacion de Farmacia
-CREATE TABLE farmacia
+
+CREATE TABLE servicio
   (
-    iddepartamento NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE
+    idServicio  NUMBER,
+    nombre      CHAR(50),
+    descripcion VARCHAR2(150),
+    CONSTRAINT servicio_PK PRIMARY KEY (idServicio)
   );
-ALTER TABLE farmacia ADD CONSTRAINT farmacia_PK PRIMARY KEY (iddepartamento);
---Creacion de Abarrotes
-CREATE TABLE abarrotes
+
+CREATE TABLE seguro
   (
-    iddepartamento NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE
+    numPoliza     NUMBER,
+    aseguradora   CHAR(50),
+    tipoCovertura VARCHAR2(150),
+    precioAnual   NUMBER,
+    CONSTRAINT seguro_PK PRIMARY KEY (numPoliza)
   );
-ALTER TABLE abarrotes ADD CONSTRAINT abarrotes_PK PRIMARY KEY (iddepartamento);
---Creacion de Vinos y licores
-CREATE TABLE vinosylicores
+
+CREATE TABLE empresa
   (
-    iddepartamento NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE
+    idEmpresa NUMBER,
+    nombre    VARCHAR2(40),
+    CONSTRAINT empresa_PK PRIMARY KEY (idEmpresa)
   );
-ALTER TABLE vinosylicores ADD CONSTRAINT vinosylicores_PK PRIMARY KEY (iddepartamento);
---Creacion de las relaciones entre encargado y los departamentos (Farmacia, abarrotes, vinos y licores)
-CREATE TABLE encargado_tener_farmacia
+
+CREATE TABLE asesor
   (
-    idencargado    NUMBER,
-    iddepartamento NUMBER,
-    CONSTRAINT encargado_tener_farmacia_idencargado_FK FOREIGN KEY (idencargado) REFERENCES encargado (idencargado),
-    CONSTRAINT encargado_tener_farmacia_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES farmacia (iddepartamento)
+    CURP        CHAR(18),
+    RFC         CHAR(13),
+    idEmpleado  NUMBER,
+    idEmpresa   NUMBER,
+    fNacimiento DATE NOT NULL,
+    nombre      VARCHAR2(25) NOT NULL,
+    aPaterno    VARCHAR2(25) NOT NULL,
+    aMaterno    VARCHAR2(25) NOT NULL,
+    fIngreso    DATE DEFAULT SYSDATE NOT NULL,
+    sueldo      NUMBER NOT NULL,
+    CONSTRAINT idEmpresa_asesor_FK FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa),
+    CONSTRAINT asesor_PK PRIMARY KEY (CURP, RFC, idEmpleado)
   );
-ALTER TABLE encargado_tener_farmacia ADD CONSTRAINT encargado_tener_farmacia_PK PRIMARY KEY (idencargado, iddepartamento);
-CREATE TABLE encargado_tener_abarrotes
+
+CREATE TABLE asesor_email
   (
-    idencargado    NUMBER,
-    iddepartamento NUMBER,
-    CONSTRAINT encargado_tener_abarrotes_idencargado_FK FOREIGN KEY (idencargado) REFERENCES encargado (idencargado),
-    CONSTRAINT encargado_tener_abarrotes_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES abarrotes (iddepartamento)
+    correo     VARCHAR2(500) CHECK(correo LIKE '%@%.%'),
+    CURP       CHAR(18),
+    RFC        CHAR(13),
+    idEmpleado NUMBER,
+    CONSTRAINT asesor_email_PK PRIMARY KEY (correo),
+    CONSTRAINT asesor_email_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON DELETE CASCADE
   );
-ALTER TABLE encargado_tener_abarrotes ADD CONSTRAINT encargado_tener_abarrtoes_PK PRIMARY KEY (idencargado, iddepartamento);
-CREATE TABLE encargado_tener_vinosylicores
+
+CREATE TABLE asesor_telefono
   (
-    idencargado    NUMBER,
-    iddepartamento NUMBER,
-    CONSTRAINT encargado_tener_vinosylicores_idencargado_FK FOREIGN KEY (idencargado) REFERENCES encargado (idencargado),
-    CONSTRAINT encargado_tener_vinosylicores_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES vinosylicores (iddepartamento)
+    telefono   CHAR(12),
+    CURP       CHAR(18),
+    RFC        CHAR(13),
+    idEmpleado NUMBER,
+    CONSTRAINT revisaNumeros_asesor_telefono CHECK (regexp_like(telefono, '^[0-9]')),
+    CONSTRAINT asesor_telefono_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON DELETE CASCADE,
+    CONSTRAINT asesor_telefono_PK PRIMARY KEY (telefono)
   );
-ALTER TABLE encargado_tener_vinosylicores ADD CONSTRAINT encargado_tener_vinosylicores_PK PRIMARY KEY (idencargado, iddepartamento);
---Creacion de la entidad Sucursal
-CREATE TABLE sucursal
+
+CREATE TABLE dueño
   (
-    idsucursal NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    fcreacion      DATE NOT NULL,
-    estado         VARCHAR2(50) NOT NULL,
-    colonia        VARCHAR2(50) NOT NULL,
-    calle          VARCHAR2(50) NOT NULL,
-    correo         VARCHAR2(50) NOT NULL,
-    nombresucursal VARCHAR2(50) NOT NULL,
-    CONSTRAINT idsucursal_PK PRIMARY KEY (idsucursal)
+    CURP        CHAR(18),
+    fNacimiento DATE NOT NULL,
+    nombre      CHAR(50),
+    aPAterno    CHAR(50),
+    aMAterno    CHAR(50),
+    CONSTRAINT dueño_PK PRIMARY KEY (CURP)
   );
---Creacion del atributo multivaluado telefono sucursal
-CREATE TABLE telefonos_sucursal
+
+CREATE TABLE dueño_email
   (
-    telefono   VARCHAR(14),
-    idsucursal NUMBER,
-    CONSTRAINT sucursal_telefono_PK PRIMARY KEY (telefono),
-    CONSTRAINT sucursal_telefonoes_idsucursal_FK FOREIGN KEY (idsucursal) REFERENCES sucursal (idsucursal)
+    correo VARCHAR2(500) CHECK(correo LIKE '%@%.%'),
+    CURP   CHAR(18),
+    CONSTRAINT dueño_email_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP),
+    CONSTRAINT dueño_email_PK PRIMARY KEY (correo)
   );
---Creacion de la relacion dirigir entre gerente y sucursal
-CREATE TABLE gerente_dirigir_sucursal
+
+CREATE TABLE dueño_telefono
   (
-    idgerente  NUMBER,
-    idsucursal NUMBER,
-    CONSTRAINT gerente_dirigir_sucursal_idgerente_FK FOREIGN KEY (idgerente) REFERENCES gerente (idgerente),
-    CONSTRAINT gerente_dirigir_sucursal_idsucursal_FK FOREIGN KEY (idsucursal) REFERENCES sucursal (idsucursal)
+    telefono CHAR(12),
+    CURP     CHAR(18),
+    CONSTRAINT revisaNumeros_dueño_telefono CHECK (regexp_like(telefono, '^[0-9]')),
+    CONSTRAINT dueño_telefono_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP),
+    CONSTRAINT dueño_telefono_PK PRIMARY KEY (telefono)
   );
-ALTER TABLE gerente_dirigir_sucursal ADD CONSTRAINT gerente_dirigir_sucursal_PK PRIMARY KEY (idgerente, idsucursal);
---Creacion de la relacion Tener entre empleado y sucursal
-CREATE TABLE empleado_tener_sucursal
+
+CREATE TABLE casa
   (
-    idempleado NUMBER,
-    idsucursal NUMBER,
-    CONSTRAINT empleado_tener_sucursal_idempleado_FK FOREIGN KEY (idempleado) REFERENCES empleado (idempleado),
-    CONSTRAINT empleado_tener_sucursal_idsucursal_FK FOREIGN KEY (idsucursal) REFERENCES sucursal (idsucursal)
+    numRegistro           NUMBER,
+    valorCatastral        NUMBER NOT NULL,
+    tipoPropiedad         CHAR(15) NOT NULL,
+    materialConstruccion  CHAR(20) NOT NULL,
+    nBañosMedios          CHAR(1) NOT NULL,
+    nBañosCompletos       CHAR(1) NOT NULL,
+    nEstacionamientos     CHAR(1) NOT NULL,
+    nHabitaciones         CHAR(2) NOT NULL,
+    nPisos                CHAR(1) NOT NULL,
+    tamañoHabitableMetros CHAR(10) NOT NULL,
+    tamañoTerreno         CHAR(10) NOT NULL,
+    estadoDeConstruccion  CHAR(20) NOT NULL,
+    fConstruccion         DATE NOT NULL,
+    CONSTRAINT casa_PK PRIMARY KEY (numRegistro)
   );
-ALTER TABLE empleado_tener_sucursal ADD CONSTRAINT empleado_tener_sucursal_PK PRIMARY KEY (idempleado, idsucursal);
---Creacion de las relaciones tener entre sucursal y departamentos (Farmacia, abarrotes, vinos y licores
-CREATE TABLE sucursal_tener_farmacia
+
+CREATE TABLE departamento
   (
-    idsucursal     NUMBER,
-    iddepartamento NUMBER,
-    CONSTRAINT sucursal_tener_farmacia_idsucursal_FK FOREIGN KEY (idsucursal) REFERENCES sucursal (idsucursal),
-    CONSTRAINT sucursal_tener_farmacia_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES farmacia (iddepartamento)
+    numRegistro           NUMBER,
+    valorCatastral        NUMBER NOT NULL,
+    tipoPropiedad         CHAR(15) NOT NULL,
+    materialConstruccion  CHAR(20) NOT NULL,
+    nBañosMedios          CHAR(1) NOT NULL,
+    nBañosCompletos       CHAR(1) NOT NULL,
+    nEstacionamientos     CHAR(1) NOT NULL,
+    nHabitaciones         CHAR(2) NOT NULL,
+    tamañoHabitableMetros CHAR(10) NOT NULL,
+    tamañoTerreno         CHAR(10) NOT NULL,
+    estadoDeConstruccion  CHAR(20) NOT NULL,
+    fConstruccion         DATE NOT NULL,
+    ubicadoEnPiso         CHAR(2) NOT NULL,
+    totalEnEdificio       CHAR(4) NOT NULL,
+    mantenimientoAnual    NUMBER NOT NULL,
+    CONSTRAINT departamento_PK PRIMARY KEY (numRegistro)
   );
-ALTER TABLE sucursal_tener_farmacia ADD CONSTRAINT sucursal_tener_farmacia_PK PRIMARY KEY (idsucursal, iddepartamento);
-CREATE TABLE sucursal_tener_abarrotes
+
+CREATE TABLE terreno
   (
-    idsucursal     NUMBER,
-    iddepartamento NUMBER,
-    CONSTRAINT sucursal_tener_abarrotes_idsucursal_FK FOREIGN KEY (idsucursal) REFERENCES sucursal (idsucursal),
-    CONSTRAINT sucursal_tener_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES abarrotes (iddepartamento)
+    numRegistro        NUMBER,
+    valorCatastral     NUMBER NOT NULL,
+    existeConstruccion CHAR(2),
+    CONSTRAINT terreno_PK PRIMARY KEY (numRegistro)
   );
-ALTER TABLE sucursal_tener_abarrotes ADD CONSTRAINT sucursal_tener_abarrotes_PK PRIMARY KEY (idsucursal, iddepartamento);
-CREATE TABLE sucursal_tener_vinosylicores
+
+-------------------------------------------------------CASA--------------------------------------------------------------------------------
+
+CREATE TABLE casa_asesor
   (
-    idsucursal     NUMBER,
-    iddepartamento NUMBER,
-    CONSTRAINT sucursal_tener_vinosylicores_idsucursal_FK FOREIGN KEY (idsucursal) REFERENCES sucursal (idsucursal),
-    CONSTRAINT sucursal_tener_vinosylicores_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES vinosylicores (iddepartamento)
+    numRegistro NUMBER,
+    CURP        CHAR(18),
+    RFC         CHAR(13),
+    idEmpleado  NUMBER,
+    CONSTRAINT casa_asesor_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON  DELETE CASCADE,
+    CONSTRAINT casa_asesor_PK PRIMARY KEY (numRegistro, CURP, RFC, idEmpleado)
   );
-ALTER TABLE sucursal_tener_vinosylicores ADD CONSTRAINT sucursal_tener_vinosylicores_PK PRIMARY KEY (idsucursal, iddepartamento);
---Creacion de la entidad Cliente
-CREATE TABLE cliente
+
+CREATE TABLE casa_caracteristica
   (
-    idcliente NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    nombrepila     VARCHAR2(50) NOT NULL,
-    apaterno       VARCHAR2(50) NOT NULL,
-    amaterno       VARCHAR2(50) NOT NULL,
-    colonia        VARCHAR2(50) NOT NULL,
-    numerovivienda NUMBER(3,0) NOT NULL ,
-    estado         VARCHAR2(50) NOT NULL,
-    calle          VARCHAR2(50) NOT NULL,
-    fnacimiento    DATE,
-    fregistro      DATE DEFAULT sysdate NOT NULL,
-    CONSTRAINT idcliente_PK PRIMARY KEY (idcliente)
+    numRegistro      NUMBER,
+    idCaracteristica NUMBER,
+    CONSTRAINT casa_caracteristica_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_caracteristica_idCaracteristica_FK FOREIGN KEY (idCaracteristica) REFERENCES caracteristica (idCaracteristica) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_caracteristica_PK PRIMARY KEY (numRegistro, idCaracteristica)
   );
-CREATE TABLE telefonos_cliente
+
+CREATE TABLE casa_amenidad
   (
-    telefono  VARCHAR(14),
-    idcliente NUMBER,
-    CONSTRAINT cliente_telefono_PK PRIMARY KEY (telefono),
-    CONSTRAINT cliente_telefonos_idcliente_FK FOREIGN KEY (idcliente) REFERENCES cliente (idcliente)
+    numRegistro NUMBER,
+    idAmenidad  NUMBER,
+    CONSTRAINT casa_amenidad_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_amenidad_idAmenidad_FK FOREIGN KEY (idAmenidad) REFERENCES amenidad (idAmenidad) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_amenidad_PK PRIMARY KEY (numRegistro, idAmenidad)
   );
-CREATE TABLE correos_cliente
+
+CREATE TABLE casa_servicio
   (
-    correo    VARCHAR2(50) CHECK(correo LIKE '%@%.%'),
-    idcliente NUMBER,
-    CONSTRAINT cliente_correo_PK PRIMARY KEY (correo),
-    CONSTRAINT cliente_correos_idempleado_FK FOREIGN KEY (idcliente) REFERENCES empleado (idempleado)
+    numRegistro NUMBER,
+    idServicio  NUMBER,
+    CONSTRAINT casa_servicio_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_servicio_idAmenidad_FK FOREIGN KEY (idServicio) REFERENCES servicio (idServicio) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_servicio_PK PRIMARY KEY (numRegistro, idServicio)
   );
---Creacion de la entidad Tarjeta
-CREATE TABLE tarjeta
+
+CREATE TABLE casa_seguro
   (
-    idtarjeta NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20,
-    totalpuntos NUMBER(7,0) DEFAULT 0 NOT NULL,
-    totalpesos  NUMBER(7,0),
-    CONSTRAINT tarjeta_idtarjeta_PK PRIMARY KEY (idtarjeta)
+    numRegistro NUMBER,
+    numPoliza   NUMBER,
+    CONSTRAINT casa_seguro_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_seguro_idAmenidad_FK FOREIGN KEY (numPoliza) REFERENCES seguro (numPoliza) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_seguro_PK PRIMARY KEY (numRegistro, numPoliza)
   );
-ALTER TABLE tarjeta
-DROP COLUMN TOTALPESOS;
---Creacion de la relacion asignar entre cliente y tarjeta
-CREATE TABLE cliente_asignar_tarjeta
+
+CREATE TABLE casa_direccion
   (
-    idtarjeta NUMBER,
-    idcliente NUMBER,
-    CONSTRAINT cliente_asignar_tarjeta_idtarjeta_FK FOREIGN KEY (idtarjeta) REFERENCES tarjeta (idtarjeta),
-    CONSTRAINT cliente_asignar_tarjeta_idcliente_FK FOREIGN KEY (idcliente) REFERENCES cliente (idcliente)
+    numRegistro NUMBER,
+    idDireccion NUMBER,
+    CONSTRAINT casa_direccion_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_direccion_idAmenidad_FK FOREIGN KEY (idDireccion) REFERENCES direccion (idDireccion) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_direccion_PK PRIMARY KEY (numRegistro, idDireccion)
   );
-ALTER TABLE cliente_asignar_tarjeta ADD CONSTRAINT cliente_asignar_tarjeta_PK PRIMARY KEY (idtarjeta, idcliente);
-CREATE TABLE cliente_remplazar_tarjeta
+
+CREATE TABLE casa_empresa
   (
-    idtarjeta NUMBER,
-    idcliente NUMBER,
-    CONSTRAINT cliente_remplazar_tarjeta_idtarjeta_FK FOREIGN KEY (idtarjeta) REFERENCES tarjeta (idtarjeta),
-    CONSTRAINT cliente_remplazar_tarjeta_idcliente_FK FOREIGN KEY (idcliente) REFERENCES cliente (idcliente)
+    numRegistro NUMBER,
+    idEmpresa   NUMBER,
+    valorCompra NUMBER NOT NULL,
+    fCompra     DATE DEFAULT SYSDATE NOT NULL,
+    CONSTRAINT casa_empresa_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_empresa_idEmpresa_FK FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_empresa_PK PRIMARY KEY (numRegistro, idEmpresa)
   );
-ALTER TABLE cliente_remplazar_tarjeta ADD CONSTRAINT cliente_remplazar_tarjeta_PK PRIMARY KEY (idtarjeta, idcliente);
---Creacion de la entidad compra
-CREATE TABLE compra
+
+CREATE TABLE casa_precio
   (
-    idcompra NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20,
-    horacompra  TIMESTAMP DEFAULT systimestamp NOT NULL,
-    fechacompra DATE DEFAULT sysdate NOT NULL,
-    CONSTRAINT idcompra_PK PRIMARY KEY (idcompra)
+    numRegistro NUMBER,
+    fecha       DATE DEFAULT SYSDATE NOT NULL,
+    precio      NUMBER NOT NULL,
+    CONSTRAINT casa_precio_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE, CONSTRAINT casa_precio_PK PRIMARY KEY (numRegistro, fecha)
   );
-ALTER TABLE compra
-DROP COLUMN horacompra;
-CREATE TABLE forma_pago
+
+CREATE TABLE casa_exdueño
   (
-    formapago VARCHAR2(50),
-    idcompra  NUMBER,
-    CONSTRAINT forma_pago_idcompra_FK FOREIGN KEY (idcompra) REFERENCES compra (idcompra)
+    CURP         CHAR(18),
+    numRegistro  NUMBER,
+    fRecesion    DATE NOT NULL,
+    fAdquisicion DATE NOT NULL,
+    CONSTRAINT casa_exdueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_exdueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE, CONSTRAINT casa_exdueño_PK PRIMARY KEY (CURP, numRegistro)
   );
-ALTER TABLE forma_pago ADD CONSTRAINT forma_pago_PK PRIMARY KEY (formapago);
-CREATE TABLE datos_compra
+
+CREATE TABLE casa_venta_dueño
   (
-    idcompra   NUMBER,
-    idcliente  NUMBER,
-    idempleado NUMBER,
-    idsucursal NUMBER,
-    CONSTRAINT datos_compra_idcompra_FK FOREIGN KEY (idcompra) REFERENCES compra (idcompra),
-    CONSTRAINT datos_compra_idcliente_FK FOREIGN KEY (idcliente) REFERENCES cliente (idcliente),
-    CONSTRAINT datos_compra_idempleado_FK FOREIGN KEY (idempleado) REFERENCES empleado (idempleado),
-    CONSTRAINT datos_compra_idsucursal_FK FOREIGN KEY (idsucursal) REFERENCES sucursal (idsucursal),
-    CONSTRAINT datos_compra_PK PRIMARY KEY (idcompra, idcliente, idempleado, idsucursal)
+    CURP         CHAR(18),
+    numRegistro  NUMBER,
+    fAdquisicion DATE NOT NULL,
+    CONSTRAINT casa_venta_dueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_venta_dueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE, CONSTRAINT casa_venta_dueño_PK PRIMARY KEY (CURP, numRegistro)
   );
---Creacion de la relacion abonar entre compra y tarjeta
-CREATE TABLE compra_abonar_tarjeta
+
+-------------------------------------------------------DEPARTAMENTO--------------------------------------------------------------------------------
+
+CREATE TABLE departamento_asesor
   (
-    idcompra  NUMBER,
-    idtarjeta NUMBER,
-    CONSTRAINT compra_abonar_tarjeta_idcompra_FK FOREIGN KEY (idcompra) REFERENCES compra (idcompra),
-    CONSTRAINT compra_abonar_tarjeta_idtarjeta_FK FOREIGN KEY (idtarjeta) REFERENCES tarjeta (idtarjeta)
+    numRegistro NUMBER,
+    CURP        CHAR(18),
+    RFC         CHAR(13),
+    idEmpleado  NUMBER,
+    CONSTRAINT departamento_asesor_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON  DELETE CASCADE,
+    CONSTRAINT departamento_asesor_PK PRIMARY KEY (numRegistro, CURP, RFC, idEmpleado)
   );
-ALTER TABLE compra_abonar_tarjeta ADD CONSTRAINT compra_abonar_tarjeta_PK PRIMARY KEY (idcompra, idtarjeta);
---Creacion de los distintos tipos de productos (ProductoMedicamentoControlado, ProductoMedicamentoVentaLibre, ProductoAbarrotes, ProductoVinoyLicor)
-CREATE TABLE producto_med_controlado
+
+CREATE TABLE departamento_caracteristica
   (
-    idproducto NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20,
-    iddepartamento NUMBER,
-    idcompra       NUMBER,
-    nombre         VARCHAR2(50) NOT NULL,
-    laboratorio    VARCHAR2(50) NOT NULL,
-    compuesto      VARCHAR2(50) NOT NULL,
-    dosis          VARCHAR2(50) NOT NULL,
-    cantidadneta   VARCHAR2(50) NOT NULL,
-    precio         NUMBER NOT NULL,
-    cantidad       VARCHAR2(50) NOT NULL,
-    marca          VARCHAR2(50) NOT NULL,
-    presentacion   VARCHAR2(50) NOT NULL,
-    tipoproducto   VARCHAR2(50) NOT NULL,
-    refrigeracion  VARCHAR2(2) NOT NULL,
-    felaboracion   DATE NOT NULL,
-    fcaducidad     DATE NOT NULL,
-    color          CHAR(20) NOT NULL,
-    stock          NUMBER DEFAULT 0 NOT NULL
+    numRegistro      NUMBER,
+    idCaracteristica NUMBER,
+    CONSTRAINT departamento_caracteristica_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_caracteristica_idCaracteristica_FK FOREIGN KEY (idCaracteristica) REFERENCES caracteristica (idCaracteristica) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_caracteristica_PK PRIMARY KEY (numRegistro, idCaracteristica)
   );
---Agregamos la llave primaria
-ALTER TABLE producto_med_controlado ADD (CONSTRAINT producto_med_controlado_PK PRIMARY KEY (idproducto));
---Agregamos las llaves foraneas
-ALTER TABLE producto_med_controlado ADD (CONSTRAINT producto_med_controlado_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES farmacia (iddepartamento));
---Agregamos el constraint check para asegurar que refrigeracion es SI o NO
-ALTER TABLE producto_med_controlado ADD (CONSTRAINT producto_med_controlado_refrigeracion CHECK (UPPER(refrigeracion)='SI' OR UPPER(refrigeracion)='NO' OR LOWER(refrigeracion)='si' OR LOWER(refrigeracion)='no'));
---Modificacion de la tabla para la practica 7 (Quitamos idcompra y su respectivo constraint)
-ALTER TABLE producto_med_controlado
-DROP COLUMN idcompra;
-ALTER TABLE producto_med_controlado
-DROP COLUMN departamento;
-CREATE TABLE producto_med_libre
+
+CREATE TABLE departamento_amenidad
   (
-    idproducto NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20,
-    iddepartamento NUMBER,
-    idcompra       NUMBER,
-    nombre         VARCHAR2(50) NOT NULL,
-    laboratorio    VARCHAR2(50) NOT NULL,
-    compuesto      VARCHAR2(50) NOT NULL,
-    dosis          VARCHAR2(50) NOT NULL,
-    cantidadneta   VARCHAR2(50) NOT NULL,
-    precio         NUMBER NOT NULL,
-    cantidad       VARCHAR2(50) NOT NULL,
-    marca          VARCHAR2(50) NOT NULL,
-    presentacion   VARCHAR2(50) NOT NULL,
-    departamento   VARCHAR2(50) NOT NULL,
-    tipoproducto   VARCHAR2(50) NOT NULL,
-    refrigeracion  VARCHAR2(2) NOT NULL,
-    felaboracion   DATE NOT NULL,
-    fcaducidad     DATE NOT NULL,
-    color          CHAR(20) NOT NULL,
-    stock          NUMBER DEFAULT 0 NOT NULL
+    numRegistro NUMBER,
+    idAmenidad  NUMBER,
+    CONSTRAINT departamento_amenidad_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_amenidad_idAmenidad_FK FOREIGN KEY (idAmenidad) REFERENCES amenidad (idAmenidad) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_amenidad_PK PRIMARY KEY (numRegistro, idAmenidad)
   );
---Agregamos la llave primaria y la hacemos unica
-ALTER TABLE producto_med_libre ADD (CONSTRAINT producto_med_libre_PK PRIMARY KEY (idproducto));
---Agregamos las llaves foraneas
-ALTER TABLE producto_med_libre ADD (CONSTRAINT producto_med_libre_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES farmacia (iddepartamento));
---Agregamos el constraint para asegurar que refrigeracion es SI o NO
-ALTER TABLE producto_med_libre ADD (CONSTRAINT producto_med_libre_refrigeracion CHECK (UPPER(refrigeracion)='SI' OR UPPER(refrigeracion)='NO' OR LOWER(refrigeracion)='si' OR LOWER(refrigeracion)='no'));
---Modificacion de la tabla para la practica 7 (Quitamos idcompra y su respectivo constraint)
-ALTER TABLE producto_med_libre
-DROP COLUMN idcompra;
-ALTER TABLE producto_med_libre
-DROP COLUMN departamento;
-CREATE TABLE producto_abarrote
+
+CREATE TABLE departamento_servicio
   (
-    idproducto NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20,
-    iddepartamento NUMBER,
-    idcompra       NUMBER,
-    nombre         VARCHAR2(50) NOT NULL,
-    precio         NUMBER NOT NULL,
-    cantidad       VARCHAR2(50) NOT NULL,
-    marca          VARCHAR2(50) NOT NULL,
-    presentacion   VARCHAR2(50) NOT NULL,
-    departamento   VARCHAR2(50) NOT NULL,
-    tipoproducto   VARCHAR2(50) NOT NULL,
-    refrigeracion  VARCHAR2(2) NOT NULL,
-    felaboracion   DATE NOT NULL,
-    fcaducidad     DATE NOT NULL,
-    color          CHAR(20) NOT NULL,
-    stock          NUMBER DEFAULT 0 NOT NULL
+    numRegistro NUMBER,
+    idServicio  NUMBER,
+    CONSTRAINT departamento_servicio_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_servicio_idAmenidad_FK FOREIGN KEY (idServicio) REFERENCES servicio (idServicio) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_servicio_PK PRIMARY KEY (numRegistro, idServicio)
   );
---Agregamos la llave primaria y la hacemos unica
-ALTER TABLE producto_abarrote ADD (CONSTRAINT producto_abarrote_PK PRIMARY KEY (idproducto));
---Agregamos las llaves foraneas
-ALTER TABLE producto_abarrote ADD (CONSTRAINT producto_abarrote_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES abarrotes (iddepartamento));
---Agregamos el constraint para asegurar que refrigeracion es SI o NO
-ALTER TABLE producto_abarrote ADD (CONSTRAINT producto_abarrote_refrigeracion CHECK (UPPER(refrigeracion)='SI' OR UPPER(refrigeracion)='NO' OR LOWER(refrigeracion)='si' OR LOWER(refrigeracion)='no'));
---Modificacion de la tabla para la practica 7 (Quitamos idcompra y su respectivo constraint)
-ALTER TABLE producto_abarrote
-DROP COLUMN idcompra;
-ALTER TABLE producto_abarrote
-DROP COLUMN departamento;
-CREATE TABLE producto_vino
+
+CREATE TABLE departamento_seguro
   (
-    idproducto NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20,
-    iddepartamento NUMBER,
-    idcompra       NUMBER,
-    nombre         VARCHAR2(50) NOT NULL,
-    precio         NUMBER NOT NULL,
-    cantidad       VARCHAR2(50) NOT NULL,
-    marca          VARCHAR2(50) NOT NULL,
-    presentacion   VARCHAR2(50) NOT NULL,
-    departamento   VARCHAR2(50) NOT NULL,
-    tipoproducto   VARCHAR2(50) NOT NULL,
-    refrigeracion  VARCHAR2(2) NOT NULL,
-    felaboracion   DATE NOT NULL,
-    fcaducidad     DATE NOT NULL,
-    color          CHAR(20) NOT NULL,
-    stock          NUMBER DEFAULT 0 NOT NULL
+    numRegistro NUMBER,
+    numPoliza   NUMBER,
+    CONSTRAINT departamento_seguro_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_seguro_idAmenidad_FK FOREIGN KEY (numPoliza) REFERENCES seguro (numPoliza) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_seguro_PK PRIMARY KEY (numRegistro, numPoliza)
   );
---Agregamos la llave primaria y la hacemos unica
-ALTER TABLE producto_vino ADD (CONSTRAINT producto_vino_PK PRIMARY KEY (idproducto));
---Agregamos las llaves foraneas
-ALTER TABLE producto_vino ADD (CONSTRAINT producto_vino_iddepartamento_FK FOREIGN KEY (iddepartamento) REFERENCES vinosylicores (iddepartamento));
---Agregamos el constraint para asegurar que refrigeracion es SI o NO
-ALTER TABLE producto_vino ADD (CONSTRAINT producto_vino_refrigeracion CHECK (UPPER(refrigeracion)='SI' OR UPPER(refrigeracion)='NO' OR LOWER(refrigeracion)='si' OR LOWER(refrigeracion)='no'));
---Modificacion de la tabla para la practica 7 (Quitamos idcompra y su respectivo constraint)
-ALTER TABLE producto_vino
-DROP COLUMN idcompra;
-ALTER TABLE producto_vino
-DROP COLUMN departamento;
---Creacion de la relacion Compra_Contiene_Producto_
-CREATE TABLE compra_has_controlado
+
+CREATE TABLE departamento_direccion
   (
-    idcompra   NUMBER,
-    idproducto NUMBER,
-    CONSTRAINT compra_has_controlado_idcompra_FK FOREIGN KEY (idcompra) REFERENCES compra (idcompra),
-    CONSTRAINT compra_has_controlado_idproducto_FK FOREIGN KEY (idproducto) REFERENCES producto_med_controlado (idproducto),
-    CONSTRAINT compra_has_controlado_PK PRIMARY KEY (idcompra, idproducto)
+    numRegistro NUMBER,
+    idDireccion NUMBER,
+    CONSTRAINT departamento_direccion_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_direccion_idAmenidad_FK FOREIGN KEY (idDireccion) REFERENCES direccion (idDireccion) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_direccion_PK PRIMARY KEY (numRegistro, idDireccion)
   );
-CREATE TABLE compra_has_libre
+
+CREATE TABLE departamento_empresa
   (
-    idproducto NUMBER,
-    idcompra   NUMBER,
-    CONSTRAINT compra_has_libre_idcompra_FK FOREIGN KEY (idcompra) REFERENCES compra (idcompra),
-    CONSTRAINT compra_has_libre_idproducto_FK FOREIGN KEY (idproducto) REFERENCES producto_med_libre (idproducto),
-    CONSTRAINT compra_has_libre_PK PRIMARY KEY (idcompra, idproducto)
+    numRegistro NUMBER,
+    idEmpresa   NUMBER,
+    valorCompra NUMBER NOT NULL,
+    fCompra     DATE DEFAULT SYSDATE NOT NULL,
+    CONSTRAINT departamento_empresa_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_empresa_idEmpresa_FK FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_empresa_PK PRIMARY KEY (numRegistro, idEmpresa)
   );
-CREATE TABLE compra_has_abarrote
+
+CREATE TABLE departamento_precio
   (
-    idproducto NUMBER,
-    idcompra   NUMBER,
-    CONSTRAINT compra_has_abarrote_idcompra_FK FOREIGN KEY (idcompra) REFERENCES compra (idcompra),
-    CONSTRAINT compra_has_abarrote_idproducto_FK FOREIGN KEY (idproducto) REFERENCES producto_abarrote (idproducto),
-    CONSTRAINT compra_has_abarrote_PK PRIMARY KEY (idcompra, idproducto)
+    numRegistro NUMBER,
+    fecha       DATE DEFAULT SYSDATE NOT NULL,
+    precio      NUMBER NOT NULL,
+    CONSTRAINT departamento_precio_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_precio_PK PRIMARY KEY (numRegistro, fecha)
   );
-CREATE TABLE compra_has_vino
+
+CREATE TABLE departamento_exdueño
   (
-    idproducto NUMBER,
-    idcompra   NUMBER,
-    CONSTRAINT compra_has_vino_idcompra_FK FOREIGN KEY (idcompra) REFERENCES compra (idcompra),
-    CONSTRAINT compra_has_vino_idproducto_FK FOREIGN KEY (idproducto) REFERENCES producto_vino (idproducto),
-    CONSTRAINT compra_has_vino_PK PRIMARY KEY (idcompra, idproducto)
+    CURP         CHAR(18),
+    numRegistro  NUMBER,
+    fRecesion    DATE NOT NULL,
+    fAdquisicion DATE NOT NULL,
+    CONSTRAINT departamento_exdueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_exdueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_exdueño_PK PRIMARY KEY (CURP, numRegistro)
   );
---Creacion de la entidad Proveedor
-CREATE TABLE proveedor
+
+CREATE TABLE departamento_venta_dueño
   (
-    idproveedor NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 99999999 INCREMENT BY 1
-    START WITH 1 CACHE 20,
-    nombre VARCHAR2(50),
-    CONSTRAINT idproveedor_PK PRIMARY KEY (idproveedor)
+    CURP         CHAR(18),
+    numRegistro  NUMBER,
+    fAdquisicion DATE NOT NULL,
+    CONSTRAINT departamento_venta_dueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_venta_dueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_venta_dueño_PK PRIMARY KEY (CURP, numRegistro)
   );
-CREATE TABLE telefonos_proveedor
+
+-------------------------------------------------------TERRENO--------------------------------------------------------------------------------
+
+CREATE TABLE terreno_asesor
   (
-    telefono    VARCHAR(14),
-    idproveedor NUMBER,
-    CONSTRAINT telefonos_proveedor_telefono_PK PRIMARY KEY (telefono),
-    CONSTRAINT telefonos_proveedor_idproveedor_FK FOREIGN KEY (idproveedor) REFERENCES proveedor (idproveedor)
+    numRegistro NUMBER,
+    CURP        CHAR(18),
+    RFC         CHAR(13),
+    idEmpleado  NUMBER,
+    CONSTRAINT terreno_asesor_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON  DELETE CASCADE,
+    CONSTRAINT terreno_asesor_PK PRIMARY KEY (numRegistro, CURP, RFC, idEmpleado)
   );
---Creacion de las relaciones suministrar entre proveedor y producto a los distintos tipos de productos
-CREATE TABLE provedor_sum_controlado
+
+CREATE TABLE terreno_servicio
   (
-    idproducto      NUMBER,
-    idproveedor     NUMBER,
-    fechasuministro DATE DEFAULT sysdate NOT NULL,
-    CONSTRAINT provedor_sum_controlado_idproducto_FK FOREIGN KEY (idproducto) REFERENCES producto_med_controlado (idproducto),
-    CONSTRAINT provedor_sum_controlado_idproveedor_FK FOREIGN KEY (idproveedor) REFERENCES proveedor (idproveedor)
+    numRegistro NUMBER,
+    idServicio  NUMBER,
+    CONSTRAINT terreno_servicio_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_servicio_idAmenidad_FK FOREIGN KEY (idServicio) REFERENCES servicio (idServicio) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_servicio_PK PRIMARY KEY (numRegistro, idServicio)
   );
-ALTER TABLE provedor_sum_controlado ADD CONSTRAINT provedor_sum_controlado_PK PRIMARY KEY (idproducto, idproveedor);
-CREATE TABLE proveedor_sum_libre
+
+CREATE TABLE terreno_seguro
   (
-    idproducto      NUMBER,
-    idproveedor     NUMBER,
-    fechasuministro DATE DEFAULT sysdate NOT NULL,
-    CONSTRAINT proveedor_sum_libre_idproducto_FK FOREIGN KEY (idproducto) REFERENCES producto_med_libre (idproducto),
-    CONSTRAINT proveedor_sum_libre_idproveedor_FK FOREIGN KEY (idproveedor) REFERENCES proveedor (idproveedor)
+    numRegistro NUMBER,
+    numPoliza   NUMBER,
+    CONSTRAINT terreno_seguro_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_seguro_idAmenidad_FK FOREIGN KEY (numPoliza) REFERENCES seguro (numPoliza) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_seguro_PK PRIMARY KEY (numRegistro, numPoliza)
   );
-ALTER TABLE proveedor_sum_libre ADD CONSTRAINT proveedor_sum_libre_PK PRIMARY KEY (idproducto, idproveedor);
-CREATE TABLE proveedor_sum_abarrote
+
+CREATE TABLE terreno_direccion
   (
-    idproducto      NUMBER,
-    idproveedor     NUMBER,
-    fechasuministro DATE DEFAULT sysdate NOT NULL,
-    CONSTRAINT proveedor_sum_abarrote_idproducto_FK FOREIGN KEY (idproducto) REFERENCES producto_abarrote (idproducto),
-    CONSTRAINT proveedor_sum_abarrote_idproveedor_FK FOREIGN KEY (idproveedor) REFERENCES proveedor (idproveedor)
+    numRegistro NUMBER,
+    idDireccion NUMBER,
+    CONSTRAINT terreno_direccion_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_direccion_idAmenidad_FK FOREIGN KEY (idDireccion) REFERENCES direccion (idDireccion) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_direccion_PK PRIMARY KEY (numRegistro, idDireccion)
   );
-ALTER TABLE proveedor_sum_abarrote ADD CONSTRAINT proveedor_sum_abarrote_PK PRIMARY KEY (idproducto, idproveedor);
-CREATE TABLE proveedor_sum_vino
+
+CREATE TABLE terreno_empresa
   (
-    idproducto      NUMBER,
-    idproveedor     NUMBER,
-    fechasuministro DATE DEFAULT sysdate NOT NULL,
-    CONSTRAINT proveedor_sum_vino_idproducto_FK FOREIGN KEY (idproducto) REFERENCES producto_vino (idproducto),
-    CONSTRAINT proveedor_sum_vino_idproveedor_FK FOREIGN KEY (idproveedor) REFERENCES proveedor (idproveedor)
+    numRegistro NUMBER,
+    idEmpresa   NUMBER,
+    valorCompra NUMBER NOT NULL,
+    fCompra     DATE DEFAULT SYSDATE NOT NULL,
+    CONSTRAINT terreno_empresa_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_empresa_idEmpresa_FK FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_empresa_PK PRIMARY KEY (numRegistro, idEmpresa)
   );
-ALTER TABLE proveedor_sum_vino ADD CONSTRAINT proveedor_sum_vino_PK PRIMARY KEY (idproducto, idproveedor);
+
+CREATE TABLE terreno_precio
+  (
+    numRegistro NUMBER,
+    fecha       DATE DEFAULT SYSDATE NOT NULL,
+    precio      NUMBER NOT NULL,
+    CONSTRAINT terreno_precio_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_precio_PK PRIMARY KEY (numRegistro, fecha)
+  );
+
+CREATE TABLE terreno_exdueño
+  (
+    CURP         CHAR(18),
+    numRegistro  NUMBER,
+    fRecesion    DATE NOT NULL,
+    fAdquisicion DATE NOT NULL,
+    CONSTRAINT terreno_exdueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_exdueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_exdueño_PK PRIMARY KEY (CURP, numRegistro)
+  );
+  
+CREATE TABLE terreno_venta_dueño
+  (
+    CURP         CHAR(18),
+    numRegistro  NUMBER,
+    fAdquisicion DATE NOT NULL,
+    CONSTRAINT terreno_venta_dueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_venta_dueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno (numRegistro) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_venta_dueño_PK PRIMARY KEY (CURP, numRegistro)
+  );
