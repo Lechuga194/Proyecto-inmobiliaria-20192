@@ -61,9 +61,9 @@ CREATE TABLE direccion
     calle       VARCHAR2(50) DEFAULT 'No especificado' NOT NULL,
     nExterior   CHAR(3) DEFAULT '000' NOT NULL,
     nInterior   CHAR(3) DEFAULT '000' NOT NULL,
-    CONSTRAINT revisaNumeros_direccion CHECK (regexp_like(CP, '^[0-9]')
+    /*CONSTRAINT revisaNumeros_direccion CHECK (regexp_like(CP, '^[0-9]')
   AND (regexp_like(nExterior, '^[0-9]')
-  AND (regexp_like(nInterior, '^[0-9]')))),
+  AND (regexp_like(nInterior, '^[0-9]')))),*/
     CONSTRAINT idColonia_direccio_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT direccion_PK PRIMARY KEY (idDireccion)
   );
@@ -89,6 +89,7 @@ CREATE TABLE servicio
     idServicio  NUMBER,
     nombre      CHAR(50),
     descripcion VARCHAR2(150),
+    precioAnual NUMBER,
     CONSTRAINT servicio_PK PRIMARY KEY (idServicio)
   );
 
@@ -126,7 +127,7 @@ CREATE TABLE asesor
 
 CREATE TABLE asesor_email
   (
-    correo     VARCHAR2(500) CHECK(correo LIKE '%@%.%'),
+    correo     VARCHAR2(500),-- CHECK(correo LIKE '%@%.%'),
     CURP       CHAR(18),
     RFC        CHAR(13),
     idEmpleado NUMBER,
@@ -140,7 +141,7 @@ CREATE TABLE asesor_telefono
     CURP       CHAR(18),
     RFC        CHAR(13),
     idEmpleado NUMBER,
-    CONSTRAINT revisaNumeros_asesor_telefono CHECK (regexp_like(telefono, '^[0-9]')),
+    CONSTRAINT revisaNumeros_asesor_telefono, --CHECK (regexp_like(telefono, '^[0-9]')),
     CONSTRAINT asesor_telefono_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON DELETE CASCADE,
     CONSTRAINT asesor_telefono_PK PRIMARY KEY (telefono)
   );
@@ -525,7 +526,7 @@ CREATE TABLE terreno_exdueño
   DELETE CASCADE,
     CONSTRAINT terreno_exdueño_PK PRIMARY KEY (CURP, numRegistro)
   );
-  
+
 CREATE TABLE terreno_venta_dueño
   (
     CURP         CHAR(18),
