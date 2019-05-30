@@ -138,27 +138,48 @@ CREATE TABLE asesor_telefono
   );
 CREATE TABLE dueño
   (
-    CURP        CHAR(18),
+  	idDueño NUMBER,
     fNacimiento DATE NOT NULL,
     nombre      CHAR(50),
     aPAterno    CHAR(50),
     aMAterno    CHAR(50),
-    CONSTRAINT dueño_PK PRIMARY KEY (CURP)
+    CONSTRAINT dueño_PK PRIMARY KEY (idDueño)
   );
+
+  CREATE TABLE CURP
+  ( 
+  	idCURP NUMBER,
+  	CURP CHAR(13) UNIQUE,
+  	CONSTRAINT RFC_PK PRIMARY KEY (idCURP)
+  );
+
+CREATE TABLE dueño_CURP
+  (
+    idDueño NUMBER,
+    idCURP NUMBER,
+    CONSTRAINT dueño_CURP_FK FOREIGN KEY (idDueño) REFERENCES dueño (idDueño) ON
+  DELETE CASCADE,
+    CONSTRAINT dueño_CURP_idCURP_FK FOREIGN KEY (idCURP) REFERENCES CURP (idCURP) ON
+  DELETE CASCADE, CONSTRAINT asesor_RFC_PK PRIMARY KEY (idEmpleado, idRFC)
+  );
+
 CREATE TABLE dueño_email
   (
     correo VARCHAR2(500),
-    CURP   CHAR(18),
-    CONSTRAINT dueño_email_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+    idDueño NUMBER,
+    CONSTRAINT dueño_email_FK FOREIGN KEY (idDueño) REFERENCES dueño (idDueño) ON
   DELETE CASCADE, CONSTRAINT dueño_email_PK PRIMARY KEY (correo)
   );
 CREATE TABLE dueño_telefono
   (
     telefono CHAR(12),
-    CURP     CHAR(18),
-    CONSTRAINT dueño_telefono_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+    idDueño NUMBER,
+    CONSTRAINT dueño_telefono_FK FOREIGN KEY (idDueño) REFERENCES dueño (idDueño) ON
   DELETE CASCADE, CONSTRAINT dueño_telefono_PK PRIMARY KEY (telefono)
   );
+
+---------------------------------------------------------------------------------------
+
 CREATE TABLE casa
   (
     numRegistro           NUMBER,
