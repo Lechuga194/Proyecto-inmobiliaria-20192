@@ -294,7 +294,7 @@ CREATE TABLE casa_exdueño
 CREATE TABLE casa_venta_dueño
   (
     idVenta        NUMBER,
-    numRegistro    NUMBER,
+    numRegistro    NUMBER UNIQUE,
     CURP           CHAR(18),
     idEmpleado     NUMBER,
     fAdquisicion   DATE NOT NULL,
@@ -305,7 +305,7 @@ CREATE TABLE casa_venta_dueño
   DELETE CASCADE,
     CONSTRAINT casa_venta_dueño_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
   DELETE CASCADE,
-    CONSTRAINT casa_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro, CURP)
+    CONSTRAINT casa_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro)
   );
 -------------------------------------------------------DEPARTAMENTO--------------------------------------------------------------------------------
 CREATE TABLE departamento_asesor
@@ -404,7 +404,7 @@ CREATE TABLE departamento_exdueño
 CREATE TABLE departamento_venta_dueño
   (
     idVenta        NUMBER,
-    numRegistro    NUMBER,
+    numRegistro    NUMBER UNIQUE,
     CURP           CHAR(18),
     idEmpleado     NUMBER,
     fAdquisicion   DATE NOT NULL,
@@ -415,7 +415,7 @@ CREATE TABLE departamento_venta_dueño
   DELETE CASCADE,
     CONSTRAINT departamento_venta_dueño_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
   DELETE CASCADE,
-    CONSTRAINT departamento_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro, CURP)
+    CONSTRAINT departamento_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro)
   );
 -------------------------------------------------------TERRENO--------------------------------------------------------------------------------
 CREATE TABLE terreno_asesor
@@ -494,7 +494,7 @@ CREATE TABLE terreno_exdueño
 CREATE TABLE terreno_venta_dueño
   (
     idVenta        NUMBER,
-    numRegistro    NUMBER,
+    numRegistro    NUMBER UNIQUE,
     CURP           CHAR(18),
     idEmpleado     NUMBER,
     fAdquisicion   DATE NOT NULL,
@@ -505,5 +505,5 @@ CREATE TABLE terreno_venta_dueño
   DELETE CASCADE,
     CONSTRAINT terreno_venta_dueño_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
   DELETE CASCADE,
-    CONSTRAINT terreno_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro, CURP)
+    CONSTRAINT terreno_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro)
   );

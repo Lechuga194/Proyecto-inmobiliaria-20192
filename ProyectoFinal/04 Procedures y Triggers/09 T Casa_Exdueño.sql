@@ -1,0 +1,14 @@
+/*
+Trigger que agrega un exdueño cada que la propiedad cambia de dueño
+*/
+CREATE OR REPLACE TRIGGER AGREGA_EXDUEÑO BEFORE
+  UPDATE OF CURP ON CASA_VENTA_DUEÑO FOR EACH ROW DECLARE BEGIN
+  INSERT
+  INTO CASA_EXDUEÑO VALUES
+    (
+      :OLD.CURP,
+      :OLD.NUMREGISTRO,
+      SYSDATE,
+      :OLD.FADQUISICION
+    );
+END;
