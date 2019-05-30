@@ -1,5 +1,5 @@
 /*
-Verifica que el email de un dueño contenga un @ y un punto
+Verifica que el email de un dueño contenga al menos un @ y un punto
 */
 CREATE OR REPLACE TRIGGER VERIFICA_DUEÑO_EMAIL BEFORE
   INSERT OR

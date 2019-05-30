@@ -7,7 +7,6 @@ CREATE TABLE colonia
     nombre    CHAR(25) NOT NULL,
     CONSTRAINT colonia_PK PRIMARY KEY (idColonia)
   );
-
 CREATE TABLE tiendas_Cercanas
   (
     nombreTienda CHAR(50),
@@ -15,7 +14,6 @@ CREATE TABLE tiendas_Cercanas
     CONSTRAINT tiendas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT tiendas_Cercanas_PK PRIMARY KEY (nombreTienda)
   );
-
 CREATE TABLE recreativos_Cercanos
   (
     nombreRecreativo CHAR(50),
@@ -24,7 +22,6 @@ CREATE TABLE recreativos_Cercanos
   DELETE CASCADE,
     CONSTRAINT recreativos_Cercanos_PK PRIMARY KEY (nombreRecreativo)
   );
-
 CREATE TABLE escuelas_Cercanas
   (
     nombreEscuela CHAR(50),
@@ -32,7 +29,6 @@ CREATE TABLE escuelas_Cercanas
     CONSTRAINT Escuelas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT Escuelas_Cercanas_PK PRIMARY KEY (nombreEscuela)
   );
-
 CREATE TABLE hospitales_Cercanos
   (
     nombreHospital CHAR(50),
@@ -41,7 +37,6 @@ CREATE TABLE hospitales_Cercanos
   DELETE CASCADE,
     CONSTRAINT hospitales_Cercanos_PK PRIMARY KEY (nombreHospital)
   );
-
 CREATE TABLE transportes_Cercanos
   (
     nombreTransporte CHAR(50),
@@ -50,7 +45,6 @@ CREATE TABLE transportes_Cercanos
   DELETE CASCADE,
     CONSTRAINT transportes_Cercanos_PK PRIMARY KEY (nombreTransporte)
   );
-
 CREATE TABLE direccion
   (
     idDireccion NUMBER,
@@ -61,13 +55,9 @@ CREATE TABLE direccion
     calle       VARCHAR2(50) DEFAULT 'No especificado' NOT NULL,
     nExterior   CHAR(3) DEFAULT '000' NOT NULL,
     nInterior   CHAR(3) DEFAULT '000' NOT NULL,
-    /*CONSTRAINT revisaNumeros_direccion CHECK (regexp_like(CP, '^[0-9]')
-  AND (regexp_like(nExterior, '^[0-9]')
-  AND (regexp_like(nInterior, '^[0-9]')))),*/
     CONSTRAINT idColonia_direccio_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT direccion_PK PRIMARY KEY (idDireccion)
   );
-
 CREATE TABLE caracteristica
   (
     idCaracteristica NUMBER,
@@ -75,7 +65,6 @@ CREATE TABLE caracteristica
     descripcion      VARCHAR2(150),
     CONSTRAINT caracteristica_PK PRIMARY KEY (idCaracteristica)
   );
-
 CREATE TABLE amenidad
   (
     idAmenidad  NUMBER,
@@ -83,7 +72,6 @@ CREATE TABLE amenidad
     descripcion VARCHAR2(150),
     CONSTRAINT amenidad_PK PRIMARY KEY (idAmenidad)
   );
-
 CREATE TABLE servicio
   (
     idServicio  NUMBER,
@@ -92,7 +80,6 @@ CREATE TABLE servicio
     precioAnual NUMBER,
     CONSTRAINT servicio_PK PRIMARY KEY (idServicio)
   );
-
 CREATE TABLE seguro
   (
     numPoliza     NUMBER,
@@ -101,18 +88,17 @@ CREATE TABLE seguro
     precioAnual   NUMBER,
     CONSTRAINT seguro_PK PRIMARY KEY (numPoliza)
   );
-
 CREATE TABLE empresa
   (
     idEmpresa NUMBER,
     nombre    VARCHAR2(40),
     CONSTRAINT empresa_PK PRIMARY KEY (idEmpresa)
   );
-
+CREATE TABLE RFC
+  ( RFC CHAR(13), CONSTRAINT RFC_PK PRIMARY KEY (RFC)
+  );
 CREATE TABLE asesor
   (
-    CURP        CHAR(18),
-    RFC         CHAR(13),
     idEmpleado  NUMBER,
     idEmpresa   NUMBER,
     fNacimiento DATE NOT NULL,
@@ -121,31 +107,32 @@ CREATE TABLE asesor
     aMaterno    VARCHAR2(25) NOT NULL,
     fIngreso    DATE DEFAULT SYSDATE NOT NULL,
     sueldo      NUMBER NOT NULL,
-    CONSTRAINT idEmpresa_asesor_FK FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa),
-    CONSTRAINT asesor_PK PRIMARY KEY (CURP, RFC, idEmpleado)
+    CONSTRAINT idEmpresa_asesor_FK FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa) ON
+  DELETE CASCADE, CONSTRAINT asesor_PK PRIMARY KEY (idEmpleado)
   );
-
+CREATE TABLE asesor_RFC
+  (
+    idEmpleado NUMBER,
+    RFC        CHAR(13),
+    CONSTRAINT idEmpleado_RFC_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
+  DELETE CASCADE,
+    CONSTRAINT RFC_RFC_FK FOREIGN KEY (RFC) REFERENCES RFC (RFC) ON
+  DELETE CASCADE, CONSTRAINT asesor_RFC_PK PRIMARY KEY (idEmpleado, RFC)
+  );
 CREATE TABLE asesor_email
   (
-    correo     VARCHAR2(500),-- CHECK(correo LIKE '%@%.%'),
-    CURP       CHAR(18),
-    RFC        CHAR(13),
+    correo     VARCHAR2(500),
     idEmpleado NUMBER,
-    CONSTRAINT asesor_email_PK PRIMARY KEY (correo),
-    CONSTRAINT asesor_email_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON DELETE CASCADE
+    CONSTRAINT asesor_email_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
+  DELETE CASCADE, CONSTRAINT asesor_email_PK PRIMARY KEY (correo)
   );
-
 CREATE TABLE asesor_telefono
   (
     telefono   CHAR(12),
-    CURP       CHAR(18),
-    RFC        CHAR(13),
     idEmpleado NUMBER,
-    CONSTRAINT revisaNumeros_asesor_telefono, --CHECK (regexp_like(telefono, '^[0-9]')),
-    CONSTRAINT asesor_telefono_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON DELETE CASCADE,
-    CONSTRAINT asesor_telefono_PK PRIMARY KEY (telefono)
+    CONSTRAINT asesor_telefono_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
+  DELETE CASCADE, CONSTRAINT asesor_telefono_PK PRIMARY KEY (telefono)
   );
-
 CREATE TABLE dueño
   (
     CURP        CHAR(18),
@@ -155,24 +142,20 @@ CREATE TABLE dueño
     aMAterno    CHAR(50),
     CONSTRAINT dueño_PK PRIMARY KEY (CURP)
   );
-
 CREATE TABLE dueño_email
   (
-    correo VARCHAR2(500) CHECK(correo LIKE '%@%.%'),
+    correo VARCHAR2(500),
     CURP   CHAR(18),
-    CONSTRAINT dueño_email_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP),
-    CONSTRAINT dueño_email_PK PRIMARY KEY (correo)
+    CONSTRAINT dueño_email_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+  DELETE CASCADE, CONSTRAINT dueño_email_PK PRIMARY KEY (correo)
   );
-
 CREATE TABLE dueño_telefono
   (
     telefono CHAR(12),
     CURP     CHAR(18),
-    CONSTRAINT revisaNumeros_dueño_telefono CHECK (regexp_like(telefono, '^[0-9]')),
-    CONSTRAINT dueño_telefono_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP),
-    CONSTRAINT dueño_telefono_PK PRIMARY KEY (telefono)
+    CONSTRAINT dueño_telefono_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
+  DELETE CASCADE, CONSTRAINT dueño_telefono_PK PRIMARY KEY (telefono)
   );
-
 CREATE TABLE casa
   (
     numRegistro           NUMBER,
@@ -190,7 +173,6 @@ CREATE TABLE casa
     fConstruccion         DATE NOT NULL,
     CONSTRAINT casa_PK PRIMARY KEY (numRegistro)
   );
-
 CREATE TABLE departamento
   (
     numRegistro           NUMBER,
@@ -210,7 +192,6 @@ CREATE TABLE departamento
     mantenimientoAnual    NUMBER NOT NULL,
     CONSTRAINT departamento_PK PRIMARY KEY (numRegistro)
   );
-
 CREATE TABLE terreno
   (
     numRegistro        NUMBER,
@@ -218,19 +199,17 @@ CREATE TABLE terreno
     existeConstruccion CHAR(2),
     CONSTRAINT terreno_PK PRIMARY KEY (numRegistro)
   );
-
 -------------------------------------------------------CASA--------------------------------------------------------------------------------
-
 CREATE TABLE casa_asesor
   (
     numRegistro NUMBER,
-    CURP        CHAR(18),
-    RFC         CHAR(13),
     idEmpleado  NUMBER,
-    CONSTRAINT casa_asesor_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON  DELETE CASCADE,
-    CONSTRAINT casa_asesor_PK PRIMARY KEY (numRegistro, CURP, RFC, idEmpleado)
+    CONSTRAINT casa_asesor_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor ON
+  DELETE CASCADE,
+    CONSTRAINT casa_asesor_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno ON
+  DELETE CASCADE,
+    CONSTRAINT casa_asesor_PK PRIMARY KEY (numRegistro, idEmpleado)
   );
-
 CREATE TABLE casa_caracteristica
   (
     numRegistro      NUMBER,
@@ -241,7 +220,6 @@ CREATE TABLE casa_caracteristica
   DELETE CASCADE,
     CONSTRAINT casa_caracteristica_PK PRIMARY KEY (numRegistro, idCaracteristica)
   );
-
 CREATE TABLE casa_amenidad
   (
     numRegistro NUMBER,
@@ -252,7 +230,6 @@ CREATE TABLE casa_amenidad
   DELETE CASCADE,
     CONSTRAINT casa_amenidad_PK PRIMARY KEY (numRegistro, idAmenidad)
   );
-
 CREATE TABLE casa_servicio
   (
     numRegistro NUMBER,
@@ -263,7 +240,6 @@ CREATE TABLE casa_servicio
   DELETE CASCADE,
     CONSTRAINT casa_servicio_PK PRIMARY KEY (numRegistro, idServicio)
   );
-
 CREATE TABLE casa_seguro
   (
     numRegistro NUMBER,
@@ -274,7 +250,6 @@ CREATE TABLE casa_seguro
   DELETE CASCADE,
     CONSTRAINT casa_seguro_PK PRIMARY KEY (numRegistro, numPoliza)
   );
-
 CREATE TABLE casa_direccion
   (
     numRegistro NUMBER,
@@ -285,7 +260,6 @@ CREATE TABLE casa_direccion
   DELETE CASCADE,
     CONSTRAINT casa_direccion_PK PRIMARY KEY (numRegistro, idDireccion)
   );
-
 CREATE TABLE casa_empresa
   (
     numRegistro NUMBER,
@@ -298,7 +272,6 @@ CREATE TABLE casa_empresa
   DELETE CASCADE,
     CONSTRAINT casa_empresa_PK PRIMARY KEY (numRegistro, idEmpresa)
   );
-
 CREATE TABLE casa_precio
   (
     numRegistro NUMBER,
@@ -307,7 +280,6 @@ CREATE TABLE casa_precio
     CONSTRAINT casa_precio_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
   DELETE CASCADE, CONSTRAINT casa_precio_PK PRIMARY KEY (numRegistro, fecha)
   );
-
 CREATE TABLE casa_exdueño
   (
     CURP         CHAR(18),
@@ -319,30 +291,33 @@ CREATE TABLE casa_exdueño
     CONSTRAINT casa_exdueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
   DELETE CASCADE, CONSTRAINT casa_exdueño_PK PRIMARY KEY (CURP, numRegistro)
   );
-
 CREATE TABLE casa_venta_dueño
   (
-    CURP         CHAR(18),
-    numRegistro  NUMBER,
-    fAdquisicion DATE NOT NULL,
+    idVenta        NUMBER,
+    numRegistro    NUMBER,
+    CURP           CHAR(18),
+    idEmpleado     NUMBER,
+    fAdquisicion   DATE NOT NULL,
+    valorPropiedad NUMBER,
     CONSTRAINT casa_venta_dueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
   DELETE CASCADE,
     CONSTRAINT casa_venta_dueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
-  DELETE CASCADE, CONSTRAINT casa_venta_dueño_PK PRIMARY KEY (CURP, numRegistro)
+  DELETE CASCADE,
+    CONSTRAINT casa_venta_dueño_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
+  DELETE CASCADE,
+    CONSTRAINT casa_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro, CURP)
   );
-
 -------------------------------------------------------DEPARTAMENTO--------------------------------------------------------------------------------
-
 CREATE TABLE departamento_asesor
   (
     numRegistro NUMBER,
-    CURP        CHAR(18),
-    RFC         CHAR(13),
     idEmpleado  NUMBER,
-    CONSTRAINT departamento_asesor_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON  DELETE CASCADE,
-    CONSTRAINT departamento_asesor_PK PRIMARY KEY (numRegistro, CURP, RFC, idEmpleado)
+    CONSTRAINT departamento_asesor_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_asesor_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_asesor_PK PRIMARY KEY (numRegistro, idEmpleado)
   );
-
 CREATE TABLE departamento_caracteristica
   (
     numRegistro      NUMBER,
@@ -353,7 +328,6 @@ CREATE TABLE departamento_caracteristica
   DELETE CASCADE,
     CONSTRAINT departamento_caracteristica_PK PRIMARY KEY (numRegistro, idCaracteristica)
   );
-
 CREATE TABLE departamento_amenidad
   (
     numRegistro NUMBER,
@@ -364,7 +338,6 @@ CREATE TABLE departamento_amenidad
   DELETE CASCADE,
     CONSTRAINT departamento_amenidad_PK PRIMARY KEY (numRegistro, idAmenidad)
   );
-
 CREATE TABLE departamento_servicio
   (
     numRegistro NUMBER,
@@ -375,7 +348,6 @@ CREATE TABLE departamento_servicio
   DELETE CASCADE,
     CONSTRAINT departamento_servicio_PK PRIMARY KEY (numRegistro, idServicio)
   );
-
 CREATE TABLE departamento_seguro
   (
     numRegistro NUMBER,
@@ -386,7 +358,6 @@ CREATE TABLE departamento_seguro
   DELETE CASCADE,
     CONSTRAINT departamento_seguro_PK PRIMARY KEY (numRegistro, numPoliza)
   );
-
 CREATE TABLE departamento_direccion
   (
     numRegistro NUMBER,
@@ -397,7 +368,6 @@ CREATE TABLE departamento_direccion
   DELETE CASCADE,
     CONSTRAINT departamento_direccion_PK PRIMARY KEY (numRegistro, idDireccion)
   );
-
 CREATE TABLE departamento_empresa
   (
     numRegistro NUMBER,
@@ -410,7 +380,6 @@ CREATE TABLE departamento_empresa
   DELETE CASCADE,
     CONSTRAINT departamento_empresa_PK PRIMARY KEY (numRegistro, idEmpresa)
   );
-
 CREATE TABLE departamento_precio
   (
     numRegistro NUMBER,
@@ -420,7 +389,6 @@ CREATE TABLE departamento_precio
   DELETE CASCADE,
     CONSTRAINT departamento_precio_PK PRIMARY KEY (numRegistro, fecha)
   );
-
 CREATE TABLE departamento_exdueño
   (
     CURP         CHAR(18),
@@ -433,31 +401,33 @@ CREATE TABLE departamento_exdueño
   DELETE CASCADE,
     CONSTRAINT departamento_exdueño_PK PRIMARY KEY (CURP, numRegistro)
   );
-
 CREATE TABLE departamento_venta_dueño
   (
-    CURP         CHAR(18),
-    numRegistro  NUMBER,
-    fAdquisicion DATE NOT NULL,
+    idVenta        NUMBER,
+    numRegistro    NUMBER,
+    CURP           CHAR(18),
+    idEmpleado     NUMBER,
+    fAdquisicion   DATE NOT NULL,
+    valorPropiedad NUMBER,
     CONSTRAINT departamento_venta_dueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
   DELETE CASCADE,
-    CONSTRAINT departamento_venta_dueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES departamento (numRegistro) ON
+    CONSTRAINT departamento_venta_dueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
   DELETE CASCADE,
-    CONSTRAINT departamento_venta_dueño_PK PRIMARY KEY (CURP, numRegistro)
+    CONSTRAINT departamento_venta_dueño_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
+  DELETE CASCADE,
+    CONSTRAINT departamento_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro, CURP)
   );
-
 -------------------------------------------------------TERRENO--------------------------------------------------------------------------------
-
 CREATE TABLE terreno_asesor
   (
     numRegistro NUMBER,
-    CURP        CHAR(18),
-    RFC         CHAR(13),
     idEmpleado  NUMBER,
-    CONSTRAINT terreno_asesor_FK FOREIGN KEY (CURP, RFC, idEmpleado) REFERENCES asesor ON  DELETE CASCADE,
-    CONSTRAINT terreno_asesor_PK PRIMARY KEY (numRegistro, CURP, RFC, idEmpleado)
+    CONSTRAINT terreno_asesor_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_asesor_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_asesor_PK PRIMARY KEY (numRegistro, idEmpleado)
   );
-
 CREATE TABLE terreno_servicio
   (
     numRegistro NUMBER,
@@ -468,7 +438,6 @@ CREATE TABLE terreno_servicio
   DELETE CASCADE,
     CONSTRAINT terreno_servicio_PK PRIMARY KEY (numRegistro, idServicio)
   );
-
 CREATE TABLE terreno_seguro
   (
     numRegistro NUMBER,
@@ -479,7 +448,6 @@ CREATE TABLE terreno_seguro
   DELETE CASCADE,
     CONSTRAINT terreno_seguro_PK PRIMARY KEY (numRegistro, numPoliza)
   );
-
 CREATE TABLE terreno_direccion
   (
     numRegistro NUMBER,
@@ -490,7 +458,6 @@ CREATE TABLE terreno_direccion
   DELETE CASCADE,
     CONSTRAINT terreno_direccion_PK PRIMARY KEY (numRegistro, idDireccion)
   );
-
 CREATE TABLE terreno_empresa
   (
     numRegistro NUMBER,
@@ -503,7 +470,6 @@ CREATE TABLE terreno_empresa
   DELETE CASCADE,
     CONSTRAINT terreno_empresa_PK PRIMARY KEY (numRegistro, idEmpresa)
   );
-
 CREATE TABLE terreno_precio
   (
     numRegistro NUMBER,
@@ -513,7 +479,6 @@ CREATE TABLE terreno_precio
   DELETE CASCADE,
     CONSTRAINT terreno_precio_PK PRIMARY KEY (numRegistro, fecha)
   );
-
 CREATE TABLE terreno_exdueño
   (
     CURP         CHAR(18),
@@ -526,15 +491,19 @@ CREATE TABLE terreno_exdueño
   DELETE CASCADE,
     CONSTRAINT terreno_exdueño_PK PRIMARY KEY (CURP, numRegistro)
   );
-
 CREATE TABLE terreno_venta_dueño
   (
-    CURP         CHAR(18),
-    numRegistro  NUMBER,
-    fAdquisicion DATE NOT NULL,
+    idVenta        NUMBER,
+    numRegistro    NUMBER,
+    CURP           CHAR(18),
+    idEmpleado     NUMBER,
+    fAdquisicion   DATE NOT NULL,
+    valorPropiedad NUMBER,
     CONSTRAINT terreno_venta_dueño_CURP_FK FOREIGN KEY (CURP) REFERENCES dueño (CURP) ON
   DELETE CASCADE,
-    CONSTRAINT terreno_venta_dueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES terreno (numRegistro) ON
+    CONSTRAINT terreno_venta_dueño_numRegistro_FK FOREIGN KEY (numRegistro) REFERENCES casa (numRegistro) ON
   DELETE CASCADE,
-    CONSTRAINT terreno_venta_dueño_PK PRIMARY KEY (CURP, numRegistro)
+    CONSTRAINT terreno_venta_dueño_idEmpleado_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
+  DELETE CASCADE,
+    CONSTRAINT terreno_venta_dueño_PK PRIMARY KEY (idVenta, numRegistro, CURP)
   );
