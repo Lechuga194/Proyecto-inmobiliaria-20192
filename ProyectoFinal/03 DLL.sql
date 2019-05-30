@@ -4,19 +4,19 @@ DDL.SQL Proyecto final | Lechuga Martínez José Eduardo | 314325749 | Joselechu
 CREATE TABLE colonia
   (
     idColonia NUMBER,
-    nombre    CHAR(25) NOT NULL,
+    nombre    CHAR(50) NOT NULL,
     CONSTRAINT colonia_PK PRIMARY KEY (idColonia)
   );
 CREATE TABLE tiendas_Cercanas
   (
-    nombreTienda CHAR(50),
+    nombreTienda CHAR(250),
     idColonia    NUMBER,
     CONSTRAINT tiendas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT tiendas_Cercanas_PK PRIMARY KEY (nombreTienda)
   );
 CREATE TABLE recreativos_Cercanos
   (
-    nombreRecreativo CHAR(50),
+    nombreRecreativo CHAR(250),
     idColonia        NUMBER,
     CONSTRAINT recreativos_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE,
@@ -24,14 +24,14 @@ CREATE TABLE recreativos_Cercanos
   );
 CREATE TABLE escuelas_Cercanas
   (
-    nombreEscuela CHAR(50),
+    nombreEscuela CHAR(500),
     idColonia     NUMBER,
     CONSTRAINT Escuelas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT Escuelas_Cercanas_PK PRIMARY KEY (nombreEscuela)
   );
 CREATE TABLE hospitales_Cercanos
   (
-    nombreHospital CHAR(50),
+    nombreHospital CHAR(150),
     idColonia      NUMBER,
     CONSTRAINT hospitales_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE,
@@ -39,7 +39,7 @@ CREATE TABLE hospitales_Cercanos
   );
 CREATE TABLE transportes_Cercanos
   (
-    nombreTransporte CHAR(50),
+    nombreTransporte CHAR(250),
     idColonia        NUMBER,
     CONSTRAINT transportes_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE,
@@ -95,7 +95,10 @@ CREATE TABLE empresa
     CONSTRAINT empresa_PK PRIMARY KEY (idEmpresa)
   );
 CREATE TABLE RFC
-  ( RFC CHAR(13), CONSTRAINT RFC_PK PRIMARY KEY (RFC)
+  ( 
+  	idRFC NUMBER,
+  	RFC CHAR(13) UNIQUE,
+  	CONSTRAINT RFC_PK PRIMARY KEY (idRFC)
   );
 CREATE TABLE asesor
   (
@@ -113,11 +116,11 @@ CREATE TABLE asesor
 CREATE TABLE asesor_RFC
   (
     idEmpleado NUMBER,
-    RFC        CHAR(13),
+    idRFC NUMBER,
     CONSTRAINT idEmpleado_RFC_FK FOREIGN KEY (idEmpleado) REFERENCES asesor (idEmpleado) ON
   DELETE CASCADE,
-    CONSTRAINT RFC_RFC_FK FOREIGN KEY (RFC) REFERENCES RFC (RFC) ON
-  DELETE CASCADE, CONSTRAINT asesor_RFC_PK PRIMARY KEY (idEmpleado, RFC)
+    CONSTRAINT RFC_RFC_FK FOREIGN KEY (RFC) REFERENCES RFC (idRFC) ON
+  DELETE CASCADE, CONSTRAINT asesor_RFC_PK PRIMARY KEY (idEmpleado, idRFC)
   );
 CREATE TABLE asesor_email
   (
