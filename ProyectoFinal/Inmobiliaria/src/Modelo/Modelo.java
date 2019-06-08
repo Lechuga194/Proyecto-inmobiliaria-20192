@@ -17,7 +17,7 @@ import java.sql.Statement;
  */
 public class Modelo {
 
-    String consulta, inserta, elimina, auxiliar;
+    String consulta, inserta, elimina;
     OracleJDBCExample a = new OracleJDBCExample();
     Connection conexion = a.getConection();
     PreparedStatement pconsulta = null;
@@ -610,7 +610,6 @@ public class Modelo {
     }
 
     ///////// ZONA DE CREACION DE NUEVAS FILAS ///////////////////////////////////////////////////////////////
-    
     /**
      * Metodo que agrega una casa a la BD
      *
@@ -629,7 +628,7 @@ public class Modelo {
      * @param año
      * @throws SQLException
      */
-    public void agregaCasa(int valorCatastral, String material,
+    public void AgregaCasa(int valorCatastral, String material,
             int nbmedios, int nbcompletos, int nestaciona, int nhabita,
             int npisos, int tamhabitable, int tamterreno, String estadoConstruccion,
             int dia, int mes, int año) throws SQLException {
@@ -642,9 +641,10 @@ public class Modelo {
         Statement stmtConsulta = conexion.createStatement();
         stmtConsulta.execute(inserta);
     }
-    
+
     /**
      * Metodo que inserta un edificio
+     *
      * @param valorCatastral
      * @param material
      * @param nbmedios
@@ -660,49 +660,52 @@ public class Modelo {
      * @param ubicado
      * @param totalEdif
      * @param mantenimiento
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void agregaDepartamento(int valorCatastral, String material,
+    public void AgregaDepartamento(int valorCatastral, String material,
             int nbmedios, int nbcompletos, int nestaciona, int nhabita,
             int tamhabitable, int tamterreno, String estadoConstruccion,
             int dia, int mes, int año, int ubicado, int totalEdif,
-            int mantenimiento) throws SQLException{
+            int mantenimiento) throws SQLException {
         inserta = "INSERT INTO DEPARTAMENTO VALUES (DEFAULT," + valorCatastral + ","
                 + "'departamento','" + material + "','" + nbmedios + "','" + nbcompletos
                 + "','" + nestaciona + "','" + nhabita + "','"
                 + tamhabitable + "','" + tamterreno + "','" + estadoConstruccion
-                + "','" + dia + "/" + mes + "/" + año + "','" +
-                ubicado + "','" + totalEdif + "','" + mantenimiento +  "')";
-        
+                + "','" + dia + "/" + mes + "/" + año + "','"
+                + ubicado + "','" + totalEdif + "','" + mantenimiento + "')";
+
         Statement stmtConsulta = conexion.createStatement();
         stmtConsulta.execute(inserta);
     }
 
     /**
      * Metodo que agrega un terreno
+     *
      * @param valorCatastral
      * @param existe
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void agregaTerreno(int valorCatastral, String existe) throws SQLException{
+    public void AgregaTerreno(int valorCatastral, String existe) throws SQLException {
         inserta = "INSERT INTO TERRENO VALUES (DEFAULT, " + valorCatastral + ",'" + existe + "')";
         Statement stmtConsulta = conexion.createStatement();
         stmtConsulta.execute(inserta);
     }
-    
+
     /**
      * Metodo que agrega una nueva empresa a la base
-     * @param nombre 
-     * @throws java.sql.SQLException 
+     *
+     * @param nombre
+     * @throws java.sql.SQLException
      */
-    public void agregaEmpresa(String nombre) throws SQLException{
+    public void AgregaEmpresa(String nombre) throws SQLException {
         inserta = "INSERT INTO EMPRESA VALUES (DEFAULT, '" + nombre + "')";
         Statement stmtConsulta = conexion.createStatement();
         stmtConsulta.execute(inserta);
     }
-    
+
     /**
      * Metodo que agrega un asesor a la bd
+     *
      * @param empresa
      * @param diaN
      * @param mesN
@@ -714,47 +717,349 @@ public class Modelo {
      * @param mesI
      * @param añoI
      * @param sueldo
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void agregaAsesor(int empresa, int diaN, int mesN, int añoN, String nombre,
-            String aPaterno, String aMaterno, int diaI, int mesI, int añoI, int sueldo) throws SQLException{
+    public void AgregaAsesor(int empresa, int diaN, int mesN, int añoN, String nombre,
+            String aPaterno, String aMaterno, int diaI, int mesI, int añoI, int sueldo) throws SQLException {
         inserta = "INSERT INTO ASESOR VALUES (DEFAULT, " + empresa + ",'"
-                + diaN + "/" + mesN + "/" + añoN + "', '" + nombre 
-                + "', '" + aPaterno + "', '" + aMaterno + "', '" + diaI + "/" 
-                + mesI + "/" + añoI + "', " + sueldo + ")"; 
+                + diaN + "/" + mesN + "/" + añoN + "', '" + nombre
+                + "', '" + aPaterno + "', '" + aMaterno + "', '" + diaI + "/"
+                + mesI + "/" + añoI + "', " + sueldo + ")";
         Statement stmtConsulta = conexion.createStatement();
         stmtConsulta.execute(inserta);
     }
-    
+
     /**
      * Metodo que agrega un dueño a la bd
+     *
      * @param dia
      * @param mes
      * @param año
      * @param nombre
      * @param aPaterno
      * @param aMaterno
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void agregaDueño(int dia, int mes, int año, String nombre, String aPaterno, 
-            String aMaterno) throws SQLException{
+    public void AgregaDueño(int dia, int mes, int año, String nombre, String aPaterno,
+            String aMaterno) throws SQLException {
         inserta = "INSERT INTO DUEÑO VALUES (DEFAULT, '" + dia + "/" + mes + "/" + año + "', '" + nombre + "', '" + aPaterno + "', '" + aMaterno + "')";
         Statement stmtConsulta = conexion.createStatement();
         stmtConsulta.execute(inserta);
     }
-    
-    public void agregaColonia(String nombre) throws SQLException{
+
+    /**
+     * Metodo que agrega una colonia a la BD
+     *
+     * @param nombre
+     * @throws SQLException
+     */
+    public void AgregaColonia(String nombre) throws SQLException {
         inserta = "INSERT INTO COLONIA VALUES (DEFAULT, '" + nombre + "')";
         Statement stmtConsulta = conexion.createStatement();
         stmtConsulta.execute(inserta);
     }
-    
-    public void agregaDireccion(int colonia, String estado, String municipio, int CP,
-            String calle, int ext, int inte)throws SQLException{
-        inserta = "INSERT INTO DIRECCION VALUES (DEFAULT, " + colonia + ", '" 
-                + estado + "', '" + municipio + "'," + CP + ",'" + calle 
+
+    /**
+     * Metodo que agrega una direccion a la BD
+     *
+     * @param colonia
+     * @param estado
+     * @param municipio
+     * @param CP
+     * @param calle
+     * @param ext
+     * @param inte
+     * @throws SQLException
+     */
+    public void AgregaDireccion(int colonia, String estado, String municipio, int CP,
+            String calle, int ext, int inte) throws SQLException {
+        inserta = "INSERT INTO DIRECCION VALUES (DEFAULT, " + colonia + ", '"
+                + estado + "', '" + municipio + "'," + CP + ",'" + calle
                 + "', " + ext + "," + inte + ")";
         Statement stmtConsulta = conexion.createStatement();
-        stmtConsulta.execute(inserta);        
+        stmtConsulta.execute(inserta);
     }
+
+    /**
+     * Metodo que agrega una nueva amenidad a la bd
+     *
+     * @param nombre
+     * @param descripcion
+     * @throws SQLException
+     */
+    public void AgregaAmenidad(String nombre, String descripcion) throws SQLException {
+        inserta = "INSERT INTO AMENIDAD VALUES (DEFAULT, '" + nombre + "', '" + descripcion + "')";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    /**
+     * Metodo que agrega una nueva caracteristica a la BD
+     *
+     * @param nombre
+     * @param descripcion
+     * @throws SQLException
+     */
+    public void AgregaCaracteristica(String nombre, String descripcion) throws SQLException {
+        inserta = "INSERT INTO CARACTERISTICA VALUES (DEFAULT, '" + nombre + "', '" + descripcion + "')";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    /**
+     * Metodo que agrega un nuevo servicio a la BD
+     *
+     * @param nombre
+     * @param descripcion
+     * @param precio
+     * @throws SQLException
+     */
+    public void AgregaServicio(String nombre, String descripcion, int precio) throws SQLException {
+        inserta = "INSERT INTO SERVICIO VALUES (DEFAULT, '" + nombre + "', '" + descripcion + "'," + precio + ")";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    /**
+     * Metodo que agrega un seguro a la BD
+     *
+     * @param aseguradora
+     * @param tipo
+     * @param precio
+     * @throws SQLException
+     */
+    public void AgregaSeguro(String aseguradora, String tipo, int precio) throws SQLException {
+        inserta = "INSERT INTO SERVICIO VALUES (DEFAULT, '" + aseguradora + "', '" + tipo + "'," + precio + ")";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    /**
+     * Agrega una escuela cercana a una colonia
+     *
+     * @param nombre
+     * @param colonia
+     * @throws SQLException
+     */
+    public void AgregaColoniaEscuela(String nombre, int colonia) throws SQLException {
+        inserta = "INSERT INTO ESCUELAS_CERCANAS VALUES ('" + nombre + "'," + colonia + ")";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    /**
+     * Agrega un hospital cercano a una colonia
+     *
+     * @param nombre
+     * @param colonia
+     * @throws SQLException
+     */
+    public void AgregaColoniaHospital(String nombre, int colonia) throws SQLException {
+        inserta = "INSERT INTO HOSPITALES_CERCANOS VALUES ('" + nombre + "'," + colonia + ")";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    /**
+     * Metodo que agrega un recreativo a una colonia
+     *
+     * @param nombre
+     * @param colonia
+     * @throws SQLException
+     */
+    public void AgregaColoniaRecreativo(String nombre, int colonia) throws SQLException {
+        inserta = "INSERT INTO RECREATIVOS_CERCANOS VALUES ('" + nombre + "'," + colonia + ")";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    /**
+     * Metodo que agrega un transporte cercano a la colonia
+     *
+     * @param nombre
+     * @param colonia
+     * @throws SQLException
+     */
+    public void AgregaColoniaTransporte(String nombre, int colonia) throws SQLException {
+        inserta = "INSERT INTO TRANSPORTES_CERCANOS VALUES ('" + nombre + "'," + colonia + ")";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    //////////////////ZONA DE ELIMINACION EN LA BD/////////////////////////////////////////////////
+    /**
+     * Metodo que elimina una amenidad de la bd
+     *
+     * @param amenidad
+     * @throws SQLException
+     */
+    public void EliminaAmenidad(int amenidad) throws SQLException {
+        elimina = "DELETE FROM AMENIDAD WHERE IDAMENIDAD = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, amenidad);
+        pconsulta.executeQuery();
+    }
+
+    /**
+     * Metodo que elimina un asesor por su id
+     * @param asesor
+     * @throws SQLException 
+     */
+    public void EliminaAsesor(int asesor) throws SQLException {
+        elimina = "DELETE FROM ASESOR WHERE IDASESOR = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, asesor);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina una caracteristica 
+     * @param caracteristica
+     * @throws SQLException 
+     */
+    public void EliminaCaracteristica(int caracteristica) throws SQLException {
+        elimina = "DELETE FROM CARACTERISTICA WHERE IDCARACTERISTICA = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, caracteristica);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina una casa por su numero de registro
+     * @param numregistro
+     * @throws SQLException 
+     */
+    public void EliminaCasa(int numregistro) throws SQLException {
+        elimina = "DELETE FROM CASA WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, numregistro);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina una colonia por el id
+     * @param colonia
+     * @throws SQLException 
+     */
+    public void EliminaColonia(int colonia) throws SQLException{
+        elimina = "DELETE FROM COLONIA WHERE IDCOLONIA = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, colonia);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina un curp de la bd
+     * @param curp
+     * @throws SQLException 
+     */
+    public void EliminaCURP(int curp) throws SQLException{
+        elimina = "DELETE FROM CURP WHERE IDCURP = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, curp);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina un departamento de la bd
+     * @param numregistro
+     * @throws SQLException 
+     */
+    public void EliminaDepartamento(int numregistro) throws SQLException{
+        elimina = "DELETE FROM DEPARTAMENTO WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, numregistro);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina una direccion de la bd
+     * @param direccion
+     * @throws SQLException 
+     */
+    public void EliminaDireccion(int direccion) throws SQLException{
+        elimina = "DELETE FROM DIRECCION WHERE IDDIRECCION = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, direccion);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina un dueño de la bd
+     * @param dueño
+     * @throws SQLException 
+     */
+    public void EliminaDueño(int dueño) throws SQLException{
+        elimina = "DELETE FROM DUEÑO WHERE IDDUEÑO = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, dueño);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina una empresa de la bd
+     * @param empresa
+     * @throws SQLException 
+     */
+    public void EliminaEmpresa(int empresa) throws SQLException{
+        elimina = "DELETE FROM EMPRESA WHERE IDEMPRESA = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, empresa);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina un rfc de la bd
+     * @param rfc
+     * @throws SQLException 
+     */
+    public void EliminaRFC(int rfc) throws SQLException{
+        elimina = "DELETE FROM RFC WHERE IDRFC = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, rfc);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina un seguro de la BD
+     * @param seguro
+     * @throws SQLException 
+     */
+    public void EliminaSeguro(int seguro) throws SQLException{
+        elimina = "DELETE FROM SEGURO WHERE NUMPOLIZA = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, seguro);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina un servicio de la BD
+     * @param servicio
+     * @throws SQLException 
+     */
+    public void EliminaServicio(int servicio) throws SQLException{
+        elimina = "DELETE FROM SERVICIO WHERE IDSERVICIO = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, servicio);
+        pconsulta.executeQuery();
+    }
+    
+    /**
+     * Metodo que elimina un terreno de la BD
+     * @param numregistro
+     * @throws SQLException 
+     */
+    public void EliminaTerreno(int numregistro) throws SQLException{
+        elimina = "DELETE FROM TERRENO WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(elimina);
+        pconsulta.setInt(1, numregistro);
+        pconsulta.executeQuery();
+    }
+    
+    
+    
+    
+    
+    
+
 }
