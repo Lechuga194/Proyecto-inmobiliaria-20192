@@ -601,8 +601,96 @@ public class Vista {
                                 } while (seleccionAuxiliar != 0);
                                 break;
                             case 7:
+                                System.out.println("Introduce el numero de registro de la propiedad");
+                                id = sc.nextInt();
+                                do {
+                                    System.out.println("¿Que deseas modificar?"
+                                            + "\n1:  Valor catastral"
+                                            + "\n2:  Material de construccion"
+                                            + "\n3:  Numero de baños medios"
+                                            + "\n4:  Numero de baños completos"
+                                            + "\n5:  Numero de estacionamientos"
+                                            + "\n6:  Numero de habitaciones"
+                                            + "\n7:  Tamaño habitable"
+                                            + "\n8:  Tamaño Terreno"
+                                            + "\n9:  Estado de la propiedad"
+                                            + "\n0:  SALIR");
+                                    seleccionAuxiliar = sc.nextInt();
+                                    switch (seleccionAuxiliar) {
+                                        case 1:
+                                            System.out.println("Introduce el nuevo valor");
+                                            valorC = sc.nextInt();
+                                            controlador.ActualizaDepartamentoValorCatastral(id, valorC);
+                                            break;
+                                        case 2:
+                                            System.out.println("Introduce el material predominante");
+                                            material = sc.next();
+                                            controlador.ActualizaDepartamentoMaterialConstruccion(id, material);
+                                            break;
+                                        case 3:
+                                            System.out.println("Introduce el numero de medios baños");
+                                            nbmedios = sc.nextInt();
+                                            controlador.ActualizaDepartamentoNBañosMedios(id, nbmedios);
+                                            break;
+                                        case 4:
+                                            System.out.println("Introduce el numero de baños completos");
+                                            nbcompletos = sc.nextInt();
+                                            controlador.ActualizaDepartamentoNBañosCompletos(id, nbcompletos);
+                                            break;
+                                        case 5:
+                                            System.out.println("Introduce el numero de estacionamientos");
+                                            nestaciona = sc.nextInt();
+                                            controlador.ActualizaDepartamentoNEstacionamientos(id, nestaciona);
+                                            break;
+                                        case 6:
+                                            System.out.println("Introduce el numero de habitaciones");
+                                            nhabita = sc.nextInt();
+                                            controlador.ActualizaDepartamentoNHabitaciones(id, nhabita);
+                                            break;
+                                        case 7:
+                                            System.out.println("Introduce el tamaño habitable");
+                                            tamha = sc.nextInt();
+                                            controlador.ActualizaDepartamentoTamañoHabitable(id, tamha);
+                                            break;
+                                        case 8:
+                                            System.out.println("Introduce el tamaño del terreno");
+                                            tamte = sc.nextInt();
+                                            controlador.ActualizaDepartamentoTamañoTerreno(id, tamte);
+                                            break;
+                                        case 9:
+                                            System.out.println("Introduce el estado de la propiedad");
+                                            estado = sc.next();
+                                            controlador.ActualizaDepartamentoEstadoHabitable(id, estado);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                } while (seleccionAuxiliar != 0);
                                 break;
                             case 8:
+                                 System.out.println("Introduce el numero de registro de la propiedad");
+                                id = sc.nextInt();
+                                do {
+                                    System.out.println("¿Que deseas modificar?"
+                                            + "\n1:  Valor catastral"
+                                            + "\n2:  Existencia de construccion"
+                                            + "\n0:  SALIR");
+                                    seleccionAuxiliar = sc.nextInt();
+                                    switch (seleccionAuxiliar) {
+                                        case 1:
+                                            System.out.println("Introduce el nuevo valor");
+                                            valorC = sc.nextInt();
+                                            controlador.ActualizaTerrenoValorCatastral(id, valorC);
+                                            break;
+                                        case 2:
+                                            System.out.println("¿Existe alguna construccion en el terreno?");
+                                            existe = sc.next();
+                                            controlador.ActualizaExisteConstruccion(id, existe);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                } while (seleccionAuxiliar != 0);
                                 break;
                             default:
                                 break;

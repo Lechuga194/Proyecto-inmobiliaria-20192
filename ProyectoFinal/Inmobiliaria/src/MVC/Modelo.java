@@ -1,7 +1,7 @@
 /*
     Proyecto final | Lechuga Martinez José Eduardo | BD 
  */
-package Modelo;
+package MVC;
 
 import conectividad.OracleJDBCExample;
 import java.sql.Connection;
@@ -932,7 +932,7 @@ public class Modelo {
      * @throws SQLException 
      */
     public void ActualizaCasaNPisos(int numreg, int pisos) throws SQLException{
-        actualiza = "UPDATE CASA SET NBAÑOSMEDIOS = '" + pisos + "' WHERE NUMREGISTRO = " + numreg; 
+        actualiza = "UPDATE CASA SET NPISOS = '" + pisos + "' WHERE NUMREGISTRO = " + numreg; 
         Statement stmtActualizacion = conexion.createStatement();
         stmtActualizacion.execute(actualiza);
     }

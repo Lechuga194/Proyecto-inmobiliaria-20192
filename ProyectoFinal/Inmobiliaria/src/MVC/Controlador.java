@@ -3,7 +3,6 @@
  */
 package MVC;
 
-import Modelo.Modelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
