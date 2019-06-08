@@ -1,11 +1,10 @@
 /*
-    Proyecto 2 | Modelado y Programación | LechugaEats
+    Proyecto final | Lechuga Martinez José Eduardo | BD 
  */
 package Modelo;
 
 import conectividad.OracleJDBCExample;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +16,7 @@ import java.sql.Statement;
  */
 public class Modelo {
 
-    String consulta, inserta, elimina;
+    String consulta, inserta, elimina, actualiza;
     OracleJDBCExample a = new OracleJDBCExample();
     Connection conexion = a.getConection();
     PreparedStatement pconsulta = null;
@@ -166,7 +165,7 @@ public class Modelo {
         return rs;
     }
 
-    public ResultSet PropiedadesEmpresa() throws SQLException {
+    public ResultSet ConsultaPropiedadesEmpresa() throws SQLException {
         consulta = "SELECT *\n"
                 + "FROM EMPRESA\n"
                 + "JOIN CASA_EMPRESA\n"
@@ -223,296 +222,6 @@ public class Modelo {
     public ResultSet TerrenosPorAsesores(String numRegistro) throws SQLException {
         consulta = "SELECT * FROM TERRENO_ASESOR WHERE NUMREGISTRO = ?";
         PreparedStatement pconsulta = null;
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa todas las asignaciones que tiene un asesor
-     *
-     * @param idasesor
-     * @return caracteristicas
-     * @throws SQLException
-     */
-    public ResultSet AsignacionDeAsesor(String idasesor) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM ASESOR\n"
-                + "RIGHT JOIN CASA_ASESOR\n"
-                + "ON (ASESOR.IDASESOR = CASA_ASESOR.IDASESOR)\n"
-                + "RIGHT JOIN DEPARTAMENTO_ASESOR\n"
-                + "ON (ASESOR.IDASESOR = DEPARTAMENTO_ASESOR.IDASESOR)\n"
-                + "RIGHT JOIN TERRENO_ASESOR\n"
-                + "ON (ASESOR.IDASESOR   = TERRENO_ASESOR.IDASESOR)\n"
-                + "WHERE ASESOR.IDASESOR = ?";
-        PreparedStatement pconsulta = null;
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, idasesor);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa las caracteristicas de una vivienda
-     *
-     * @param numRegistro
-     * @return caracteristicas
-     * @throws SQLException
-     */
-    public ResultSet CaracteristicasCasa(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM CASA_CARACTERISTICA\n"
-                + "JOIN CARACTERISTICA\n"
-                + "ON(CASA_CARACTERISTICA.IDCARACTERISTICA = CARACTERISTICA.IDCARACTERISTICA)\n"
-                + "WHERE NUMREGISTRO                       = ?";
-        PreparedStatement pconsulta = null;
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa las caracteristicas de una vivienda
-     *
-     * @param numRegistro
-     * @return caracteristicas
-     * @throws SQLException
-     */
-    public ResultSet CaracteristicasDepartamento(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM DEPARTAMENTO_CARACTERISTICA\n"
-                + "JOIN CARACTERISTICA\n"
-                + "ON(DEPARTAMENTO_CARACTERISTICA.IDCARACTERISTICA = CARACTERISTICA.IDCARACTERISTICA)\n"
-                + "WHERE NUMREGISTRO                       = ?";
-        PreparedStatement pconsulta = null;
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa las amenidades de una casa por medio de su numero de
-     * registro
-     *
-     * @param numRegistro
-     * @return amenidades
-     * @throws SQLException
-     */
-    public ResultSet AmenidadesCasa(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM CASA_AMENIDAD\n"
-                + "JOIN AMENIDAD\n"
-                + "ON(CASA_AMENIDAD.IDAMENIDAD = AMENIDAD.IDAMENIDAD)\n"
-                + "WHERE NUMREGISTRO                       = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa las amenidades de una casa por medio de su numero de
-     * registro
-     *
-     * @param numRegistro
-     * @return amenidades
-     * @throws SQLException
-     */
-    public ResultSet AmenidadesDepartamento(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM DEPARTAMENTO_AMENIDAD\n"
-                + "JOIN AMENIDAD\n"
-                + "ON(DEPARTAMENTO_AMENIDAD.IDAMENIDAD = AMENIDAD.IDAMENIDAD)\n"
-                + "WHERE NUMREGISTRO                       = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa los servicios de una casa por medio de su numero de
-     * registro
-     *
-     * @param numRegistro
-     * @return Servicios
-     * @throws SQLException
-     */
-    public ResultSet ServiciosCasa(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM CASA_SERVICIO\n"
-                + "JOIN SERVICIO\n"
-                + "ON(CASA_SERVICIO.IDSERVICIO = SERVICIO.IDSERVICIO)\n"
-                + "WHERE NUMREGISTRO                       = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa los servicios de una casa por medio de su numero de
-     * registro
-     *
-     * @param numRegistro
-     * @return Servicios
-     * @throws SQLException
-     */
-    public ResultSet ServiciosDepartamento(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM DEPARTAMENTO_SERVICIO\n"
-                + "JOIN SERVICIO\n"
-                + "ON(DEPARTAMENTO_SERVICIO.IDSERVICIO = SERVICIO.IDSERVICIO)\n"
-                + "WHERE NUMREGISTRO                       = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa los servicios de una casa por medio de su numero de
-     * registro
-     *
-     * @param numRegistro
-     * @return Servicios
-     * @throws SQLException
-     */
-    public ResultSet ServiciosTerreno(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM TERRENO_SERVICIO\n"
-                + "JOIN SERVICIO\n"
-                + "ON(TERRENO_SERVICIO.IDSERVICIO = SERVICIO.IDSERVICIO)\n"
-                + "WHERE NUMREGISTRO                       = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa los seguros que tiene una vivienda
-     *
-     * @param numRegistro
-     * @return Seguros
-     * @throws SQLException
-     */
-    public ResultSet SeguroCasa(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM CASA_SEGURO\n"
-                + "JOIN SEGURO\n"
-                + "ON(SEGURO.NUMPOLIZA           = CASA_SEGURO.NUMPOLIZA)\n"
-                + "WHERE CASA_SEGURO.NUMREGISTRO = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa los seguros que tiene una vivienda
-     *
-     * @param numRegistro
-     * @return Seguros
-     * @throws SQLException
-     */
-    public ResultSet SeguroDepartamento(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM DEPARTAMENTO_SEGURO\n"
-                + "JOIN SEGURO\n"
-                + "ON(SEGURO.NUMPOLIZA           = DEPARTAMENTO_SEGURO.NUMPOLIZA)\n"
-                + "WHERE DEPARTAMENTO_SEGURO.NUMREGISTRO = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa los seguros que tiene una vivienda
-     *
-     * @param numRegistro
-     * @return Seguros
-     * @throws SQLException
-     */
-    public ResultSet SeguroTerreno(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM TERRENO_SEGURO\n"
-                + "JOIN SEGURO\n"
-                + "ON(SEGURO.NUMPOLIZA           = TERRENO_SEGURO.NUMPOLIZA)\n"
-                + "WHERE TERRENO_SEGURO.NUMREGISTRO = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa la direccion de una vivienda por medio del numero de
-     * registro
-     *
-     * @param numRegistro
-     * @return direccion
-     * @throws SQLException
-     */
-    public ResultSet DireccionCasa(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM CASA\n"
-                + "JOIN CASA_DIRECCION\n"
-                + "ON(CASA.NUMREGISTRO = CASA_DIRECCION.NUMREGISTRO)\n"
-                + "JOIN DIRECCION\n"
-                + "ON(CASA_DIRECCION.IDDIRECCION = DIRECCION.IDDIRECCION)\n"
-                + "JOIN COLONIA\n"
-                + "ON (DIRECCION.IDCOLONIA = COLONIA.IDCOLONIA) WHERE CASA.NUMREGISTRO = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa la direccion de una vivienda por medio del numero de
-     * registro
-     *
-     * @param numRegistro
-     * @return direccion
-     * @throws SQLException
-     */
-    public ResultSet DireccionDepartamento(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM DEPARTAMENTO\n"
-                + "JOIN DEPARTAMENTO_DIRECCION\n"
-                + "ON(DEPARTAMENTO.NUMREGISTRO = DEPARTAMENTO_DIRECCION.NUMREGISTRO)\n"
-                + "JOIN DIRECCION\n"
-                + "ON(DEPARTAMENTO_DIRECCION.IDDIRECCION = DIRECCION.IDDIRECCION)\n"
-                + "JOIN COLONIA\n"
-                + "ON (DIRECCION.IDCOLONIA = COLONIA.IDCOLONIA) WHERE DEPARTAMENTO.NUMREGISTRO = ?";
-        pconsulta = conexion.prepareStatement(consulta);
-        pconsulta.setString(1, numRegistro);
-        ResultSet rs = pconsulta.executeQuery();
-        return rs;
-    }
-
-    /**
-     * Metodo que regresa la direccion de una vivienda por medio del numero de
-     * registro
-     *
-     * @param numRegistro
-     * @return direccion
-     * @throws SQLException
-     */
-    public ResultSet DireccionTerreno(String numRegistro) throws SQLException {
-        consulta = "SELECT *\n"
-                + "FROM TERRENO\n"
-                + "JOIN TERRENO_DIRECCION\n"
-                + "ON(TERRENO.NUMREGISTRO = TERRENO_DIRECCION.NUMREGISTRO)\n"
-                + "JOIN DIRECCION\n"
-                + "ON(TERRENO_DIRECCION.IDDIRECCION = DIRECCION.IDDIRECCION)\n"
-                + "JOIN COLONIA\n"
-                + "ON (DIRECCION.IDCOLONIA = COLONIA.IDCOLONIA) WHERE TERRENO.NUMREGISTRO = ?";
         pconsulta = conexion.prepareStatement(consulta);
         pconsulta.setString(1, numRegistro);
         ResultSet rs = pconsulta.executeQuery();
@@ -902,8 +611,9 @@ public class Modelo {
 
     /**
      * Metodo que elimina un asesor por su id
+     *
      * @param asesor
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void EliminaAsesor(int asesor) throws SQLException {
         elimina = "DELETE FROM ASESOR WHERE IDASESOR = ?";
@@ -911,11 +621,12 @@ public class Modelo {
         pconsulta.setInt(1, asesor);
         pconsulta.executeQuery();
     }
-    
+
     /**
-     * Metodo que elimina una caracteristica 
+     * Metodo que elimina una caracteristica
+     *
      * @param caracteristica
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void EliminaCaracteristica(int caracteristica) throws SQLException {
         elimina = "DELETE FROM CARACTERISTICA WHERE IDCARACTERISTICA = ?";
@@ -923,11 +634,12 @@ public class Modelo {
         pconsulta.setInt(1, caracteristica);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina una casa por su numero de registro
+     *
      * @param numregistro
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void EliminaCasa(int numregistro) throws SQLException {
         elimina = "DELETE FROM CASA WHERE NUMREGISTRO = ?";
@@ -935,131 +647,498 @@ public class Modelo {
         pconsulta.setInt(1, numregistro);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina una colonia por el id
+     *
      * @param colonia
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaColonia(int colonia) throws SQLException{
+    public void EliminaColonia(int colonia) throws SQLException {
         elimina = "DELETE FROM COLONIA WHERE IDCOLONIA = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, colonia);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina un curp de la bd
+     *
      * @param curp
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaCURP(int curp) throws SQLException{
+    public void EliminaCURP(int curp) throws SQLException {
         elimina = "DELETE FROM CURP WHERE IDCURP = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, curp);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina un departamento de la bd
+     *
      * @param numregistro
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaDepartamento(int numregistro) throws SQLException{
+    public void EliminaDepartamento(int numregistro) throws SQLException {
         elimina = "DELETE FROM DEPARTAMENTO WHERE NUMREGISTRO = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, numregistro);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina una direccion de la bd
+     *
      * @param direccion
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaDireccion(int direccion) throws SQLException{
+    public void EliminaDireccion(int direccion) throws SQLException {
         elimina = "DELETE FROM DIRECCION WHERE IDDIRECCION = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, direccion);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina un dueño de la bd
+     *
      * @param dueño
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaDueño(int dueño) throws SQLException{
+    public void EliminaDueño(int dueño) throws SQLException {
         elimina = "DELETE FROM DUEÑO WHERE IDDUEÑO = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, dueño);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina una empresa de la bd
+     *
      * @param empresa
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaEmpresa(int empresa) throws SQLException{
+    public void EliminaEmpresa(int empresa) throws SQLException {
         elimina = "DELETE FROM EMPRESA WHERE IDEMPRESA = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, empresa);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina un rfc de la bd
+     *
      * @param rfc
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaRFC(int rfc) throws SQLException{
+    public void EliminaRFC(int rfc) throws SQLException {
         elimina = "DELETE FROM RFC WHERE IDRFC = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, rfc);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina un seguro de la BD
+     *
      * @param seguro
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaSeguro(int seguro) throws SQLException{
+    public void EliminaSeguro(int seguro) throws SQLException {
         elimina = "DELETE FROM SEGURO WHERE NUMPOLIZA = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, seguro);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina un servicio de la BD
+     *
      * @param servicio
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaServicio(int servicio) throws SQLException{
+    public void EliminaServicio(int servicio) throws SQLException {
         elimina = "DELETE FROM SERVICIO WHERE IDSERVICIO = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, servicio);
         pconsulta.executeQuery();
     }
-    
+
     /**
      * Metodo que elimina un terreno de la BD
+     *
      * @param numregistro
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public void EliminaTerreno(int numregistro) throws SQLException{
+    public void EliminaTerreno(int numregistro) throws SQLException {
         elimina = "DELETE FROM TERRENO WHERE NUMREGISTRO = ?";
         pconsulta = conexion.prepareStatement(elimina);
         pconsulta.setInt(1, numregistro);
         pconsulta.executeQuery();
     }
+
+    //////////// ZONA DE ACTUALIZACION EN LA BD ///////////////////////////
+    /**
+     * Metodo que cambia el nombre de una amenidad por medio de su id
+     *
+     * @param nombre
+     * @param idamenidad
+     * @throws SQLException
+     */
+    public void ActualizaAmenidadNombre(String nombre, int idamenidad) throws SQLException {
+        actualiza = "UPDATE AMENIDAD SET NOMBRE = '" + nombre + "' WHERE IDAMENIDAD = " + idamenidad;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+
+    /**
+     * Metodo que actualiza la descripcion de una amenidad
+     *
+     * @param descripcion
+     * @param idamenidad
+     * @throws SQLException
+     */
+    public void ActualizaAmenidadDescripcion(String descripcion, int idamenidad) throws SQLException {
+        actualiza = "UPDATE AMENIDAD SET DESCRIPCION = '" + descripcion + "' WHERE IDAMENIDAD = " + idamenidad;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+
+    /**
+     * Metodo que actualiza el sueldo de un asesor
+     * @param sueldo
+     * @param idasesor
+     * @throws SQLException 
+     */
+    public void ActualizaAsesorSueldo(int sueldo, int idasesor) throws SQLException {
+        actualiza = "UPDATE ASESOR SET SUELDO = " + sueldo + "WHERE IDASESOR =" + idasesor;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
     
+    /**
+     * Metodo que actualiza el nombre de una caracteristica
+     * @param nombre
+     * @param idcaracteristica
+     * @throws SQLException 
+     */
+    public void ActualizaCaracteristicaNombre(String nombre, int idcaracteristica) throws SQLException {
+        actualiza = "UPDATE CARACTERISTICA SET NOMBRE = '" + nombre + "' WHERE IDCARACTERISTICA = " + idcaracteristica;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+
+    /**
+     * Metodo que actualiza la descripcion de una caracteristica
+     * @param descripcion
+     * @param idcaracteristica
+     * @throws SQLException 
+     */
+    public void ActualizaCaracteristicaDescripcion(String descripcion, int idcaracteristica) throws SQLException {
+        actualiza = "UPDATE CARACTERISTICA SET DESCRIPCION = '" + descripcion + "' WHERE IDCARACTERISTICA = " + idcaracteristica;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
     
+    /**
+     * Metodo que actualiza el valor catastral de una propiedad
+     * @param numreg
+     * @param valor
+     * @throws SQLException 
+     */
+    public void ActualizaCasaValorCatastral(int numreg, int valor) throws SQLException{
+        actualiza = "UPDATE CASA SET VALORCATASTRAL = " + valor + " WHERE NUMREGISTRO = " + numreg;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
     
+    /**
+     * Metodo que actualiza el tipo de propiedad
+     * @param numreg
+     * @param tipo
+     * @throws SQLException 
+     */
+    public void ActualizaCasaTipoPropiedad(int numreg, String tipo) throws SQLException{
+        actualiza = "UPDATE CASA SET TIPOPROPIEDAD = '" + tipo + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
     
+    /**
+     * Metodo que actualiza el material de la propiedad
+     * @param numreg
+     * @param material
+     * @throws SQLException 
+     */
+    public void ActualizaCasaMaterialConstruccion(int numreg, String material) throws SQLException{
+        actualiza = "UPDATE CASA SET MATERIALCONSTRUCCION = '" + material + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
     
+    /**
+     * Metodo que actualiza el numero de baños medios de una propiedad
+     * @param numreg
+     * @param baño
+     * @throws SQLException 
+     */
+    public void ActualizaCasaNBañosMedios(int numreg, int baño) throws SQLException{
+        actualiza = "UPDATE CASA SET NBAÑOSMEDIOS = '" + baño + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
     
+    /**
+     * Metodo que actualiza el numero de baños completos
+     * @param numreg
+     * @param baño
+     * @throws SQLException 
+     */
+    public void ActualizaCasaNBañosCompletos(int numreg, int baño) throws SQLException{
+        actualiza = "UPDATE CASA SET NBAÑOSCOMPLETOS = '" + baño + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el numero de estacionamientos en una propiedad
+     * @param numreg
+     * @param estacio
+     * @throws SQLException 
+     */
+    public void ActualizaCasaNEstacionamientos(int numreg, int estacio) throws SQLException{
+        actualiza = "UPDATE CASA SET NESTACIONAMIENTOS = '" + estacio + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el numero de habitaciones en una propiedad
+     * @param numreg
+     * @param habitaciones
+     * @throws SQLException 
+     */
+    public void ActualizaCasaNHabitaciones(int numreg, int habitaciones) throws SQLException{
+        actualiza = "UPDATE CASA SET NHABITACIONES = '" + habitaciones + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el numero de pisos en una casa
+     * @param numreg
+     * @param pisos
+     * @throws SQLException 
+     */
+    public void ActualizaCasaNPisos(int numreg, int pisos) throws SQLException{
+        actualiza = "UPDATE CASA SET NBAÑOSMEDIOS = '" + pisos + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza los metros habitables de una casa
+     * @param numreg
+     * @param tam
+     * @throws SQLException 
+     */
+    public void ActualizaCasaTamañoHabitable(int numreg, int tam) throws SQLException{
+        actualiza = "UPDATE CASA SET TAMAÑOHABITABLEMETROS = '" + tam + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el tamaño del terreno
+     * @param numreg
+     * @param tam
+     * @throws SQLException 
+     */
+    public void ActualizaCasaTamañoTerreno(int numreg, int tam) throws SQLException{
+        actualiza = "UPDATE CASA SET TAMAÑOTERRENO = '" + tam + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el estado de una propeidad
+     * @param numreg
+     * @param estado
+     * @throws SQLException 
+     */
+    public void ActualizaCasaEstadoHabitable(int numreg, String estado) throws SQLException{
+        actualiza = "UPDATE CASA SET ESTADODECONSTRUCCION = '" + estado + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el nombre de la colonia
+     * @param id
+     * @param nombre
+     * @throws SQLException 
+     */
+    public void ActualizaColoniaNombre(int id, String nombre) throws SQLException{
+        actualiza = "UPDATE COLONIA SET NOMBRE = '" + nombre + "' WHERE IDCOLONIA = " + id;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+        /**
+     * Metodo que actualiza el valor catastral de una propiedad
+     * @param numreg
+     * @param valor
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoValorCatastral(int numreg, int valor) throws SQLException{
+        actualiza = "UPDATE Departamento SET VALORCATASTRAL = " + valor + " WHERE NUMREGISTRO = " + numreg;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el tipo de propiedad
+     * @param numreg
+     * @param tipo
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoTipoPropiedad(int numreg, String tipo) throws SQLException{
+        actualiza = "UPDATE Departamento SET TIPOPROPIEDAD = '" + tipo + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el material de la propiedad
+     * @param numreg
+     * @param material
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoMaterialConstruccion(int numreg, String material) throws SQLException{
+        actualiza = "UPDATE Departamento SET MATERIALCONSTRUCCION = '" + material + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el numero de baños medios de una propiedad
+     * @param numreg
+     * @param baño
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoNBañosMedios(int numreg, int baño) throws SQLException{
+        actualiza = "UPDATE Departamento SET NBAÑOSMEDIOS = '" + baño + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el numero de baños completos
+     * @param numreg
+     * @param baño
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoNBañosCompletos(int numreg, int baño) throws SQLException{
+        actualiza = "UPDATE Departamento SET NBAÑOSCOMPLETOS = '" + baño + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el numero de estacionamientos en una propiedad
+     * @param numreg
+     * @param estacio
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoNEstacionamientos(int numreg, int estacio) throws SQLException{
+        actualiza = "UPDATE Departamento SET NESTACIONAMIENTOS = '" + estacio + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el numero de habitaciones en una propiedad
+     * @param numreg
+     * @param habitaciones
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoNHabitaciones(int numreg, int habitaciones) throws SQLException{
+        actualiza = "UPDATE Departamento SET NHABITACIONES = '" + habitaciones + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza los metros habitables de una Departamento
+     * @param numreg
+     * @param tam
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoTamañoHabitable(int numreg, int tam) throws SQLException{
+        actualiza = "UPDATE Departamento SET TAMAÑOHABITABLEMETROS = '" + tam + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el tamaño del terreno
+     * @param numreg
+     * @param tam
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoTamañoTerreno(int numreg, int tam) throws SQLException{
+        actualiza = "UPDATE Departamento SET TAMAÑOTERRENO = '" + tam + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el estado de una propeidad
+     * @param numreg
+     * @param estado
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoEstadoHabitable(int numreg, String estado) throws SQLException{
+        actualiza = "UPDATE Departamento SET ESTADODECONSTRUCCION = '" + estado + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Actualiza el mantenimiento de un departamento
+     * @param numreg
+     * @param precio
+     * @throws SQLException 
+     */
+    public void ActualizaDepartamentoMantenimiento(int numreg, int precio) throws SQLException{
+        actualiza = "UPDATE Departamento SET MANTENIMIENTOANUAL = '" + precio + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza el valor catastral de una propiedad
+     * @param numreg
+     * @param valor
+     * @throws SQLException 
+     */
+    public void ActualizaTerrenoValorCatastral(int numreg, int valor) throws SQLException{
+        actualiza = "UPDATE Terreno SET VALORCATASTRAL = " + valor + " WHERE NUMREGISTRO = " + numreg;
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    }
+    
+    /**
+     * Metodo que actualiza si existe una construccion en el terreno
+     * @param numreg
+     * @param existe
+     * @throws SQLException 
+     */
+    public void ActualizaExisteConstruccion(int numreg, String existe) throws SQLException{
+        actualiza = "UPDATE Terreno SET EXISTECONSTRUCCION = '" + existe + "' WHERE NUMREGISTRO = " + numreg; 
+        Statement stmtActualizacion = conexion.createStatement();
+        stmtActualizacion.execute(actualiza);
+    } 
 
 }
