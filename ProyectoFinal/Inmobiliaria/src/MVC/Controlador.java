@@ -344,10 +344,6 @@ public class Controlador {
         modelo.ActualizaCasaValorCatastral(numreg, valor);
     }
     
-    public void ActualizaCasaTipoPropiedad(int numreg, String tipo) throws SQLException{
-        modelo.ActualizaCasaTipoPropiedad(numreg, tipo);
-    }
-    
     public void ActualizaCasaMaterialConstruccion(int numreg, String material) throws SQLException{
         modelo.ActualizaCasaMaterialConstruccion(numreg, material);
     }
@@ -382,10 +378,6 @@ public class Controlador {
     
     public void ActualizaCasaEstadoHabitable(int numreg, String estado) throws SQLException{
         modelo.ActualizaCasaEstadoHabitable(numreg, estado);
-    }
-    
-    public void ActualizaColoniaNombre(int id, String nombre) throws SQLException{
-        modelo.ActualizaColoniaNombre(id, nombre);
     }
     
     public void ActualizaDepartamentoValorCatastral(int numreg, int valor) throws SQLException{

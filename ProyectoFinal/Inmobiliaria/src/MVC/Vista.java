@@ -16,7 +16,7 @@ public class Vista {
     Controlador controlador = new Controlador();
     int valorC, nbmedios, nbcompletos, nestaciona, nhabita, npisos, tamha, tamte,
             dia, mes, año, ubicado, CP, totalEdif, mantenimiento, idempresa, añoN, mesN, diaN, colonia,
-            seleccionGeneral, seleccionInterna, seleccionAuxiliar, aux, ext, inte, precio;
+            seleccionGeneral, seleccionInterna, seleccionAuxiliar, aux, ext, inte, precio, id, sueldo, pisos;
     String material, estado, existe, nombre, aPaterno, aMaterno, auxiliar, municipio, calle, descripcion;
 
     public void menu() throws SQLException {
@@ -402,32 +402,74 @@ public class Vista {
 
                         switch (seleccionInterna) {
                             case 1:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina1(id);
                                 break;
                             case 2:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina2(id);
                                 break;
                             case 3:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina3(id);
                                 break;
                             case 4:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina4(id);
                                 break;
                             case 5:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina5(id);
                                 break;
                             case 6:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina6(id);
                                 break;
                             case 7:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina7(id);
                                 break;
                             case 8:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina8(id);
                                 break;
                             case 9:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina9(id);
                                 break;
                             case 10:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina10(id);
                                 break;
                             case 11:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina11(id);
                                 break;
                             case 12:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina12(id);
                                 break;
                             case 13:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina13(id);
                                 break;
                             case 14:
+                                System.out.println("Introduce su id");
+                                id = sc.nextInt();
+                                controlador.Elimina14(id);
                                 break;
                             default:
                                 break;
@@ -446,41 +488,135 @@ public class Vista {
                                 + "\n6:  actualiza una casa"
                                 + "\n7:  actualiza un departamento"
                                 + "\n8:  actualiza un terreno"
-                                + "\n10: actualiza el nombre de una colonia"
                                 + "\n0:  SALIR");
                         seleccionInterna = sc.nextInt();
 
                         switch (seleccionInterna) {
                             case 1:
+                                System.out.println("Introduce el id de la amenidad a modificar");
+                                id = sc.nextInt();
+                                System.out.println("Introduce el nuevo nombre");
+                                nombre = sc.next();
+                                controlador.ActualizaAmenidadNombre(nombre, id);
                                 break;
                             case 2:
+                                System.out.println("Introduce el id de la amenidad a modificar");
+                                id = sc.nextInt();
+                                System.out.println("Introduce la nueva descripcion");
+                                descripcion = sc.next();
+                                controlador.ActualizaAmenidadDescripcion(descripcion, id);
                                 break;
                             case 3:
+                                System.out.println("Introduce el id del asesor");
+                                id = sc.nextInt();
+                                System.out.println("Introduce el nuevo sueldo");
+                                sueldo = sc.nextInt();
+                                controlador.ActualizaAsesorSueldo(sueldo, id);
                                 break;
                             case 4:
+                                System.out.println("Introduce el id de la caracteristica a modificar");
+                                id = sc.nextInt();
+                                System.out.println("Introduce el nuevo nombre");
+                                nombre = sc.next();
+                                controlador.ActualizaCaracteristicaNombre(nombre, id);
                                 break;
                             case 5:
+                                System.out.println("Introduce el id de la caracteristica a modificar");
+                                id = sc.nextInt();
+                                System.out.println("Introduce la nueva descripcion");
+                                descripcion = sc.next();
+                                controlador.ActualizaCaracteristicaDescripcion(descripcion, id);
                                 break;
                             case 6:
+                                System.out.println("Introduce el numero de registro de la propiedad");
+                                id = sc.nextInt();
+                                do {
+                                    System.out.println("¿Que deseas modificar?"
+                                            + "\n1:  Valor catastral"
+                                            + "\n2:  Material de construccion"
+                                            + "\n3:  Numero de baños medios"
+                                            + "\n4:  Numero de baños completos"
+                                            + "\n5:  Numero de estacionamientos"
+                                            + "\n6:  Numero de habitaciones"
+                                            + "\n7:  Tamaño habitable"
+                                            + "\n8:  Tamaño Terreno"
+                                            + "\n9:  Estado de la propiedad"
+                                            + "\n10: Numero de pisos"
+                                            + "\n0:  SALIR");
+                                    seleccionAuxiliar = sc.nextInt();
+                                    switch (seleccionAuxiliar) {
+                                        case 1:
+                                            System.out.println("Introduce el nuevo valor");
+                                            valorC = sc.nextInt();
+                                            controlador.ActualizaCasaValorCatastral(id, valorC);
+                                            break;
+                                        case 2:
+                                            System.out.println("Introduce el material predominante");
+                                            material = sc.next();
+                                            controlador.ActualizaCasaMaterialConstruccion(id, material);
+                                            break;
+                                        case 3:
+                                            System.out.println("Introduce el numero de medios baños");
+                                            nbmedios = sc.nextInt();
+                                            controlador.ActualizaCasaNBañosMedios(id, nbmedios);
+                                            break;
+                                        case 4:
+                                            System.out.println("Introduce el numero de baños completos");
+                                            nbcompletos = sc.nextInt();
+                                            controlador.ActualizaCasaNBañosCompletos(id, nbcompletos);
+                                            break;
+                                        case 5:
+                                            System.out.println("Introduce el numero de estacionamientos");
+                                            nestaciona = sc.nextInt();
+                                            controlador.ActualizaCasaNEstacionamientos(id, nestaciona);
+                                            break;
+                                        case 6:
+                                            System.out.println("Introduce el numero de habitaciones");
+                                            nhabita = sc.nextInt();
+                                            controlador.ActualizaCasaNHabitaciones(id, nhabita);
+                                            break;
+                                        case 7:
+                                            System.out.println("Introduce el tamaño habitable");
+                                            tamha = sc.nextInt();
+                                            controlador.ActualizaCasaTamañoHabitable(id, tamha);
+                                            break;
+                                        case 8:
+                                            System.out.println("Introduce el tamaño del terreno");
+                                            tamte = sc.nextInt();
+                                            controlador.ActualizaCasaTamañoTerreno(id, tamte);
+                                            break;
+                                        case 9:
+                                            System.out.println("Introduce el estado de la propiedad");
+                                            estado = sc.next();
+                                            controlador.ActualizaCasaEstadoHabitable(id, estado);
+                                            break;
+                                        case 10:
+                                            System.out.println("Introduce el numero de pisos");
+                                            pisos = sc.nextInt();
+                                            controlador.ActualizaCasaNPisos(id, pisos);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                } while (seleccionAuxiliar != 0);
                                 break;
                             case 7:
                                 break;
                             case 8:
                                 break;
-                            case 9:
-                                break;
-                            case 10:
-                                break;
                             default:
                                 break;
                         }
+
                         break;
                     } while (seleccionInterna != 0);
                     break;
                 default:
                     break;
             }
+
         } while (seleccionGeneral != 0);
 
     }
+
 }
