@@ -13,9 +13,11 @@ import java.util.Scanner;
 public class Vista {
 
     Scanner sc = new Scanner(System.in);
-    int seleccionGeneral, seleccionInterna, seleccionAuxiliar, aux;
-    String auxiliar;
     Controlador controlador = new Controlador();
+    int valorC, nbmedios, nbcompletos, nestaciona, nhabita, npisos, tamha, tamte,
+            dia, mes, año, ubicado, CP, totalEdif, mantenimiento, idempresa, añoN, mesN, diaN, colonia,
+            seleccionGeneral, seleccionInterna, seleccionAuxiliar, aux, ext, inte, precio;
+    String material, estado, existe, nombre, aPaterno, aMaterno, auxiliar, municipio, calle, descripcion;
 
     public void menu() throws SQLException {
         do {
@@ -180,37 +182,197 @@ public class Vista {
                         switch (seleccionInterna) {
                             case 1:
                                 System.out.println("Introduce el valor catastral de la propiedad");
-                                
+                                valorC = sc.nextInt();
+                                System.out.println("¿Que material predomina?");
+                                material = sc.next();
+                                System.out.println("¿cuantos baños medios tiene?");
+                                nbmedios = sc.nextInt();
+                                System.out.println("y, ¿cuantos completos?");
+                                nbcompletos = sc.nextInt();
+                                System.out.println("¿Cuantos estacionamientos tiene?");
+                                nestaciona = sc.nextInt();
+                                System.out.println("¿Cuantas habitaciones tiene?");
+                                nhabita = sc.nextInt();
+                                System.out.println("¿Cuantos pisos tiene la casa?");
+                                npisos = sc.nextInt();
+                                System.out.println("¿Cuantos metros son habitables?");
+                                tamha = sc.nextInt();
+                                System.out.println("¿Cuantos metros mide el terreno completo?");
+                                tamte = sc.nextInt();
+                                System.out.println("¿Como se encuentra la casa?");
+                                estado = sc.next();
+                                System.out.println("Introduce el año de construccion");
+                                año = sc.nextInt();
+                                System.out.println("Introduce el mes de construccion en digitos");
+                                mes = sc.nextInt();
+                                System.out.println("Introduce el dia de construccion en digitos");
+                                dia = sc.nextInt();
+                                controlador.inserta1(valorC, material, nbmedios, nbcompletos, nestaciona, nhabita, npisos, tamha, tamte, estado, dia, mes, año);
                                 break;
                             case 2:
+                                System.out.println("Introduce el valor catastral de la propiedad");
+                                valorC = sc.nextInt();
+                                System.out.println("¿Que material predomina?");
+                                material = sc.next();
+                                System.out.println("¿cuantos baños medios tiene?");
+                                nbmedios = sc.nextInt();
+                                System.out.println("y, ¿cuantos completos?");
+                                nbcompletos = sc.nextInt();
+                                System.out.println("¿Cuantos estacionamientos tiene?");
+                                nestaciona = sc.nextInt();
+                                System.out.println("¿Cuantas habitaciones tiene?");
+                                nhabita = sc.nextInt();
+                                System.out.println("¿Cuantos metros son habitables?");
+                                tamha = sc.nextInt();
+                                System.out.println("¿Cuantos metros mide el terreno completo?");
+                                tamte = sc.nextInt();
+                                System.out.println("¿Como se encuentra el departamento?");
+                                estado = sc.next();
+                                System.out.println("Introduce el año de construccion en digitos");
+                                año = sc.nextInt();
+                                System.out.println("Introduce el mes de construccion en digitos");
+                                mes = sc.nextInt();
+                                System.out.println("Introduce el dia de construccion en digitos");
+                                dia = sc.nextInt();
+                                System.out.println("En que piso se ubica?");
+                                ubicado = sc.nextInt();
+                                System.out.println("Cuantos departamentos hay en el edificio?");
+                                totalEdif = sc.nextInt();
+                                System.out.println("Cual es el costo anual de mantenimiento");
+                                mantenimiento = sc.nextInt();
+                                controlador.inserta2(valorC, material, nbmedios, nbcompletos, nestaciona, nhabita, tamha, tamte, estado, dia, mes, año, ubicado, totalEdif, mantenimiento);
                                 break;
                             case 3:
+                                System.out.println("Introduce el valor catastral de la propiedad");
+                                valorC = sc.nextInt();
+                                System.out.println("Existe alguna construccion en el terreon? (introduce si o no)");
+                                existe = sc.next();
+                                controlador.inserta3(valorC, existe);
                                 break;
                             case 4:
+                                System.out.println("Introduce el nombre de la empresa");
+                                nombre = sc.next();
+                                controlador.inserta4(nombre);
                                 break;
                             case 5:
+                                System.out.println("Introduce el ID de la empresa donde se registrara el asesor");
+                                idempresa = sc.nextInt();
+                                System.out.println("Introduce el año de nacimiento del asesor (en digitos) ejemplo 1998");
+                                añoN = sc.nextInt();
+                                System.out.println("Introduce el mes de naciemiento del asesor (en digitos ejemplo 2");
+                                mesN = sc.nextInt();
+                                System.out.println("Introduce el dia de nacimiento del asesor (en digitos) ejemplo 15");
+                                diaN = sc.nextInt();
+                                System.out.println("Introduce el nombre del asesor (solo nombre)");
+                                nombre = sc.next();
+                                System.out.println("Introduce el apellido paterno del asesor");
+                                aPaterno = sc.next();
+                                System.out.println("Introduce el apellido materno del asesor");
+                                aMaterno = sc.next();
+                                System.out.println("Introduce el año en que el asesor inicio su contrato (en digitos) ejemplo 1998");
+                                año = sc.nextInt();
+                                System.out.println("Introduce el mes en que el asesor inicio su contrato (en digitos) ejemplo 2");
+                                mes = sc.nextInt();
+                                System.out.println("Introduce el dia en que el asesor inicio su contrato (en digitos) ejemplo 15");
+                                dia = sc.nextInt();
+                                controlador.inserta5(idempresa, diaN, mesN, añoN, nombre, aPaterno, aMaterno, dia, mes, año, mes);
                                 break;
                             case 6:
+                                System.out.println("Introduce el año de nacimiento del dueño (en digitos) ejemplo 1998");
+                                añoN = sc.nextInt();
+                                System.out.println("Introduce el mes de naciemiento del dueño (en digitos ejemplo 2");
+                                mesN = sc.nextInt();
+                                System.out.println("Introduce el dia de nacimiento del dueño (en digitos) ejemplo 15");
+                                diaN = sc.nextInt();
+                                System.out.println("Introduce el nombre del dueño (solo nombre)");
+                                nombre = sc.next();
+                                System.out.println("Introduce el apellido paterno del dueño");
+                                aPaterno = sc.next();
+                                System.out.println("Introduce el apellido materno del dueño");
+                                aMaterno = sc.next();
+                                controlador.inserta6(dia, mes, año, nombre, aPaterno, aMaterno);
                                 break;
                             case 7:
+                                System.out.println("Introduce el nombre de la nueva colonia");
+                                nombre = sc.next();
+                                controlador.inserta7(nombre);
                                 break;
                             case 8:
+                                System.out.println("Introduce el id de la colonia");
+                                colonia = sc.nextInt();
+                                System.out.println("Introduce el estado");
+                                estado = sc.next();
+                                System.out.println("Introduce el municipio");
+                                municipio = sc.next();
+                                System.out.println("Introduce el Codigo postal");
+                                CP = sc.nextInt();
+                                System.out.println("Introduce la calle");
+                                calle = sc.next();
+                                System.out.println("Introduce el numero exterior");
+                                ext = sc.nextInt();
+                                System.out.println("Introduce el numero interior");
+                                inte = sc.nextInt();
+                                controlador.inserta8(colonia, estado, municipio, CP, calle, ext, inte);
                                 break;
                             case 9:
+                                System.out.println("Introduce el nombre");
+                                nombre = sc.next();
+                                System.out.println("Introduce una descripcion");
+                                descripcion = sc.next();
+                                controlador.inserta9(nombre, descripcion);
                                 break;
                             case 10:
+                                System.out.println("Introduce el nombre");
+                                nombre = sc.next();
+                                System.out.println("Introduce una descripcion");
+                                descripcion = sc.next();
+                                controlador.inserta10(nombre, descripcion);
                                 break;
                             case 11:
+                                System.out.println("Introduce el nombre");
+                                nombre = sc.next();
+                                System.out.println("Introduce una descripcion");
+                                descripcion = sc.next();
+                                System.out.println("Introduce el precio mensual");
+                                precio = sc.nextInt();
+                                controlador.inserta11(nombre, descripcion, precio);
                                 break;
                             case 12:
+                                System.out.println("Introduce la aseguradora");
+                                nombre = sc.next();
+                                System.out.println("Introduce el tipo de covertura");
+                                descripcion = sc.next();
+                                System.out.println("Introduce el precio anual");
+                                precio = sc.nextInt();
+                                controlador.inserta12(estado, estado, precio);
                                 break;
                             case 13:
+                                System.out.println("Introduce el nombre");
+                                nombre = sc.next();
+                                System.out.println("Introduce el id de la colonia en la que se encuentra");
+                                colonia = sc.nextInt();
+                                controlador.inserta13(nombre, colonia);
                                 break;
                             case 14:
+                                System.out.println("Introduce el nombre");
+                                nombre = sc.next();
+                                System.out.println("Introduce el id de la colonia en la que se encuentra");
+                                colonia = sc.nextInt();
+                                controlador.inserta14(nombre, colonia);
                                 break;
                             case 15:
+                                System.out.println("Introduce el nombre");
+                                nombre = sc.next();
+                                System.out.println("Introduce el id de la colonia en la que se encuentra");
+                                colonia = sc.nextInt();
+                                controlador.inserta15(nombre, colonia);
                                 break;
                             case 16:
+                                System.out.println("Introduce el nombre");
+                                nombre = sc.next();
+                                System.out.println("Introduce el id de la colonia en la que se encuentra");
+                                colonia = sc.nextInt();
+                                controlador.inserta16(nombre, colonia);
                                 break;
                             default:
                                 break;
