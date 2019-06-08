@@ -309,7 +309,7 @@ public class Controlador {
     public void Elimina12(int seguro) throws SQLException {
         modelo.EliminaSeguro(seguro);
     }
-    
+    d
     public void Elimina13(int servicio) throws SQLException {
         modelo.EliminaServicio(servicio);
     }
