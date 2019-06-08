@@ -5,6 +5,7 @@ package Modelo;
 
 import conectividad.OracleJDBCExample;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import java.sql.Statement;
  */
 public class Modelo {
 
-    String consulta;
+    String consulta, inserta, elimina, auxiliar;
     OracleJDBCExample a = new OracleJDBCExample();
     Connection conexion = a.getConection();
     PreparedStatement pconsulta = null;
@@ -165,7 +166,21 @@ public class Modelo {
         return rs;
     }
 
-    ///////////// ZONA DE CONSULTA CON UN PARAMETRO ///////////////////////
+    public ResultSet PropiedadesEmpresa() throws SQLException {
+        consulta = "SELECT *\n"
+                + "FROM EMPRESA\n"
+                + "JOIN CASA_EMPRESA\n"
+                + "ON (EMPRESA.IDEMPRESA = CASA_EMPRESA.IDEMPRESA)\n"
+                + "JOIN DEPARTAMENTO_EMPRESA\n"
+                + "ON (EMPRESA.IDEMPRESA = DEPARTAMENTO_EMPRESA.IDEMPRESA)\n"
+                + "JOIN TERRENO_EMPRESA\n"
+                + "ON (EMPRESA.IDEMPRESA = TERRENO_EMPRESA.IDEMPRESA)";
+        Statement stmtConsulta = conexion.createStatement();
+        ResultSet rs = stmtConsulta.executeQuery(consulta);
+        return rs;
+    }
+
+    ///////////// ZONA DE CONSULTA CON PARAMETROS ///////////////////////
     /**
      * Metodo que recibe el numero de registro de la propiedad
      *
@@ -457,7 +472,7 @@ public class Modelo {
         ResultSet rs = pconsulta.executeQuery();
         return rs;
     }
-    
+
     /**
      * Metodo que regresa la direccion de una vivienda por medio del numero de
      * registro
@@ -480,7 +495,7 @@ public class Modelo {
         ResultSet rs = pconsulta.executeQuery();
         return rs;
     }
-    
+
     /**
      * Metodo que regresa la direccion de una vivienda por medio del numero de
      * registro
@@ -504,4 +519,242 @@ public class Modelo {
         return rs;
     }
 
+    /**
+     * Consulta el historial de precios de una propiedad
+     *
+     * @param numRegistro
+     * @return precio
+     * @throws SQLException
+     */
+    public ResultSet PrecioCasa(String numRegistro) throws SQLException {
+        consulta = "SELECT * FROM CASA_PRECIO WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(consulta);
+        pconsulta.setString(1, numRegistro);
+        ResultSet rs = pconsulta.executeQuery();
+        return rs;
+    }
+
+    /**
+     * Consulta el historial de precios de una propiedad
+     *
+     * @param numRegistro
+     * @return precio
+     * @throws SQLException
+     */
+    public ResultSet PrecioDepartamento(String numRegistro) throws SQLException {
+        consulta = "SELECT * FROM DEPARTAMENTO_PRECIO WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(consulta);
+        pconsulta.setString(1, numRegistro);
+        ResultSet rs = pconsulta.executeQuery();
+        return rs;
+    }
+
+    /**
+     * Consulta el historial de precios de una propiedad
+     *
+     * @param numRegistro
+     * @return precio
+     * @throws SQLException
+     */
+    public ResultSet PrecioTerreno(String numRegistro) throws SQLException {
+        consulta = "SELECT * FROM TERRENO_PRECIO WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(consulta);
+        pconsulta.setString(1, numRegistro);
+        ResultSet rs = pconsulta.executeQuery();
+        return rs;
+    }
+
+    /**
+     * Metodo que consulta los exdueños de una propiedad
+     *
+     * @param numRegistro
+     * @return exdueños
+     * @throws SQLException
+     */
+    public ResultSet ExDueñosCasa(String numRegistro) throws SQLException {
+        consulta = "SELECT * FROM CASA_EXDUEÑO WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(consulta);
+        pconsulta.setString(1, numRegistro);
+        ResultSet rs = pconsulta.executeQuery();
+        return rs;
+    }
+
+    /**
+     * Metodo que consulta los exdueños de una propiedad
+     *
+     * @param numRegistro
+     * @return exdueños
+     * @throws SQLException
+     */
+    public ResultSet ExDueñosDepartamento(String numRegistro) throws SQLException {
+        consulta = "SELECT * FROM CASA_EXDUEÑO WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(consulta);
+        pconsulta.setString(1, numRegistro);
+        ResultSet rs = pconsulta.executeQuery();
+        return rs;
+    }
+
+    /**
+     * Metodo que consulta los exdueños de una propiedad
+     *
+     * @param numRegistro
+     * @return exdueños
+     * @throws SQLException
+     */
+    public ResultSet ExDueñosTerreno(String numRegistro) throws SQLException {
+        consulta = "SELECT * FROM CASA_EXDUEÑO WHERE NUMREGISTRO = ?";
+        pconsulta = conexion.prepareStatement(consulta);
+        pconsulta.setString(1, numRegistro);
+        ResultSet rs = pconsulta.executeQuery();
+        return rs;
+    }
+
+    ///////// ZONA DE CREACION DE NUEVAS FILAS ///////////////////////////////////////////////////////////////
+    
+    /**
+     * Metodo que agrega una casa a la BD
+     *
+     * @param valorCatastral
+     * @param material
+     * @param nbmedios
+     * @param nbcompletos
+     * @param nestaciona
+     * @param nhabita
+     * @param npisos
+     * @param tamhabitable
+     * @param tamterreno
+     * @param estadoConstruccion
+     * @param dia
+     * @param mes
+     * @param año
+     * @throws SQLException
+     */
+    public void agregaCasa(int valorCatastral, String material,
+            int nbmedios, int nbcompletos, int nestaciona, int nhabita,
+            int npisos, int tamhabitable, int tamterreno, String estadoConstruccion,
+            int dia, int mes, int año) throws SQLException {
+        inserta = "INSERT INTO CASA VALUES (DEFAULT," + valorCatastral + ","
+                + "'casa','" + material + "','" + nbmedios + "','" + nbcompletos
+                + "','" + nestaciona + "','" + nhabita + "','" + npisos + "','"
+                + tamhabitable + "','" + tamterreno + "','" + estadoConstruccion
+                + "','" + dia + "/" + mes + "/" + año + "')";
+
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+    
+    /**
+     * Metodo que inserta un edificio
+     * @param valorCatastral
+     * @param material
+     * @param nbmedios
+     * @param nbcompletos
+     * @param nestaciona
+     * @param nhabita
+     * @param tamhabitable
+     * @param tamterreno
+     * @param estadoConstruccion
+     * @param dia
+     * @param mes
+     * @param año
+     * @param ubicado
+     * @param totalEdif
+     * @param mantenimiento
+     * @throws SQLException 
+     */
+    public void agregaDepartamento(int valorCatastral, String material,
+            int nbmedios, int nbcompletos, int nestaciona, int nhabita,
+            int tamhabitable, int tamterreno, String estadoConstruccion,
+            int dia, int mes, int año, int ubicado, int totalEdif,
+            int mantenimiento) throws SQLException{
+        inserta = "INSERT INTO DEPARTAMENTO VALUES (DEFAULT," + valorCatastral + ","
+                + "'departamento','" + material + "','" + nbmedios + "','" + nbcompletos
+                + "','" + nestaciona + "','" + nhabita + "','"
+                + tamhabitable + "','" + tamterreno + "','" + estadoConstruccion
+                + "','" + dia + "/" + mes + "/" + año + "','" +
+                ubicado + "','" + totalEdif + "','" + mantenimiento +  "')";
+        
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+
+    /**
+     * Metodo que agrega un terreno
+     * @param valorCatastral
+     * @param existe
+     * @throws SQLException 
+     */
+    public void agregaTerreno(int valorCatastral, String existe) throws SQLException{
+        inserta = "INSERT INTO TERRENO VALUES (DEFAULT, " + valorCatastral + ",'" + existe + "')";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+    
+    /**
+     * Metodo que agrega una nueva empresa a la base
+     * @param nombre 
+     * @throws java.sql.SQLException 
+     */
+    public void agregaEmpresa(String nombre) throws SQLException{
+        inserta = "INSERT INTO EMPRESA VALUES (DEFAULT, '" + nombre + "')";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+    
+    /**
+     * Metodo que agrega un asesor a la bd
+     * @param empresa
+     * @param diaN
+     * @param mesN
+     * @param añoN
+     * @param nombre
+     * @param aPaterno
+     * @param aMaterno
+     * @param diaI
+     * @param mesI
+     * @param añoI
+     * @param sueldo
+     * @throws SQLException 
+     */
+    public void agregaAsesor(int empresa, int diaN, int mesN, int añoN, String nombre,
+            String aPaterno, String aMaterno, int diaI, int mesI, int añoI, int sueldo) throws SQLException{
+        inserta = "INSERT INTO ASESOR VALUES (DEFAULT, " + empresa + ",'"
+                + diaN + "/" + mesN + "/" + añoN + "', '" + nombre 
+                + "', '" + aPaterno + "', '" + aMaterno + "', '" + diaI + "/" 
+                + mesI + "/" + añoI + "', " + sueldo + ")"; 
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+    
+    /**
+     * Metodo que agrega un dueño a la bd
+     * @param dia
+     * @param mes
+     * @param año
+     * @param nombre
+     * @param aPaterno
+     * @param aMaterno
+     * @throws SQLException 
+     */
+    public void agregaDueño(int dia, int mes, int año, String nombre, String aPaterno, 
+            String aMaterno) throws SQLException{
+        inserta = "INSERT INTO DUEÑO VALUES (DEFAULT, '" + dia + "/" + mes + "/" + año + "', '" + nombre + "', '" + aPaterno + "', '" + aMaterno + "')";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+    
+    public void agregaColonia(String nombre) throws SQLException{
+        inserta = "INSERT INTO COLONIA VALUES (DEFAULT, '" + nombre + "')";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);
+    }
+    
+    public void agregaDireccion(int colonia, String estado, String municipio, int CP,
+            String calle, int ext, int inte)throws SQLException{
+        inserta = "INSERT INTO DIRECCION VALUES (DEFAULT, " + colonia + ", '" 
+                + estado + "', '" + municipio + "'," + CP + ",'" + calle 
+                + "', " + ext + "," + inte + ")";
+        Statement stmtConsulta = conexion.createStatement();
+        stmtConsulta.execute(inserta);        
+    }
 }
