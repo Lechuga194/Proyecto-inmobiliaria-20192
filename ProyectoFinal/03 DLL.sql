@@ -5,19 +5,19 @@ CREATE TABLE colonia
   (
     idColonia NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    nombre CHAR(50) NOT NULL,
+    nombre VARCHAR2(50) NOT NULL,
     CONSTRAINT colonia_PK PRIMARY KEY (idColonia)
   );
 CREATE TABLE tiendas_Cercanas
   (
-    nombreTienda CHAR(250),
+    nombreTienda VARCHAR2(250),
     idColonia    NUMBER,
     CONSTRAINT tiendas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT tiendas_Cercanas_PK PRIMARY KEY (nombreTienda)
   );
 CREATE TABLE recreativos_Cercanos
   (
-    nombreRecreativo CHAR(250),
+    nombreRecreativo VARCHAR2(250),
     idColonia        NUMBER,
     CONSTRAINT recreativos_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE,
@@ -25,14 +25,14 @@ CREATE TABLE recreativos_Cercanos
   );
 CREATE TABLE escuelas_Cercanas
   (
-    nombreEscuela CHAR(500),
+    nombreEscuela VARCHAR2(500),
     idColonia     NUMBER,
     CONSTRAINT Escuelas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT Escuelas_Cercanas_PK PRIMARY KEY (nombreEscuela)
   );
 CREATE TABLE hospitales_Cercanos
   (
-    nombreHospital CHAR(150),
+    nombreHospital VARCHAR2(150),
     idColonia      NUMBER,
     CONSTRAINT hospitales_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE,
@@ -40,7 +40,7 @@ CREATE TABLE hospitales_Cercanos
   );
 CREATE TABLE transportes_Cercanos
   (
-    nombreTransporte CHAR(250),
+    nombreTransporte VARCHAR2(250),
     idColonia        NUMBER,
     CONSTRAINT transportes_Cercanos_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE,
@@ -51,12 +51,12 @@ CREATE TABLE direccion
     idDireccion NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
     idColonia   NUMBER,
-    estado      CHAR(50) DEFAULT 'No especificado' NOT NULL,
-    municipio   CHAR(50) DEFAULT 'No especificado' NOT NULL,
-    CP          CHAR(5) DEFAULT '00000' NOT NULL,
+    estado      VARCHAR2(50) DEFAULT 'No especificado' NOT NULL,
+    municipio   VARCHAR2(50) DEFAULT 'No especificado' NOT NULL,
+    CP          VARCHAR2(5) DEFAULT '00000' NOT NULL,
     calle       VARCHAR2(50) DEFAULT 'No especificado' NOT NULL,
-    nExterior   CHAR(3) DEFAULT '000' NOT NULL,
-    nInterior   CHAR(3) DEFAULT '000' NOT NULL,
+    nExterior   VARCHAR2(3) DEFAULT '000' NOT NULL,
+    nInterior   VARCHAR2(3) DEFAULT '000' NOT NULL,
     CONSTRAINT idColonia_direccio_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
   DELETE CASCADE, CONSTRAINT direccion_PK PRIMARY KEY (idDireccion)
   );
@@ -64,7 +64,7 @@ CREATE TABLE caracteristica
   (
     idCaracteristica NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    nombre           CHAR(50),
+    nombre           VARCHAR2(50),
     descripcion      VARCHAR2(150),
     CONSTRAINT caracteristica_PK PRIMARY KEY (idCaracteristica)
   );
@@ -72,7 +72,7 @@ CREATE TABLE amenidad
   (
     idAmenidad  NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    nombre      CHAR(50),
+    nombre      VARCHAR2(50),
     descripcion VARCHAR2(150),
     CONSTRAINT amenidad_PK PRIMARY KEY (idAmenidad)
   );
@@ -80,7 +80,7 @@ CREATE TABLE servicio
   (
     idServicio  NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    nombre      CHAR(50),
+    nombre      VARCHAR2(50),
     descripcion VARCHAR2(150),
     precioAnual NUMBER,
     CONSTRAINT servicio_PK PRIMARY KEY (idServicio)
@@ -89,7 +89,7 @@ CREATE TABLE seguro
   (
     numPoliza     NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-    aseguradora   CHAR(50),
+    aseguradora   VARCHAR2(50),
     tipoCovertura VARCHAR2(150),
     precioAnual   NUMBER,
     CONSTRAINT seguro_PK PRIMARY KEY (numPoliza)
@@ -105,7 +105,7 @@ CREATE TABLE RFC
   ( 
   	idRFC NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-  	RFC CHAR(13) UNIQUE,
+  	RFC VARCHAR2(13) UNIQUE,
   	CONSTRAINT RFC_PK PRIMARY KEY (idRFC)
   );
 CREATE TABLE asesor
@@ -140,7 +140,7 @@ CREATE TABLE asesor_email
   );
 CREATE TABLE asesor_telefono
   (
-    telefono   CHAR(12),
+    telefono   VARCHAR2(12),
     idAsesor NUMBER,
     CONSTRAINT asesor_telefono_FK FOREIGN KEY (idAsesor) REFERENCES asesor (idAsesor) ON
   DELETE CASCADE, CONSTRAINT asesor_telefono_PK PRIMARY KEY (telefono)
@@ -150,9 +150,9 @@ CREATE TABLE dueño
   	idDueño NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
     fNacimiento DATE NOT NULL,
-    nombre      CHAR(50),
-    aPAterno    CHAR(50),
-    aMAterno    CHAR(50),
+    nombre      VARCHAR2(50),
+    aPAterno    VARCHAR2(50),
+    aMAterno    VARCHAR2(50),
     CONSTRAINT dueño_PK PRIMARY KEY (idDueño)
   );
 
@@ -160,7 +160,7 @@ CREATE TABLE dueño
   ( 
   	idCURP NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
-  	CURP CHAR(18) UNIQUE,
+  	CURP VARCHAR2(18) UNIQUE,
   	CONSTRAINT CURP_PK PRIMARY KEY (idCURP)
   );
 
@@ -183,7 +183,7 @@ CREATE TABLE dueño_email
   );
 CREATE TABLE dueño_telefono
   (
-    telefono CHAR(12),
+    telefono VARCHAR2(12),
     idDueño NUMBER,
     CONSTRAINT dueño_telefono_FK FOREIGN KEY (idDueño) REFERENCES dueño (idDueño) ON
   DELETE CASCADE, CONSTRAINT dueño_telefono_PK PRIMARY KEY (telefono)
@@ -196,16 +196,16 @@ CREATE TABLE casa
     numRegistro           NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
     valorCatastral        NUMBER NOT NULL,
-    tipoPropiedad         CHAR(15) NOT NULL,
-    materialConstruccion  CHAR(20) NOT NULL,
-    nBañosMedios          CHAR(1) NOT NULL,
-    nBañosCompletos       CHAR(1) NOT NULL,
-    nEstacionamientos     CHAR(1) NOT NULL,
-    nHabitaciones         CHAR(2) NOT NULL,
-    nPisos                CHAR(1) NOT NULL,
-    tamañoHabitableMetros CHAR(10) NOT NULL,
-    tamañoTerreno         CHAR(10) NOT NULL,
-    estadoDeConstruccion  CHAR(20) NOT NULL,
+    tipoPropiedad         VARCHAR2(15) NOT NULL,
+    materialConstruccion  VARCHAR2(20) NOT NULL,
+    nBañosMedios          VARCHAR2(1) NOT NULL,
+    nBañosCompletos       VARCHAR2(1) NOT NULL,
+    nEstacionamientos     VARCHAR2(1) NOT NULL,
+    nHabitaciones         VARCHAR2(2) NOT NULL,
+    nPisos                VARCHAR2(1) NOT NULL,
+    tamañoHabitableMetros VARCHAR2(10) NOT NULL,
+    tamañoTerreno         VARCHAR2(10) NOT NULL,
+    estadoDeConstruccion  VARCHAR2(20) NOT NULL,
     fConstruccion         DATE NOT NULL,
     CONSTRAINT casa_PK PRIMARY KEY (numRegistro)
   );
@@ -214,18 +214,18 @@ CREATE TABLE departamento
     numRegistro           NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
     valorCatastral        NUMBER NOT NULL,
-    tipoPropiedad         CHAR(15) NOT NULL,
-    materialConstruccion  CHAR(20) NOT NULL,
-    nBañosMedios          CHAR(1) NOT NULL,
-    nBañosCompletos       CHAR(1) NOT NULL,
-    nEstacionamientos     CHAR(1) NOT NULL,
-    nHabitaciones         CHAR(2) NOT NULL,
-    tamañoHabitableMetros CHAR(10) NOT NULL,
-    tamañoTerreno         CHAR(10) NOT NULL,
-    estadoDeConstruccion  CHAR(20) NOT NULL,
+    tipoPropiedad         VARCHAR2(15) NOT NULL,
+    materialConstruccion  VARCHAR2(20) NOT NULL,
+    nBañosMedios          VARCHAR2(1) NOT NULL,
+    nBañosCompletos       VARCHAR2(1) NOT NULL,
+    nEstacionamientos     VARCHAR2(1) NOT NULL,
+    nHabitaciones         VARCHAR2(2) NOT NULL,
+    tamañoHabitableMetros VARCHAR2(10) NOT NULL,
+    tamañoTerreno         VARCHAR2(10) NOT NULL,
+    estadoDeConstruccion  VARCHAR2(20) NOT NULL,
     fConstruccion         DATE NOT NULL,
-    ubicadoEnPiso         CHAR(2) NOT NULL,
-    totalEnEdificio       CHAR(4) NOT NULL,
+    ubicadoEnPiso         VARCHAR2(2) NOT NULL,
+    totalEnEdificio       VARCHAR2(4) NOT NULL,
     mantenimientoAnual    NUMBER NOT NULL,
     CONSTRAINT departamento_PK PRIMARY KEY (numRegistro)
   );
@@ -234,7 +234,7 @@ CREATE TABLE terreno
     numRegistro        NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
     START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
     valorCatastral     NUMBER NOT NULL,
-    existeConstruccion CHAR(2),
+    existeConstruccion VARCHAR2(2),
     CONSTRAINT terreno_PK PRIMARY KEY (numRegistro),
     CONSTRAINT revisaTerreno CHECK (UPPER(existeConstruccion)='SI' or 
   	UPPER(existeConstruccion)='NO' or LOWER(existeConstruccion)='si' or LOWER(existeConstruccion)='no')
@@ -333,7 +333,8 @@ CREATE TABLE casa_exdueño
   );
 CREATE TABLE casa_venta_dueño
   (
-    idVenta        NUMBER,
+    idVenta        NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
+    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
     numRegistro    NUMBER UNIQUE,
     idDueño NUMBER,
     idAsesor     NUMBER,
@@ -443,7 +444,8 @@ CREATE TABLE departamento_exdueño
   );
 CREATE TABLE departamento_venta_dueño
   (
-    idVenta        NUMBER,
+    idVenta        NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
+    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
     numRegistro    NUMBER UNIQUE,
     idDueño NUMBER,
     idAsesor     NUMBER,
@@ -533,7 +535,8 @@ CREATE TABLE terreno_exdueño
   );
 CREATE TABLE terreno_venta_dueño
   (
-    idVenta        NUMBER,
+    idVenta        NUMBER GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 999999999 INCREMENT BY 1
+    START WITH 1 CACHE 20 NOORDER NOCYCLE NOT NULL ENABLE,
     numRegistro    NUMBER UNIQUE,
     idDueño NUMBER,
     idAsesor     NUMBER,
