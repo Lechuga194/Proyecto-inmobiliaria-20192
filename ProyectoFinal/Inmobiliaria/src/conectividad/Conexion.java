@@ -24,7 +24,7 @@ public class Conexion {
         System.out.println("JDBC Registrado");
         Connection connection = null;
         try{
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:fundamentosB", "tarea6", "1904");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:fundamentosB", "PF314325749", "1904");
         } catch (SQLException ex) {
             System.out.println("Conexion fallida");
             ex.printStackTrace();

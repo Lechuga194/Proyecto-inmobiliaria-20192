@@ -1,0 +1,178 @@
+\begin{center}
+    \textbf{\LARGE Creación de la Base de datos}
+    \vspace{5mm}
+\end{center}
+\begin{flushleft}
+
+\textbf{Colonia}
+
+Creación de la tabla colonia, contiene dos columnas idColonia que funciona como llave (NUMBER)
+y un nombre como CHAR con una capacidad máxima de 25 caracteres
+
+\begin{verbatim}
+    CREATE TABLE colonia
+  (
+    idColonia NUMBER,
+    nombre CHAR(25) NOT NULL,
+    CONSTRAINT colonia_PK PRIMARY KEY (idColonia)
+  );
+\end{verbatim}
+
+\textbf{tiendas\_Cercanas, ...}
+
+Este conjunto de tablas nacen de la relación entre colonia y lo que estas tienen en sus alrededores, es decir desde tiendas hasta transporte, 
+pasando por escuelas y hospitales.
+
+Esto comprende el conjunto de tablas
+tiendas\_Cercanas, recreativos\_Cercanos, escuelas\_Cercanas, hospitales\_Cercanos, transportes\_Cercanos.
+
+Todas estas tablas cuentan con un nombre (CHAR(50)) y idColonia que la reciben de la tabla Colonia
+como forma de asegurar la integridad referencial en todas se aplica
+un "ON DELETE CASCADE" para eliminar cualquier información de la colonia si es que se borra
+
+\begin{verbatim}
+    CREATE TABLE tiendas_Cercanas
+  (
+    nombreTienda CHAR(50),
+    idColonia    NUMBER,
+    CONSTRAINT tiendas_Cercanas_idColonia_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
+  DELETE CASCADE, CONSTRAINT tiendas_Cercanas_PK PRIMARY KEY (nombreTienda)
+  );
+\end{verbatim}
+
+\textbf{Dirección}
+
+En la tabla dirección tenemos idDireccion que funciona como llave primaria, idColonia que
+funciona como llave foránea de la tabla Colonia, luego tenemos estado, municipio y calle en los
+que no se permite la inserción de nulos y tienen un valor por default 'No especificado',
+por ultimo tenemos a CP, nExterior, nInterior que no permiten la inserción de nulos y que tienen
+un valor por default de '000', estas columnas tienen asignado un CONSTRAINT CHECK para verificar
+que en sus campos solo se introduzcan caracteres numéricos
+
+\begin{verbatim}
+    CREATE TABLE direccion
+  (
+    idDireccion NUMBER,
+    idColonia   NUMBER,
+    estado      CHAR(50) DEFAULT 'No especificado' NOT NULL,
+    municipio   CHAR(50) DEFAULT 'No especificado' NOT NULL,
+    CP          CHAR(5) DEFAULT '00000' NOT NULL,
+    calle       VARCHAR2(50) DEFAULT 'No especificado' NOT NULL,
+    nExterior   CHAR(3) DEFAULT '000' NOT NULL,
+    nInterior   CHAR(3) DEFAULT '000' NOT NULL,
+    CONSTRAINT revisaNumeros_direccion CHECK (regexp_like(CP, '^[0-9]')
+  AND (regexp_like(nExterior, '^[0-9]')
+  AND (regexp_like(nInterior, '^[0-9]')))),
+    CONSTRAINT idColonia_direccio_FK FOREIGN KEY (idColonia) REFERENCES colonia (idColonia) ON
+  DELETE CASCADE, CONSTRAINT direccion_PK PRIMARY KEY (idDireccion)
+  );
+\end{verbatim}
+
+\textbf{Caracteristica, Amenidad y Servicio}
+
+Todas estas tablas contienen la misma estructura, 
+un id____ del tipo NUMBER, un nombre y una descripción
+
+
+\begin{verbatim}
+    CREATE TABLE caracteristica
+  (
+    idCaracteristica NUMBER,
+    nombre        CHAR(50),
+    descripcion   VARCHAR2(150),
+    CONSTRAINT caracteristica_PK PRIMARY KEY (idCaracteristica)
+  );
+\end{verbatim}
+
+\textbf{Seguro}
+Contiene Numero poliza, aseguradora, tipo de covertura y el precio anual la llave en este caso es numPoliza
+
+\begin{verbatim}
+    CREATE TABLE seguro
+  (
+    numPoliza     NUMBER,
+    aseguradora        CHAR(50),
+    tipoCovertura   VARCHAR2(150),
+    precioAnual     NUMBER,
+    CONSTRAINT seguro_PK PRIMARY KEY (numPoliza)
+  );
+
+\end{verbatim}
+
+\textbf{Casa, Departamento, Terreno}
+
+Las tablas de las distintas propiedades que se manejan,
+contaran con una llave numRegistro, así
+como el valor catastral y su material principal de
+construcción, omitiendo o agregando ciertas columnas 
+dependiendo de si es una construccion o un terreno.
+
+\begin{verbatim}
+    CREATE TABLE casa
+  (
+    numRegistro           NUMBER,
+    valorCatastral        NUMBER NOT NULL,
+    tipoPropiedad         CHAR(15) NOT NULL,
+    materialConstruccion  CHAR(20) NOT NULL,
+    nBañosMedios          CHAR(1) NOT NULL,
+    nBañosCompletos       CHAR(1) NOT NULL,
+    nEstacionamientos     CHAR(1) NOT NULL,
+    nHabitaciones         CHAR(2) NOT NULL,
+    nPisos                CHAR(1) NOT NULL,
+    tamañoHabitableMetros CHAR(10) NOT NULL,
+    tamañoTerreno         CHAR(10) NOT NULL,
+    estadoDeConstruccion  CHAR(20) NOT NULL,
+    fConstruccion         DATE NOT NULL,
+    CONSTRAINT casa_PK PRIMARY KEY (numRegistro)
+  );
+  
+  CREATE TABLE departamento
+  (
+    numRegistro           NUMBER,
+    valorCatastral        NUMBER NOT NULL,
+    tipoPropiedad         CHAR(15) NOT NULL,
+    materialConstruccion  CHAR(20) NOT NULL,
+    nBañosMedios          CHAR(1) NOT NULL,
+    nBañosCompletos       CHAR(1) NOT NULL,
+    nEstacionamientos     CHAR(1) NOT NULL,
+    nHabitaciones         CHAR(2) NOT NULL,
+    tamañoHabitableMetros CHAR(10) NOT NULL,
+    tamañoTerreno         CHAR(10) NOT NULL,
+    estadoDeConstruccion  CHAR(20) NOT NULL,
+    fConstruccion         DATE NOT NULL,
+    ubicadoEnPiso         CHAR(2) NOT NULL,
+    totalEnEdificio       CHAR(4) NOT NULL,
+    mantenimientoAnual    NUMBER NOT NULL,
+    CONSTRAINT departamento_PK PRIMARY KEY (numRegistro)
+  );  
+
+CREATE TABLE terreno
+  (
+    numRegistro        NUMBER,
+    valorCatastral     NUMBER NOT NULL,
+    existeConstruccion CHAR(2),
+    CONSTRAINT terreno_PK PRIMARY KEY (numRegistro)
+  );
+  
+\end{verbatim}
+
+\textbf{Direccion}
+
+\begin{verbatim}
+    ///////////////AÑADIR CODIGO
+\end{verbatim}
+
+\textbf{Direccion}
+
+\begin{verbatim}
+    ///////////////AÑADIR CODIGO
+\end{verbatim}
+
+
+\end{flushleft}
+
+
+
+
+
+
