@@ -3,7 +3,7 @@
 */
 package MVC;
 
-import conectividad.OracleJDBCExample;
+import conectividad.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +17,8 @@ import java.sql.Statement;
 public class Modelo {
 
     String consulta, inserta, elimina, actualiza;
-    OracleJDBCExample a = new OracleJDBCExample();
-    Connection conexion = a.getConection();
+    Conexion a = new Conexion();
+    Connection conexion = a.getConexion();
     PreparedStatement pconsulta = null;
 
     ///////////////////////////// ZONA DE CONSULTA ///////////////////////////////////

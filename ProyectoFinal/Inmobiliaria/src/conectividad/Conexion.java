@@ -12,8 +12,8 @@ import java.sql.SQLException;
  * Clase que conecta la base de datos con java
  * @author Lechuga194
  */
-public class OracleJDBCExample {
-    public Connection getConection(){
+public class Conexion {
+    public Connection getConexion(){
         System.out.println("--------Probando Conexion con JDBC-------");
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
