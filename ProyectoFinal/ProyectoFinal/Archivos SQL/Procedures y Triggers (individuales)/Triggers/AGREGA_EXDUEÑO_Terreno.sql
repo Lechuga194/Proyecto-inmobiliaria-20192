@@ -1,0 +1,15 @@
+/*
+Trigger que agrega un exdueño cada que la propiedad cambia de dueño
+*/
+CREATE OR REPLACE TRIGGER AGREGA_EXDUEÑO_TERRENO BEFORE
+  UPDATE OF IDDUEÑO ON TERRENO_VENTA_DUEÑO FOR EACH ROW DECLARE BEGIN
+  INSERT
+  INTO TERRENO_EXDUEÑO VALUES
+    (
+      :OLD.IDDUEÑO,
+      :OLD.NUMREGISTRO,
+      SYSDATE,
+      :OLD.FADQUISICION
+    );
+END;
+\
