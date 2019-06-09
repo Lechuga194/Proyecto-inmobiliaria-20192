@@ -1,6 +1,6 @@
 /*
-    Proyecto final | Lechuga Martinez José Eduardo | BD 
- */
+    Proyecto Final | Base de datos | 2019-2 | Lechuga Martinez Jose Eduardo | joselechuga194@ciencias.unam.mx
+*/
 package MVC;
 
 import java.sql.SQLException;
